@@ -45,3 +45,27 @@ mesh = SubResource("QuadMesh_7uy0d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource("RectangleShape2D_dim7k")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(82, 164)
+rotation = 4.125
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D4"]
+scale = Vector2(93.1483, 9.27256)
+mesh = SubResource("QuadMesh_7uy0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_dim7k")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(525, 139)
+rotation = 1.5708
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D5"]
+scale = Vector2(93.1483, 9.27256)
+mesh = SubResource("QuadMesh_7uy0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("RectangleShape2D_dim7k")

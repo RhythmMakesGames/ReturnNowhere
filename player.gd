@@ -44,6 +44,10 @@ func _physics_process(delta: float) -> void:
 	elif !jump_buffer.is_stopped() && is_on_floor():
 		jump()
 	
+	## for short jumps if key released early
+	#if !Input.is_action_pressed("jump") && velocity.y < 0:
+		#velocity.y *= 0.8
+	
 	if coyote_timer.is_stopped() && !is_on_floor():
 		velocity.y += gravity * delta
 	
