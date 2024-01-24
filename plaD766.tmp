@@ -18,7 +18,7 @@ texture = ExtResource("1_s75wj")
 shape = SubResource("CapsuleShape2D_fo2n7")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.06
+wait_time = 5.0
 one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="."]
