@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @export var max_speed = 200
-@export var max_jump_velocity = -350
-@export var friction = 50
+@export var max_jump_velocity = -280
+@export var max_drop_velocity = 300
+#@export var friction = 50
 #@export var acceleration = 200
 
 var is_horizontally_flipped = false
@@ -11,6 +12,9 @@ var is_horizontally_flipped = false
 @onready var jump_buffer = $JumpBuffer
 var was_on_floor = false
 var is_jumping = true
+
+# remove later
+@export var disable_movement:bool = false
 
 var temp = 0
 
@@ -49,7 +53,8 @@ func _physics_process(delta: float) -> void:
 		#velocity.y *= 0.8
 	
 	if coyote_timer.is_stopped() && !is_on_floor():
-		velocity.y += gravity * delta
+		if velocity.y < max_drop_velocity:
+			velocity.y += gravity * delta
 	
 	var move_direction := Input.get_axis("move_left", "move_right")
 	
@@ -61,10 +66,13 @@ func _physics_process(delta: float) -> void:
 		else: 
 			is_horizontally_flipped = false
 	else:
-		velocity.x = move_toward(velocity.x, 0, friction)
+		velocity.x = move_toward(velocity.x, 0, max_speed) # friction
 	
 	was_on_floor = is_on_floor()
-	move_and_slide()
+	
+	# remove later ig
+	if !disable_movement: 
+		move_and_slide()
 	
 	if (was_on_floor != is_on_floor()) && !is_jumping:
 		coyote_timer.start()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5rh5ox474nqy"
-path="res://.godot/imported/MegaCatto.png-1de692e857c82583bd8aa262ebfb327c.ctex"
+uid="uid://bb516urhpth6q"
+path="res://.godot/imported/test_sky.png-3081a227a5f25acfb79068ce2d9c67aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MegaCatto.png"
-dest_files=["res://.godot/imported/MegaCatto.png-1de692e857c82583bd8aa262ebfb327c.ctex"]
+source_file="res://assets/test_sky.png"
+dest_files=["res://.godot/imported/test_sky.png-3081a227a5f25acfb79068ce2d9c67aa.ctex"]
 
 [params]
 
