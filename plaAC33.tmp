@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dskkedg0egljf"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_tnf3b"]
+[ext_resource type="Texture2D" uid="uid://bo8ei0c24wddn" path="res://assets/MegaCatto_32x32.png" id="2_4l2ts"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cyy7"]
+size = Vector2(18, 31)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_tnf3b")
+accel_factor_h = 555
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4l2ts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_2cyy7")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.06
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
