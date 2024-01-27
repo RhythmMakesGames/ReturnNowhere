@@ -31,6 +31,10 @@ var is_jumping = true
 var is_horizontally_flipped = false
 var was_on_floor = false
 
+# animation/states ig
+var is_idle = false
+@onready var animation_player = $AnimationPlayer
+
 var gravity:int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
@@ -41,8 +45,13 @@ func _process(delta: float) -> void:
 		$Sprite2D.flip_h = true
 	else:
 		$Sprite2D.flip_h = false
+	
+	#if is_idle:
+		#animation_player.play("idle_1")
 
 func _physics_process(delta: float) -> void:
+	#move_and_slide()
+	#print(velocity.x)
 	handle_vertical_movement(delta)
 	handle_horizontal_movement()
 	#handle_movement_mechanics(delta)
@@ -100,6 +109,7 @@ func jump() -> void:
 	jump_buffer.stop()
 	is_jumping = true
 
+# and here i realized, maybe i should've used a state machine
 func handle_horizontal_movement():
 	# horizontal movement (walk/run/air)
 
@@ -116,7 +126,6 @@ func handle_horizontal_movement():
 		else: # continuous movement in some direction
 			# decreasing acceleration over time
 			acceleration_h *= accel_decay_rate_h
-			
 		velocity.x += acceleration_h * move_direction
 		
 		# moving on floor, and not trying to jump
@@ -135,6 +144,6 @@ func handle_horizontal_movement():
 		else: # increase deceleration with time (key released some time ago)
 			deceleration_h *= decel_growth_rate_h
 			velocity.x -= velocity.x/abs(velocity.x) * deceleration_h # v direction * decel
-	#print(acceleration_h * move_direction)
 	
+	print(velocity.x)
 	last_move_direction_h = move_direction

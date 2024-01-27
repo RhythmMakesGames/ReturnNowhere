@@ -1,21 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://dskkedg0egljf"]
+[gd_scene load_steps=9 format=3 uid="uid://dskkedg0egljf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_tnf3b"]
-[ext_resource type="Texture2D" uid="uid://bo8ei0c24wddn" path="res://assets/MegaCatto_32x32.png" id="2_4l2ts"]
+[ext_resource type="Texture2D" uid="uid://b0kcn4qwq467d" path="res://assets/Cat Sprite Sheet.png" id="2_dqjs2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cyy7"]
-size = Vector2(18, 31)
+[sub_resource type="Animation" id="Animation_dqf0v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_ajbdl"]
+resource_name = "idle_1"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ghtsj"]
+resource_name = "idle_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_xmcf2"]
+resource_name = "idle_3"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k3thj"]
+_data = {
+"RESET": SubResource("Animation_dqf0v"),
+"idle_1": SubResource("Animation_ajbdl"),
+"idle_2": SubResource("Animation_ghtsj"),
+"idle_3": SubResource("Animation_xmcf2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ai18h"]
+size = Vector2(23, 24)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_tnf3b")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_4l2ts")
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("2_dqjs2")
+hframes = 8
+vframes = 10
+frame = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0.5)
-shape = SubResource("RectangleShape2D_2cyy7")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_k3thj")
+}
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.06
@@ -24,3 +100,7 @@ one_shot = true
 [node name="JumpBuffer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -12)
+shape = SubResource("RectangleShape2D_ai18h")
