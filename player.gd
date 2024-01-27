@@ -135,7 +135,6 @@ func handle_horizontal_movement():
 		else: # increase deceleration with time (key released some time ago)
 			deceleration_h *= decel_growth_rate_h
 			velocity.x -= velocity.x/abs(velocity.x) * deceleration_h # v direction * decel
-	
-	print(acceleration_h * move_direction)
+	#print(acceleration_h * move_direction)
 	
 	last_move_direction_h = move_direction
