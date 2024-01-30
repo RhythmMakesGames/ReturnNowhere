@@ -48,6 +48,10 @@ func _process(delta: float) -> void:
 	
 	#if is_idle:
 		#animation_player.play("idle_1")
+	if abs(velocity.x) > 0:
+		animation_player.play("run_1")
+	else:
+		animation_player.play("idle_2")
 
 func _physics_process(delta: float) -> void:
 	#move_and_slide()

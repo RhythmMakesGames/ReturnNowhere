@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=23 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://player.tscn" id="1_mxe2c"]
 [ext_resource type="Texture2D" uid="uid://bhhcej1tpm7hi" path="res://assets/test_cardboard_box.png" id="2_d7uoo"]
@@ -58,6 +58,29 @@ size = Vector2(468, 20)
 
 [sub_resource type="QuadMesh" id="QuadMesh_u7gi1"]
 
+[sub_resource type="Environment" id="Environment_d7tsq"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.05
+glow_bloom = 0.14
+glow_blend_mode = 0
+
+[sub_resource type="Gradient" id="Gradient_kwo4o"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x48bl"]
+gradient = SubResource("Gradient_kwo4o")
+width = 640
+height = 360
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u6seo"]
+
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_yxaf1")
 
@@ -116,7 +139,7 @@ texture = ExtResource("6_tqwjc")
 
 [node name="Cityscape" type="ParallaxLayer" parent="Background"]
 position = Vector2(0, -60)
-motion_scale = Vector2(0.05, 0.05)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(640, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Cityscape"]
@@ -126,7 +149,7 @@ texture = ExtResource("7_7ykfj")
 
 [node name="Buildings" type="ParallaxLayer" parent="Background"]
 position = Vector2(0, -75)
-motion_scale = Vector2(0.2, 0.2)
+motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(640, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Buildings"]
@@ -136,10 +159,28 @@ texture = ExtResource("9_0fkw5")
 
 [node name="DistantCars" type="ParallaxLayer" parent="Background"]
 position = Vector2(0, -75)
-motion_scale = Vector2(0.4, 0.4)
+motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(640, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/DistantCars"]
 position = Vector2(320, 180)
 scale = Vector2(4, 4)
 texture = ExtResource("8_w237o")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d7tsq")
+
+[node name="MoonLight" type="DirectionalLight2D" parent="."]
+visible = false
+color = Color(0.192157, 0.192157, 0.192157, 1)
+blend_mode = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(392, 158)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_x48bl")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(375, 283)
+occluder = SubResource("OccluderPolygon2D_u6seo")
