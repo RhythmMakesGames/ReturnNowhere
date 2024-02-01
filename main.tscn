@@ -85,7 +85,14 @@ fill_to = Vector2(0.5, 0)
 script = SubResource("GDScript_yxaf1")
 
 [node name="Player" parent="." instance=ExtResource("1_mxe2c")]
-position = Vector2(57, 67)
+position = Vector2(76, 76)
+disable_movement = false
+max_move_speed = 150
+max_move_speed_air = 200.0
+max_jump_velocity = -280.0
+max_drop_velocity = 500.0
+scratch_down_speed = 25.0
+friction = 50
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
@@ -182,5 +189,6 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_x48bl")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 position = Vector2(375, 283)
 occluder = SubResource("OccluderPolygon2D_u6seo")
