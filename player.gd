@@ -33,7 +33,7 @@ var is_jump_key_held
 enum STATES {
 	STATE_ON_GROUND,
 	STATE_IN_AIR,
-	STATE_ON_WALL
+	#STATE_ON_WALL
 }
 
 var gravity:int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -98,6 +98,10 @@ func _physics_process(delta: float) -> void:
 					velocity.x = max_move_speed * move_direction
 				else:
 					velocity.x = move_toward(velocity.x, 0, friction)
+			
+			#elif is_on_wall_only() && velocity.y >= 0 && Input.is_action_pressed("jump"):
+				## skip a frame. no movement update (negligible)
+				#current_state = STATES.STATE_ON_WALL
 			else:
 				if velocity.y < max_drop_velocity:
 					velocity.y += gravity * delta
@@ -107,8 +111,19 @@ func _physics_process(delta: float) -> void:
 					velocity.x = clamp(velocity.x, -max_move_speed_air, max_move_speed_air)
 				else:
 					velocity.x *= velocity_decay_air_h
-		STATES.STATE_ON_WALL:
-			pass # yet to implement
+		
+		#STATES.STATE_ON_WALL:
+			## scratching down a wall (while holding space)
+			#if Input.is_action_pressed("jump"):
+				#velocity.y += gravity * delta
+				#velocity.y = clampf(velocity.y, max_jump_velocity, scratch_down_speed)
+				##velocity.x = -get_wall_normal().x * max_move_speed_air # not slip off
+			#else:
+				#velocity.x = get_wall_normal().x * max_move_speed_air
+				#velocity.y = max_jump_velocity
+				#move_direction = get_wall_normal().x
+				#current_state = STATES.STATE_IN_AIR
+
 	print(velocity.x)
 	
 	# keeping track of current information
@@ -123,15 +138,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("reset_position"):
 		velocity.x = 0
 		position = Vector2(57, 67)
+		current_state = STATES.STATE_IN_AIR
 		
-func handle_movement_mechanics(delta):
-	# scratching down a wall (while holding space)
-	if is_on_wall_only():
-		if Input.is_action_pressed("jump"):
-			velocity.y = clampf(velocity.y, max_jump_velocity, scratch_down_speed)
-			#velocity.x = -get_wall_normal().x * max_move_speed_air # not slip off
-		elif Input.is_action_just_released("jump"):
-			velocity.x = get_wall_normal().x * max_move_speed_air
-			velocity.y = max_jump_velocity
-	
+	#if is_on_wall_only():
 	# if was on wall and release space (becomes walljump) within a walljump timer
