@@ -16,6 +16,7 @@ extends CharacterBody2D
 ## while player is in air, and move key isn't held
 @export var velocity_decay_air_h = 0.96
 
+@onready var idle_timer = $IdleTimer
 @onready var coyote_timer = $CoyoteTimer
 @onready var jump_buffer = $JumpBuffer
 var was_on_floor = false
@@ -28,6 +29,8 @@ var last_move_direction_h = 0
 
 var current_state
 var is_jump_key_held
+# becomes idle after 2/4 seconds of inactivity
+var is_idle
 
 # basic state machine (not really ig)
 enum STATES {
@@ -47,13 +50,22 @@ func _process(delta: float) -> void:
 	
 	match current_state:
 		STATES.STATE_ON_GROUND:
+			animation_player.set_speed_scale(1)
 			if abs(velocity.x) > 0:
 				animation_player.play("run")
 			else:
-				animation_player.play("idle")
+				if is_idle:
+					animation_player.play("idle")
+				else:
+					animation_player.play("standing")
 		STATES.STATE_IN_AIR:
+			# there is no jump animation, trick the player
+			animation_player.set_speed_scale(0.25)
 			animation_player.play("run")
 
+func _on_idle_timer_timeout() -> void:
+	is_idle = true
+	
 func jump() -> void:
 	velocity.y += max_jump_velocity
 	jump_buffer.stop()
@@ -83,6 +95,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x = max_move_speed * move_direction
 			else:
 				velocity.x = move_toward(velocity.x, 0, friction)
+			
+			# idle check
+			if velocity.x == 0 && velocity.y == 0:
+				if idle_timer.is_stopped() && !is_idle:
+					idle_timer.start()
+			else:
+				idle_timer.stop()
+				is_idle = false
 
 		STATES.STATE_IN_AIR:
 			if Input.is_action_just_released("jump"):
@@ -142,3 +162,5 @@ func _physics_process(delta: float) -> void:
 		
 	#if is_on_wall_only():
 	# if was on wall and release space (becomes walljump) within a walljump timer
+
+
