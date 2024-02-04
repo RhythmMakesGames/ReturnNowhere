@@ -16,7 +16,6 @@ extends CharacterBody2D
 ## while player is in air, and move key isn't held
 @export var velocity_decay_air_h = 0.96
 
-@onready var idle_timer = $IdleTimer
 @onready var coyote_timer = $CoyoteTimer
 @onready var jump_buffer = $JumpBuffer
 var was_on_floor = false
@@ -29,8 +28,23 @@ var last_move_direction_h = 0
 
 var current_state
 var is_jump_key_held
-# becomes idle after 2/4 seconds of inactivity
+
+# becomes idle after a few seconds of inactivity
+@onready var idle_timer = $IdleTimer
 var is_idle
+
+#literals
+var stand_animation:String = "standing"
+var run_animation:String = "run"
+
+var idle1_animation:String = "idle1"
+var idle2_animation:String = "idle2"
+var idle3_animation:String = "idle3"
+var idle4_animation:String = "idle4"
+
+var jump_action:String = "jump"
+var move_left_action:String = "move_left"
+var move_right_action:String = "move_right"
 
 # basic state machine (not really ig)
 enum STATES {
@@ -52,16 +66,30 @@ func _process(delta: float) -> void:
 		STATES.STATE_ON_GROUND:
 			animation_player.set_speed_scale(1)
 			if abs(velocity.x) > 0:
-				animation_player.play("run")
+				animation_player.play(run_animation)
 			else:
 				if is_idle:
-					animation_player.play("idle")
+					# when player becomes idle (stand -> idle)
+					if animation_player.assigned_animation == stand_animation:
+						animation_player.set_current_animation(idle1_animation)
+					
+					# play idle animations at random
+					var rand_anim = randi()%100
+					if !animation_player.is_playing():
+						if rand_anim < 30:
+							animation_player.play(idle1_animation)
+						elif rand_anim >= 30 && rand_anim < 90:
+							animation_player.play(idle2_animation)
+						elif rand_anim >= 90 && rand_anim < 95:
+							animation_player.play(idle3_animation)
+						elif rand_anim >= 95 && rand_anim < 100:
+							animation_player.play(idle4_animation)
 				else:
-					animation_player.play("standing")
+					animation_player.play(stand_animation)
 		STATES.STATE_IN_AIR:
 			# there is no jump animation, trick the player
 			animation_player.set_speed_scale(0.25)
-			animation_player.play("run")
+			animation_player.play(run_animation)
 
 func _on_idle_timer_timeout() -> void:
 	is_idle = true
@@ -72,7 +100,7 @@ func jump() -> void:
 	is_jump_key_held = true
 
 func _physics_process(delta: float) -> void:
-	var move_direction := Input.get_axis("move_left", "move_right")
+	var move_direction := Input.get_axis(move_left_action, move_right_action)
 	# holding move key (not 0)
 	if move_direction:
 		is_horizontally_flipped = true if move_direction < 0 else false
@@ -87,7 +115,7 @@ func _physics_process(delta: float) -> void:
 			if !is_on_floor() && coyote_timer.is_stopped():
 				current_state = STATES.STATE_IN_AIR
 				velocity.y = gravity * delta
-			elif Input.is_action_just_pressed("jump") || !jump_buffer.is_stopped():
+			elif Input.is_action_just_pressed(jump_action) || !jump_buffer.is_stopped():
 				current_state = STATES.STATE_IN_AIR
 				jump()
 			
@@ -105,9 +133,9 @@ func _physics_process(delta: float) -> void:
 				is_idle = false
 
 		STATES.STATE_IN_AIR:
-			if Input.is_action_just_released("jump"):
+			if Input.is_action_just_released(jump_action):
 				is_jump_key_held = false
-			elif Input.is_action_just_pressed("jump"):
+			elif Input.is_action_just_pressed(jump_action):
 				jump_buffer.start()
 			
 			if is_on_floor():
@@ -119,7 +147,7 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity.x = move_toward(velocity.x, 0, friction)
 			
-			#elif is_on_wall_only() && velocity.y >= 0 && Input.is_action_pressed("jump"):
+			#elif is_on_wall_only() && velocity.y >= 0 && Input.is_action_pressed(jump_action):
 				## skip a frame. no movement update (negligible)
 				#current_state = STATES.STATE_ON_WALL
 			else:
@@ -134,7 +162,7 @@ func _physics_process(delta: float) -> void:
 		
 		#STATES.STATE_ON_WALL:
 			## scratching down a wall (while holding space)
-			#if Input.is_action_pressed("jump"):
+			#if Input.is_action_pressed(jump_action):
 				#velocity.y += gravity * delta
 				#velocity.y = clampf(velocity.y, max_jump_velocity, scratch_down_speed)
 				##velocity.x = -get_wall_normal().x * max_move_speed_air # not slip off
@@ -162,5 +190,3 @@ func _physics_process(delta: float) -> void:
 		
 	#if is_on_wall_only():
 	# if was on wall and release space (becomes walljump) within a walljump timer
-
-

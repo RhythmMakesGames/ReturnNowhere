@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dskkedg0egljf"]
+[gd_scene load_steps=12 format=3 uid="uid://dskkedg0egljf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_tnf3b"]
 [ext_resource type="Texture2D" uid="uid://b0kcn4qwq467d" path="res://assets/Cat Sprite Sheet.png" id="2_dqjs2"]
@@ -16,22 +16,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ajbdl"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_1edxq"]
@@ -67,10 +51,73 @@ tracks/0/keys = {
 "values": [Vector2i(5, 8), Vector2i(6, 8)]
 }
 
+[sub_resource type="Animation" id="Animation_47v2g"]
+resource_name = "idle2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3vkpr"]
+resource_name = "idle3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_f6ylx"]
+resource_name = "idle4"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_ajbdl"]
+resource_name = "idle1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k3thj"]
 _data = {
 "RESET": SubResource("Animation_dqf0v"),
-"idle": SubResource("Animation_ajbdl"),
+"idle1": SubResource("Animation_ajbdl"),
+"idle2": SubResource("Animation_47v2g"),
+"idle3": SubResource("Animation_3vkpr"),
+"idle4": SubResource("Animation_f6ylx"),
 "run": SubResource("Animation_1edxq"),
 "standing": SubResource("Animation_3a7ov")
 }
