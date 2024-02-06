@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://game.gd" id="1_bgt3o"]
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://player.tscn" id="2_yiqru"]
-[ext_resource type="Texture2D" uid="uid://dtcrkb0ucwpql" path="res://assets/city.png" id="3_ijgoc"]
-[ext_resource type="Texture2D" uid="uid://bsxrx5bkywtwq" path="res://assets/city_bg.png" id="4_rjwv4"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/city.png" id="3_ijgoc"]
+[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/city_bg.png" id="4_rjwv4"]
 [ext_resource type="Script" path="res://clouds.gd" id="5_xv8a4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu2jb"]
