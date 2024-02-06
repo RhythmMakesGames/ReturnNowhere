@@ -1,13 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=19 format=3 uid="uid://cwmehxebcatuo"]
 
-[ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://player.tscn" id="1_mxe2c"]
-[ext_resource type="Texture2D" uid="uid://dtcrkb0ucwpql" path="res://assets/city.png" id="2_rj6hd"]
-[ext_resource type="Texture2D" uid="uid://bsxrx5bkywtwq" path="res://assets/city_bg.png" id="7_opjsq"]
-
-[sub_resource type="GDScript" id="GDScript_yxaf1"]
+[ext_resource type="Script" path="res://game.gd" id="1_bgt3o"]
+[ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://player.tscn" id="2_yiqru"]
+[ext_resource type="Texture2D" uid="uid://dtcrkb0ucwpql" path="res://assets/city.png" id="3_ijgoc"]
+[ext_resource type="Texture2D" uid="uid://bsxrx5bkywtwq" path="res://assets/city_bg.png" id="4_rjwv4"]
+[ext_resource type="Script" path="res://clouds.gd" id="5_xv8a4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu2jb"]
-texture = ExtResource("2_rj6hd")
+texture = ExtResource("3_ijgoc")
 texture_region_size = Vector2i(20, 20)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -158,17 +158,30 @@ physics_layer_0/collision_layer = 1
 sources/4 = SubResource("TileSetAtlasSource_qu2jb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_che5n"]
-texture = ExtResource("7_opjsq")
+texture = ExtResource("4_rjwv4")
 texture_region_size = Vector2i(20, 20)
-0:8/0 = 0
-1:8/0 = 0
-2:8/0 = 0
 3:8/next_alternative_id = 3
 3:8/0 = 0
+2:8/0 = 0
+1:8/0 = 0
+0:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_qnkxd"]
 tile_size = Vector2i(20, 20)
 sources/0 = SubResource("TileSetAtlasSource_che5n")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wk8n"]
+texture = ExtResource("4_rjwv4")
+texture_region_size = Vector2i(20, 20)
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+4:8/next_alternative_id = 2
+4:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sppoq"]
+tile_size = Vector2i(20, 20)
+sources/0 = SubResource("TileSetAtlasSource_0wk8n")
 
 [sub_resource type="Environment" id="Environment_d7tsq"]
 background_mode = 3
@@ -200,10 +213,10 @@ size = Vector2(468, 20)
 
 [sub_resource type="QuadMesh" id="QuadMesh_u7gi1"]
 
-[node name="Main" type="Node2D"]
-script = SubResource("GDScript_yxaf1")
+[node name="Game" type="Node2D"]
+script = ExtResource("1_bgt3o")
 
-[node name="Player" parent="." instance=ExtResource("1_mxe2c")]
+[node name="Player" parent="." instance=ExtResource("2_yiqru")]
 position = Vector2(76, 76)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -235,7 +248,7 @@ layer_1/tile_data = PackedInt32Array()
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="SkyTileMap" type="TileMap" parent="ParallaxBackground"]
-z_index = -2
+z_index = -5
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_qnkxd")
 format = 2
@@ -244,6 +257,23 @@ layer_0/tile_data = PackedInt32Array(0, 0, 8, 65536, 0, 8, 131072, 0, 8, 196608,
 layer_1/name = "stars"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(65540, 131072, 1610612744, 65543, 65536, 536870920, 0, 196608, 1610612744, 11, 196608, 1610612744, 8, 196608, 536870920, 131086, 196608, 1610612744, 131076, 196608, 1342177288, 196622, 196608, 536870920, 15, 196608, 8, 131078, 65536, 1610612744, 14, 65536, 805306376, 2, 65536, 1610612744, 65548, 196608, 1073741832, 196620, 196608, 1073741832, 131084, 196608, 1073741832, 65545, 196608, 805306376, 10, 196608, 268435464, 131073, 196608, 1073741832, 5, 196608, 1342177288, 65536, 196608, 805306376, 65537, 196608, 1073741832, 65547, 196608, 805306376, 196623, 196608, 1073741832, 131075, 196608, 1879048200, 6, 196608, 1610612744, 65538, 196608, 1610612744, 131074, 196608, 805306376, 196610, 196608, 805306376, 131082, 196608, 805306376, 196615, 196608, 805306376, 196617, 196608, 1879048200, 65551, 196608, 1879048200)
+
+[node name="CloudsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+position = Vector2(0, 40)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(640, 0)
+script = ExtResource("5_xv8a4")
+cloud_speed = -5
+
+[node name="CloudsTileMap" type="TileMap" parent="ParallaxBackground/CloudsLayer"]
+z_index = -4
+position = Vector2(0, -160)
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_sppoq")
+format = 2
+layer_0/name = "clouds"
+layer_0/tile_data = PackedInt32Array(65536, 458752, 8, 65542, 327680, 268435464, 65543, 262144, 268435464, 131073, 327680, 268435464, 131074, 262144, 268435464, 131076, 262144, 8, 131077, 327680, 8, 65541, 458752, 268435464, 65539, 458752, 8, 196614, 393216, 268435464, 196608, 458752, 8, 196611, 458752, 268435464, 131079, 458752, 268435464, 262146, 393216, 268435464, 262149, 458752, 8)
 
 [node name="Buildings_Far" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = -2
@@ -254,7 +284,7 @@ motion_mirroring = Vector2(640, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Buildings_Far"]
 position = Vector2(320, 180)
 scale = Vector2(4, 4)
-texture = ExtResource("7_opjsq")
+texture = ExtResource("4_rjwv4")
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 80)
 
@@ -267,7 +297,7 @@ motion_mirroring = Vector2(640, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Buildings_Near"]
 position = Vector2(320, 180)
 scale = Vector2(4, 4)
-texture = ExtResource("7_opjsq")
+texture = ExtResource("4_rjwv4")
 region_enabled = true
 region_rect = Rect2(0, 80, 160, 80)
 
@@ -291,6 +321,7 @@ position = Vector2(375, 283)
 occluder = SubResource("OccluderPolygon2D_u6seo")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+visible = false
 position = Vector2(605, -175)
 physics_material_override = SubResource("PhysicsMaterial_x653i")
 gravity_scale = 0.0

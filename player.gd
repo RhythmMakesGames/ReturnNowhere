@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var scratch_down_speed = 25.0
 
 @export var friction = 50
-@export var acceleration_h = 250
+@export var acceleration_h = 500
 
 ## factor by which horizontal velocity exponentially decays
 ## while player is in air, and move key isn't held
@@ -27,6 +27,7 @@ var is_horizontally_flipped = false
 var last_move_direction_h = 0
 
 var current_state
+var previous_state
 var is_jump_key_held
 
 # becomes idle after a few seconds of inactivity
@@ -62,30 +63,30 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	player_sprite.flip_h = true if is_horizontally_flipped else false
 	
+	#print(current_state, "-", randi())
 	match current_state:
 		STATES.STATE_ON_GROUND:
 			animation_player.set_speed_scale(1)
 			if abs(velocity.x) > 0:
 				animation_player.play(run_animation)
+			elif is_idle:
+				# when player becomes idle (expect stand -> idle)
+				if animation_player.assigned_animation == stand_animation:
+					animation_player.set_current_animation(idle1_animation)
+				
+				# play idle animations at random
+				var rand_anim = randi()%100
+				if !animation_player.is_playing():
+					if rand_anim < 30:
+						animation_player.play(idle1_animation)
+					elif rand_anim >= 30 && rand_anim < 90:
+						animation_player.play(idle2_animation)
+					elif rand_anim >= 90 && rand_anim < 95:
+						animation_player.play(idle3_animation)
+					elif rand_anim >= 95 && rand_anim < 100:
+						animation_player.play(idle4_animation)
 			else:
-				if is_idle:
-					# when player becomes idle (stand -> idle)
-					if animation_player.assigned_animation == stand_animation:
-						animation_player.set_current_animation(idle1_animation)
-					
-					# play idle animations at random
-					var rand_anim = randi()%100
-					if !animation_player.is_playing():
-						if rand_anim < 30:
-							animation_player.play(idle1_animation)
-						elif rand_anim >= 30 && rand_anim < 90:
-							animation_player.play(idle2_animation)
-						elif rand_anim >= 90 && rand_anim < 95:
-							animation_player.play(idle3_animation)
-						elif rand_anim >= 95 && rand_anim < 100:
-							animation_player.play(idle4_animation)
-				else:
-					animation_player.play(stand_animation)
+				animation_player.play(stand_animation)
 		STATES.STATE_IN_AIR:
 			# there is no jump animation, trick the player
 			animation_player.set_speed_scale(0.25)
@@ -114,7 +115,6 @@ func _physics_process(delta: float) -> void:
 			
 			if !is_on_floor() && coyote_timer.is_stopped():
 				current_state = STATES.STATE_IN_AIR
-				velocity.y = gravity * delta
 			elif Input.is_action_just_pressed(jump_action) || !jump_buffer.is_stopped():
 				current_state = STATES.STATE_IN_AIR
 				jump()
@@ -125,7 +125,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, friction)
 			
 			# idle check
-			if velocity.x == 0 && velocity.y == 0:
+			if velocity.x == 0 && velocity.y == 0 && current_state == STATES.STATE_ON_GROUND:
 				if idle_timer.is_stopped() && !is_idle:
 					idle_timer.start()
 			else:
@@ -133,22 +133,21 @@ func _physics_process(delta: float) -> void:
 				is_idle = false
 
 		STATES.STATE_IN_AIR:
+			if previous_state == STATES.STATE_ON_GROUND:
+				idle_timer.stop()
+				is_idle = false
+			
 			if Input.is_action_just_released(jump_action):
 				is_jump_key_held = false
 			elif Input.is_action_just_pressed(jump_action):
 				jump_buffer.start()
 			
+			# one frame delay in any action. no movement update (negligible)
 			if is_on_floor():
 				is_jump_key_held = false
 				current_state = STATES.STATE_ON_GROUND
-				
-				if move_direction:
-					velocity.x = max_move_speed * move_direction
-				else:
-					velocity.x = move_toward(velocity.x, 0, friction)
 			
 			#elif is_on_wall_only() && velocity.y >= 0 && Input.is_action_pressed(jump_action):
-				## skip a frame. no movement update (negligible)
 				#current_state = STATES.STATE_ON_WALL
 			else:
 				if velocity.y < max_drop_velocity:
@@ -177,6 +176,7 @@ func _physics_process(delta: float) -> void:
 	# keeping track of current information
 	was_on_floor = is_on_floor()
 	last_move_direction_h = move_direction
+	previous_state = current_state
 	
 	## remove this later!
 	if !disable_movement:
