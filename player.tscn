@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dskkedg0egljf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_tnf3b"]
-[ext_resource type="Texture2D" uid="uid://b0kcn4qwq467d" path="res://assets/Cat Sprite Sheet.png" id="2_dqjs2"]
+[ext_resource type="Texture2D" uid="uid://hagtsneisnls" path="res://assets/Cat Sprite Sheet.png" id="2_dqjs2"]
 
 [sub_resource type="Animation" id="Animation_dqf0v"]
 length = 0.001
