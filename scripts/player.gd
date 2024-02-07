@@ -10,7 +10,8 @@ extends CharacterBody2D
 @export var scratch_down_speed = 25.0
 
 @export var friction = 50
-@export var acceleration_h = 500
+@export var acceleration_air_h = 500
+@export var acceleration_ground_h = 1000
 
 ## factor by which horizontal velocity exponentially decays
 ## while player is in air, and move key isn't held
@@ -120,7 +121,8 @@ func _physics_process(delta: float) -> void:
 				jump()
 			
 			if move_direction:
-				velocity.x = max_move_speed * move_direction
+				velocity.x += acceleration_ground_h * delta * move_direction
+				velocity.x = clamp(velocity.x, -max_move_speed, max_move_speed)
 			else:
 				velocity.x = move_toward(velocity.x, 0, friction)
 			
@@ -154,7 +156,7 @@ func _physics_process(delta: float) -> void:
 					velocity.y += gravity * delta
 				
 				if move_direction:
-					velocity.x += acceleration_h * delta * move_direction
+					velocity.x += acceleration_air_h * delta * move_direction
 					velocity.x = clamp(velocity.x, -max_move_speed_air, max_move_speed_air)
 				else:
 					velocity.x *= velocity_decay_air_h
@@ -171,7 +173,7 @@ func _physics_process(delta: float) -> void:
 				#move_direction = get_wall_normal().x
 				#current_state = STATES.STATE_IN_AIR
 
-	#print(velocity.x)
+	print(velocity.x)
 	
 	# keeping track of current information
 	was_on_floor = is_on_floor()

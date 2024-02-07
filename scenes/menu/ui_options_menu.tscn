@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://thgdqt845aqq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2igyt"]
+
+[node name="ControlsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(50, 50)
+texture = SubResource("CanvasTexture_2igyt")
