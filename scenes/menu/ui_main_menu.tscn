@@ -1,51 +1,49 @@
 [gd_scene load_steps=3 format=3 uid="uid://efpxwwc6rw2r"]
 
-[ext_resource type="FontFile" uid="uid://cdahsthp0cr68" path="res://assets/fonts/PrStart.ttf" id="1_ekdgl"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_lws6i"]
+[ext_resource type="Script" path="res://scripts/menu/ui_main_menu.gd" id="1_eyiso"]
+[ext_resource type="FontFile" uid="uid://cdahsthp0cr68" path="res://assets/fonts/PrStart.ttf" id="2_8hcpc"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lws6i")
+script = ExtResource("1_eyiso")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -80.0
-offset_top = -54.0
+offset_top = -108.0
 offset_right = 80.0
-offset_bottom = 54.0
+offset_bottom = -68.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ekdgl")
+theme_override_fonts/font = ExtResource("2_8hcpc")
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ekdgl")
-text = "Controls"
+theme_override_fonts/font = ExtResource("2_8hcpc")
+text = "Options"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ekdgl")
+theme_override_fonts/font = ExtResource("2_8hcpc")
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ekdgl")
+theme_override_fonts/font = ExtResource("2_8hcpc")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

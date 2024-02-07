@@ -1,13 +1,13 @@
 [gd_scene load_steps=19 format=3 uid="uid://cwmehxebcatuo"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_bgt3o"]
-[ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="2_yiqru"]
-[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/city.png" id="3_ijgoc"]
-[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/city_bg.png" id="4_rjwv4"]
-[ext_resource type="Script" path="res://scripts/clouds.gd" id="5_xv8a4"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_04hxw"]
+[ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="2_oiyun"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/tilemap_city.png" id="3_w5wh1"]
+[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/bg_city.png" id="4_wx3fa"]
+[ext_resource type="Script" path="res://scripts/clouds.gd" id="5_kaq2o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu2jb"]
-texture = ExtResource("3_ijgoc")
+texture = ExtResource("3_w5wh1")
 texture_region_size = Vector2i(20, 20)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -158,7 +158,7 @@ physics_layer_0/collision_layer = 1
 sources/4 = SubResource("TileSetAtlasSource_qu2jb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_che5n"]
-texture = ExtResource("4_rjwv4")
+texture = ExtResource("4_wx3fa")
 texture_region_size = Vector2i(20, 20)
 3:8/next_alternative_id = 3
 3:8/0 = 0
@@ -171,7 +171,7 @@ tile_size = Vector2i(20, 20)
 sources/0 = SubResource("TileSetAtlasSource_che5n")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wk8n"]
-texture = ExtResource("4_rjwv4")
+texture = ExtResource("4_wx3fa")
 texture_region_size = Vector2i(20, 20)
 5:8/0 = 0
 6:8/0 = 0
@@ -214,9 +214,9 @@ size = Vector2(468, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_u7gi1"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_bgt3o")
+script = ExtResource("1_04hxw")
 
-[node name="Player" parent="." instance=ExtResource("2_yiqru")]
+[node name="Player" parent="." instance=ExtResource("2_oiyun")]
 position = Vector2(76, 76)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -263,7 +263,7 @@ z_index = -2
 position = Vector2(0, 40)
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(640, 0)
-script = ExtResource("5_xv8a4")
+script = ExtResource("5_kaq2o")
 cloud_speed = -5
 
 [node name="CloudsTileMap" type="TileMap" parent="ParallaxBackground/CloudsLayer"]
@@ -284,7 +284,7 @@ motion_mirroring = Vector2(640, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Buildings_Far"]
 position = Vector2(320, 180)
 scale = Vector2(4, 4)
-texture = ExtResource("4_rjwv4")
+texture = ExtResource("4_wx3fa")
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 80)
 
@@ -297,7 +297,7 @@ motion_mirroring = Vector2(640, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Buildings_Near"]
 position = Vector2(320, 180)
 scale = Vector2(4, 4)
-texture = ExtResource("4_rjwv4")
+texture = ExtResource("4_wx3fa")
 region_enabled = true
 region_rect = Rect2(0, 80, 160, 80)
 

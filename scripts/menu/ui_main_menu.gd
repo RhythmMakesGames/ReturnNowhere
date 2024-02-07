@@ -16,7 +16,7 @@ func _on_start_button_pressed() -> void:
 	# continue here
 
 func _on_options_button_pressed() -> void:
-	var options = load("res://scenes/controls_menu.tscn").instance()
+	var options = load("res://scenes/menu/ui_options_menu.tscn").instance()
 	get_tree().add_child(options)
 
 func _on_quit_button_pressed() -> void:
