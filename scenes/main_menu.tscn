@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://efpxwwc6rw2r"]
 
 [ext_resource type="FontFile" uid="uid://cdahsthp0cr68" path="res://assets/fonts/PrStart.ttf" id="1_ekdgl"]
-[ext_resource type="Script" path="res://main_menu.gd" id="1_lws6i"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_lws6i"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
