@@ -3,6 +3,8 @@ extends CharacterBody2D
 # remove later ig
 @export var disable_movement:bool = false
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @export var max_move_speed = 150
 @export var max_move_speed_air = 200.0
 @export var max_jump_velocity = -280.0
@@ -10,7 +12,7 @@ extends CharacterBody2D
 @export var scratch_down_speed = 25.0
 
 @export var friction = 50
-@export var acceleration_air_h = 500
+@export var acceleration_air_h = 250
 @export var acceleration_ground_h = 1000
 
 ## factor by which horizontal velocity exponentially decays
@@ -48,18 +50,18 @@ var jump_action:String = "jump"
 var move_left_action:String = "move_left"
 var move_right_action:String = "move_right"
 
-# basic state machine (not really ig)
+# basic state machine (not really)
 enum STATES {
 	STATE_ON_GROUND,
 	STATE_IN_AIR,
-	#STATE_ON_WALL
+	#STATE_ON_WALL,
 }
 
-var gravity:int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	# cat should be slightly above the ground when the game starts
 	current_state = STATES.STATE_IN_AIR
+	
 	
 func _process(delta: float) -> void:
 	player_sprite.flip_h = true if is_horizontally_flipped else false
@@ -93,13 +95,16 @@ func _process(delta: float) -> void:
 			animation_player.set_speed_scale(0.25)
 			animation_player.play(run_animation)
 
+
 func _on_idle_timer_timeout() -> void:
 	is_idle = true
+	
 	
 func jump() -> void:
 	velocity.y += max_jump_velocity
 	jump_buffer.stop()
 	is_jump_key_held = true
+
 
 func _physics_process(delta: float) -> void:
 	var move_direction := Input.get_axis(move_left_action, move_right_action)
@@ -173,7 +178,7 @@ func _physics_process(delta: float) -> void:
 				#move_direction = get_wall_normal().x
 				#current_state = STATES.STATE_IN_AIR
 
-	print(velocity.x)
+	#print(velocity.x)
 	
 	# keeping track of current information
 	was_on_floor = is_on_floor()
