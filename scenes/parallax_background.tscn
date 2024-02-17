@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqqg1jo5sr6hm"]
+
+[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/bg_city.png" id="1_cn7cx"]
+[ext_resource type="Script" path="res://scripts/clouds.gd" id="2_hseci"]
+[ext_resource type="Texture2D" uid="uid://deurdojs45oq" path="res://assets/bg_city_lights_fix.png" id="3_hfc3g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_che5n"]
+texture = ExtResource("1_cn7cx")
+texture_region_size = Vector2i(20, 20)
+3:8/next_alternative_id = 3
+3:8/0 = 0
+2:8/0 = 0
+1:8/0 = 0
+0:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_qnkxd"]
+tile_size = Vector2i(20, 20)
+sources/0 = SubResource("TileSetAtlasSource_che5n")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wk8n"]
+texture = ExtResource("1_cn7cx")
+texture_region_size = Vector2i(20, 20)
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+4:8/next_alternative_id = 2
+4:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sppoq"]
+tile_size = Vector2i(20, 20)
+sources/0 = SubResource("TileSetAtlasSource_0wk8n")
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="SkyTileMap" type="TileMap" parent="."]
+z_index = -5
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_qnkxd")
+format = 2
+layer_0/name = "sky"
+layer_0/tile_data = PackedInt32Array(0, 0, 8, 65536, 0, 8, 131072, 0, 8, 196608, 0, 8, 262144, 0, 8, 327680, 0, 8, 393216, 0, 8, 458752, 0, 8, 524288, 0, 8, 589824, 0, 8, 1, 0, 8, 65537, 0, 8, 131073, 0, 8, 196609, 0, 8, 262145, 0, 8, 327681, 0, 8, 393217, 0, 8, 458753, 0, 8, 524289, 0, 8, 589825, 0, 8, 2, 0, 8, 65538, 0, 8, 131074, 0, 8, 196610, 0, 8, 262146, 0, 8, 327682, 0, 8, 393218, 0, 8, 458754, 0, 8, 524290, 0, 8, 589826, 0, 8, 3, 0, 8, 65539, 0, 8, 131075, 0, 8, 196611, 0, 8, 262147, 0, 8, 327683, 0, 8, 393219, 0, 8, 458755, 0, 8, 524291, 0, 8, 589827, 0, 8, 4, 0, 8, 65540, 0, 8, 131076, 0, 8, 196612, 0, 8, 262148, 0, 8, 327684, 0, 8, 393220, 0, 8, 458756, 0, 8, 524292, 0, 8, 589828, 0, 8, 5, 0, 8, 65541, 0, 8, 131077, 0, 8, 196613, 0, 8, 262149, 0, 8, 327685, 0, 8, 393221, 0, 8, 458757, 0, 8, 524293, 0, 8, 589829, 0, 8, 6, 0, 8, 65542, 0, 8, 131078, 0, 8, 196614, 0, 8, 262150, 0, 8, 327686, 0, 8, 393222, 0, 8, 458758, 0, 8, 524294, 0, 8, 589830, 0, 8, 7, 0, 8, 65543, 0, 8, 131079, 0, 8, 196615, 0, 8, 262151, 0, 8, 327687, 0, 8, 393223, 0, 8, 458759, 0, 8, 524295, 0, 8, 589831, 0, 8, 8, 0, 8, 65544, 0, 8, 131080, 0, 8, 196616, 0, 8, 262152, 0, 8, 327688, 0, 8, 393224, 0, 8, 458760, 0, 8, 524296, 0, 8, 589832, 0, 8, 9, 0, 8, 65545, 0, 8, 131081, 0, 8, 196617, 0, 8, 262153, 0, 8, 327689, 0, 8, 393225, 0, 8, 458761, 0, 8, 524297, 0, 8, 589833, 0, 8, 10, 0, 8, 65546, 0, 8, 131082, 0, 8, 196618, 0, 8, 262154, 0, 8, 327690, 0, 8, 393226, 0, 8, 458762, 0, 8, 524298, 0, 8, 589834, 0, 8, 11, 0, 8, 65547, 0, 8, 131083, 0, 8, 196619, 0, 8, 262155, 0, 8, 327691, 0, 8, 393227, 0, 8, 458763, 0, 8, 524299, 0, 8, 589835, 0, 8, 12, 0, 8, 65548, 0, 8, 131084, 0, 8, 196620, 0, 8, 262156, 0, 8, 327692, 0, 8, 393228, 0, 8, 458764, 0, 8, 524300, 0, 8, 589836, 0, 8, 13, 0, 8, 65549, 0, 8, 131085, 0, 8, 196621, 0, 8, 262157, 0, 8, 327693, 0, 8, 393229, 0, 8, 458765, 0, 8, 524301, 0, 8, 589837, 0, 8, 14, 0, 8, 65550, 0, 8, 131086, 0, 8, 196622, 0, 8, 262158, 0, 8, 327694, 0, 8, 393230, 0, 8, 458766, 0, 8, 524302, 0, 8, 589838, 0, 8, 15, 0, 8, 65551, 0, 8, 131087, 0, 8, 196623, 0, 8, 262159, 0, 8, 327695, 0, 8, 393231, 0, 8, 458767, 0, 8, 524303, 0, 8, 589839, 0, 8)
+layer_1/name = "stars"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(65540, 131072, 1610612744, 65543, 65536, 536870920, 0, 196608, 1610612744, 11, 196608, 1610612744, 8, 196608, 536870920, 131086, 196608, 1610612744, 131076, 196608, 1342177288, 196622, 196608, 536870920, 15, 196608, 8, 131078, 65536, 1610612744, 14, 65536, 805306376, 2, 65536, 1610612744, 65548, 196608, 1073741832, 196620, 196608, 1073741832, 131084, 196608, 1073741832, 65545, 196608, 805306376, 10, 196608, 268435464, 131073, 196608, 1073741832, 5, 196608, 1342177288, 65536, 196608, 805306376, 65537, 196608, 1073741832, 65547, 196608, 805306376, 196623, 196608, 1073741832, 131075, 196608, 1879048200, 6, 196608, 1610612744, 65538, 196608, 1610612744, 131074, 196608, 805306376, 196610, 196608, 805306376, 131082, 196608, 805306376, 196615, 196608, 805306376, 196617, 196608, 1879048200, 65551, 196608, 1879048200)
+
+[node name="CloudsLayer" type="ParallaxLayer" parent="."]
+z_index = -2
+position = Vector2(0, 40)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(640, 0)
+script = ExtResource("2_hseci")
+cloud_speed = -5
+
+[node name="CloudsTileMap" type="TileMap" parent="CloudsLayer"]
+z_index = -4
+position = Vector2(0, -160)
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_sppoq")
+format = 2
+layer_0/name = "clouds"
+layer_0/tile_data = PackedInt32Array(65536, 458752, 8, 65542, 327680, 268435464, 65543, 262144, 268435464, 131073, 327680, 268435464, 131074, 262144, 268435464, 131076, 262144, 8, 131077, 327680, 8, 65541, 458752, 268435464, 65539, 458752, 8, 196614, 393216, 268435464, 196608, 458752, 8, 196611, 458752, 268435464, 131079, 458752, 268435464, 262146, 393216, 268435464, 262149, 458752, 8)
+
+[node name="Buildings_Far" type="ParallaxLayer" parent="."]
+z_index = -2
+position = Vector2(0, 40)
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings_Far"]
+position = Vector2(320, 180)
+scale = Vector2(4, 4)
+texture = ExtResource("3_hfc3g")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 80)
+
+[node name="Buildings_Near" type="ParallaxLayer" parent="."]
+z_index = -1
+position = Vector2(0, 38)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings_Near"]
+position = Vector2(320, 180)
+scale = Vector2(4, 4)
+texture = ExtResource("3_hfc3g")
+region_enabled = true
+region_rect = Rect2(0, 80, 160, 80)

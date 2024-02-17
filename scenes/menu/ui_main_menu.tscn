@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://efpxwwc6rw2r"]
+[gd_scene load_steps=5 format=3 uid="uid://efpxwwc6rw2r"]
 
 [ext_resource type="Script" path="res://scripts/menu/ui_main_menu.gd" id="1_eyiso"]
+[ext_resource type="PackedScene" uid="uid://thgdqt845aqq" path="res://scenes/menu/ui_options_menu.tscn" id="2_2bif4"]
+[ext_resource type="PackedScene" uid="uid://cwmehxebcatuo" path="res://scenes/levels/level_1.tscn" id="2_6b8gr"]
 [ext_resource type="FontFile" uid="uid://cdahsthp0cr68" path="res://assets/fonts/PrStart.ttf" id="2_8hcpc"]
 
 [node name="MainMenu" type="Control"]
@@ -11,6 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eyiso")
+play_scene = ExtResource("2_6b8gr")
+options_scene = ExtResource("2_2bif4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -26,7 +30,7 @@ offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8hcpc")
 text = "Play"
@@ -46,6 +50,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8hcpc")
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,6 +1,6 @@
 extends Node2D
 
+@export var main_menu_scene = PackedScene
+
 func _ready() -> void:
-	#print_debug(current_scene)
-	
-	self.add_child(Global.game_scene.instantiate())
+	get_tree().change_scene_to_packed.call_deferred(main_menu_scene)

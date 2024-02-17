@@ -1,13 +1,19 @@
 extends Control
 
+@export var play_scene = PackedScene
+@export var options_scene = PackedScene
+@export var credits_scene = PackedScene
+
+
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file(Global.game_scene.resource_path)
-	print(Global.game_scene.resource_path)
-	# continue here
+	# first time running the game
+	if Global.current_level != null:
+		play_scene = Global.current_level
+	get_tree().change_scene_to_packed(play_scene)
+
 
 func _on_options_button_pressed() -> void:
-	var options = load("res://scenes/menu/ui_options_menu.tscn").instantiate()
-	get_tree().current_scene.add_child(options)
+	get_tree().change_scene_to_packed(options_scene)
 	#get_tree().add_child(options)
 
 
