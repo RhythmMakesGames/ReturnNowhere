@@ -155,17 +155,23 @@ tile_size = Vector2i(20, 20)
 physics_layer_0/collision_layer = 1
 sources/4 = SubResource("TileSetAtlasSource_qu2jb")
 
-[sub_resource type="Environment" id="Environment_11lw0"]
+[sub_resource type="Environment" id="Environment_bp4jm"]
 background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.63
 glow_enabled = true
-glow_normalized = true
-glow_intensity = 3.0
-glow_strength = 0.66
-glow_bloom = 0.03
-glow_blend_mode = 0
-glow_hdr_threshold = 2.83
-glow_hdr_scale = 0.14
-glow_hdr_luminance_cap = 0.1
+glow_levels/1 = 5.57
+glow_levels/2 = 0.95
+glow_levels/3 = 4.23
+glow_levels/5 = 10.17
+glow_levels/6 = 5.87
+glow_levels/7 = 11.45
+glow_intensity = 2.65
+glow_strength = 0.59
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.1
+glow_hdr_scale = 0.73
 
 [node name="Level" type="Node2D"]
 
@@ -199,10 +205,14 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_kwrwm")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_11lw0")
-
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
 visible = false
 color = Color(0.192157, 0.192157, 0.192157, 1)
 blend_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bp4jm")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+modulate = Color(0.137255, 0.0705882, 0.0352941, 1)
