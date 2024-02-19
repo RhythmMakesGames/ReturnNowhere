@@ -1,15 +1,16 @@
 extends Control
 
-@export var play_scene = PackedScene
+@export var tutorial_scene = PackedScene
 @export var options_scene = PackedScene
 @export var credits_scene = PackedScene
 
 
 func _on_start_button_pressed() -> void:
-	# first time running the game
+	# continue, if not running for the first time
 	if Global.current_level != null:
-		play_scene = Global.current_level
-	get_tree().change_scene_to_packed(play_scene)
+		get_tree().change_scene_to_packed(Global.current_level)
+	else:
+		get_tree().change_scene_to_packed(tutorial_scene)
 
 
 func _on_options_button_pressed() -> void:
