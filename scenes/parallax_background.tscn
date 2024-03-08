@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqqg1jo5sr6hm"]
+[gd_scene load_steps=9 format=3 uid="uid://dqqg1jo5sr6hm"]
 
 [ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/bg_city.png" id="1_cn7cx"]
 [ext_resource type="Script" path="res://scripts/clouds.gd" id="2_hseci"]
-[ext_resource type="Texture2D" uid="uid://deurdojs45oq" path="res://assets/bg_city_lights_fix.png" id="3_hfc3g"]
+[ext_resource type="Texture2D" uid="uid://1o70o7r3uva2" path="res://assets/bg_city_buildings_far.png" id="3_71vjo"]
+[ext_resource type="Texture2D" uid="uid://btg0lu27663sp" path="res://assets/bg_city_buildings_near.png" id="4_cy1w7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_che5n"]
 texture = ExtResource("1_cn7cx")
@@ -33,7 +34,7 @@ sources/0 = SubResource("TileSetAtlasSource_0wk8n")
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
 [node name="SkyTileMap" type="TileMap" parent="."]
-z_index = -5
+z_index = -10
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_qnkxd")
 format = 2
@@ -44,7 +45,7 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(65540, 131072, 1610612744, 65543, 65536, 536870920, 0, 196608, 1610612744, 11, 196608, 1610612744, 8, 196608, 536870920, 131086, 196608, 1610612744, 131076, 196608, 1342177288, 196622, 196608, 536870920, 15, 196608, 8, 131078, 65536, 1610612744, 14, 65536, 805306376, 2, 65536, 1610612744, 65548, 196608, 1073741832, 196620, 196608, 1073741832, 131084, 196608, 1073741832, 65545, 196608, 805306376, 10, 196608, 268435464, 131073, 196608, 1073741832, 5, 196608, 1342177288, 65536, 196608, 805306376, 65537, 196608, 1073741832, 65547, 196608, 805306376, 196623, 196608, 1073741832, 131075, 196608, 1879048200, 6, 196608, 1610612744, 65538, 196608, 1610612744, 131074, 196608, 805306376, 196610, 196608, 805306376, 131082, 196608, 805306376, 196615, 196608, 805306376, 196617, 196608, 1879048200, 65551, 196608, 1879048200)
 
 [node name="CloudsLayer" type="ParallaxLayer" parent="."]
-z_index = -2
+z_index = -8
 position = Vector2(0, 40)
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(640, 0)
@@ -61,27 +62,35 @@ layer_0/name = "clouds"
 layer_0/tile_data = PackedInt32Array(65536, 458752, 8, 65542, 327680, 268435464, 65543, 262144, 268435464, 131073, 327680, 268435464, 131074, 262144, 268435464, 131076, 262144, 8, 131077, 327680, 8, 65541, 458752, 268435464, 65539, 458752, 8, 196614, 393216, 268435464, 196608, 458752, 8, 196611, 458752, 268435464, 131079, 458752, 268435464, 262146, 393216, 268435464, 262149, 458752, 8)
 
 [node name="Buildings_Far" type="ParallaxLayer" parent="."]
-z_index = -2
-position = Vector2(0, 40)
-motion_scale = Vector2(0.1, 0.1)
-motion_mirroring = Vector2(640, 0)
+z_index = -6
+position = Vector2(0, 18)
+motion_scale = Vector2(0.14, 0.14)
+motion_mirroring = Vector2(648, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buildings_Far"]
 position = Vector2(320, 180)
-scale = Vector2(4, 4)
-texture = ExtResource("3_hfc3g")
-region_enabled = true
+scale = Vector2(3, 3)
+texture = ExtResource("3_71vjo")
 region_rect = Rect2(0, 0, 160, 80)
 
 [node name="Buildings_Near" type="ParallaxLayer" parent="."]
-z_index = -1
+z_index = -4
+position = Vector2(0, 16)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(648, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings_Near"]
+position = Vector2(320, 180)
+scale = Vector2(3, 3)
+texture = ExtResource("4_cy1w7")
+region_rect = Rect2(0, 80, 160, 80)
+
+[node name="Fog_layer" type="ParallaxLayer" parent="."]
+visible = false
 position = Vector2(0, 38)
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(640, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Buildings_Near"]
-position = Vector2(320, 180)
-scale = Vector2(4, 4)
-texture = ExtResource("3_hfc3g")
-region_enabled = true
-region_rect = Rect2(0, 80, 160, 80)
+[node name="ColorRect" type="ColorRect" parent="Fog_layer"]
+offset_right = 640.0
+offset_bottom = 360.0

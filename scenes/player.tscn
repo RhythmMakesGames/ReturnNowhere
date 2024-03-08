@@ -123,7 +123,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ai18h"]
-size = Vector2(1, 1)
+size = Vector2(1, 0.818182)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_tnf3b")
@@ -155,8 +155,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
-scale = Vector2(20, 24)
+position = Vector2(0, -9)
+scale = Vector2(20, 22)
 shape = SubResource("RectangleShape2D_ai18h")
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

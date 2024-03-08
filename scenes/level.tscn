@@ -25,8 +25,10 @@ glow_hdr_scale = 0.73
 [node name="Level" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource("2_g8k3m")]
+z_index = -1
 
 [node name="Player" parent="." instance=ExtResource("1_7dlpl")]
+z_index = 1
 position = Vector2(76, 76)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -40,8 +42,6 @@ drag_vertical_enabled = true
 drag_horizontal_offset = 1.0
 drag_vertical_offset = -1.0
 drag_left_margin = 0.25
-drag_top_margin = 0.25
-drag_right_margin = 0.25
 drag_bottom_margin = 0.25
 editor_draw_limits = true
 

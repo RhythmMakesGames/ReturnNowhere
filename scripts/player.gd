@@ -6,13 +6,13 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var max_move_speed = 150
-@export var max_move_speed_air = 200.0
+@export var max_move_speed_air = 250.0
 @export var max_jump_velocity = -280.0
 @export var max_drop_velocity = 500.0
 @export var scratch_down_speed = 25.0
 
 @export var friction = 50
-@export var acceleration_air_h = 250
+@export var acceleration_air_h = 300
 @export var acceleration_ground_h = 1000
 
 ## factor by which horizontal velocity exponentially decays
@@ -178,7 +178,7 @@ func _physics_process(delta: float) -> void:
 				#move_direction = get_wall_normal().x
 				#current_state = STATES.STATE_IN_AIR
 
-	#print(velocity.x)
+	print(velocity.x)
 	
 	# keeping track of current information
 	was_on_floor = is_on_floor()
