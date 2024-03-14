@@ -86,11 +86,12 @@ texture = ExtResource("4_cy1w7")
 region_rect = Rect2(0, 80, 160, 80)
 
 [node name="Fog_layer" type="ParallaxLayer" parent="."]
-visible = false
 position = Vector2(0, 38)
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(640, 0)
 
 [node name="ColorRect" type="ColorRect" parent="Fog_layer"]
+visible = false
 offset_right = 640.0
 offset_bottom = 360.0
+color = Color(0.435294, 0.00392157, 0.917647, 0.0705882)

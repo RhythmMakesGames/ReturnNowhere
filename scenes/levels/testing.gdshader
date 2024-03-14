@@ -1,18 +1,21 @@
 shader_type canvas_item;
 
 const float move_speed = -100.0f;
-
+/*
 void vertex() {
 	// Called for every vertex the material is visible on.
-	//VERTEX.x += move_speed * cos(TIME);
-	//VERTEX.x += move_speed * clamp(TIME, -10, 10);
-	//clamp(VERTEX.x, -100.0, 100.0);
+	VERTEX.x += move_speed * cos(TIME);
+	VERTEX.x = clamp(VERTEX.x, -100, 100);
 }
-
+*/
 void fragment() {
 	// Called for every pixel the material is visible on.
-	//COLOR = texture(TEXTURE, UV);
-	//COLOR = vec4(0.5,0.5,0.5,0.5);
+	vec2 distortUV = UV;
+	//distortUV.x += 1 * distortUV.y;
+	//distortUV.y = distortUV.x;
+	
+	vec4 pixelColor = texture(TEXTURE, distortUV);
+	COLOR = pixelColor;
 }
 
 //void light() {
