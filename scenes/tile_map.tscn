@@ -207,7 +207,6 @@ terrain_set_0/terrain_1/color = Color(0.690196, 0.0823529, 0.74902, 1)
 sources/4 = SubResource("TileSetAtlasSource_qu2jb")
 
 [node name="TileMap" type="TileMap"]
-scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_apeod")
 format = 2
 layer_0/name = "obstacles"

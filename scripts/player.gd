@@ -5,15 +5,15 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@export var max_move_speed = 150
+@export var max_move_speed = 140
 @export var max_move_speed_air = 250.0
-@export var max_jump_velocity = -280.0
+@export var max_jump_velocity = -290.0
 @export var max_drop_velocity = 500.0
 @export var scratch_down_speed = 25.0
 
-@export var friction = 50
-@export var acceleration_air_h = 300
-@export var acceleration_ground_h = 1000
+@export var friction = 3125
+@export var acceleration_air_h = 250
+@export var acceleration_ground_h = 2500
 
 ## factor by which horizontal velocity exponentially decays
 ## while player is in air, and move key isn't held
@@ -127,9 +127,14 @@ func _physics_process(delta: float) -> void:
 			
 			if move_direction:
 				velocity.x += acceleration_ground_h * delta * move_direction
-				velocity.x = clamp(velocity.x, -max_move_speed, max_move_speed)
+				#velocity.x = clamp(velocity.x, -max_move_speed, max_move_speed)
+
+				# better speed clamp
+				if abs(velocity.x) > max_move_speed:
+					velocity.x = move_toward(velocity.x, max_move_speed * move_direction, friction * delta)
+
 			else:
-				velocity.x = move_toward(velocity.x, 0, friction)
+				velocity.x = move_toward(velocity.x, 0, friction * delta)
 			
 			# idle check
 			if velocity.x == 0 && velocity.y == 0 && current_state == STATES.STATE_ON_GROUND:

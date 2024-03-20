@@ -13,6 +13,7 @@ texture_region_size = Vector2i(20, 20)
 2:8/0 = 0
 1:8/0 = 0
 0:8/0 = 0
+0:8/0/modulate = Color(0.509804, 0.564706, 0.733333, 1)
 
 [sub_resource type="TileSet" id="TileSet_qnkxd"]
 tile_size = Vector2i(20, 20)
@@ -22,10 +23,14 @@ sources/0 = SubResource("TileSetAtlasSource_che5n")
 texture = ExtResource("1_cn7cx")
 texture_region_size = Vector2i(20, 20)
 5:8/0 = 0
+5:8/0/modulate = Color(0.411765, 0.482353, 0.678431, 1)
 6:8/0 = 0
+6:8/0/modulate = Color(0.411765, 0.482353, 0.678431, 1)
 7:8/0 = 0
+7:8/0/modulate = Color(0.411765, 0.482353, 0.678431, 1)
 4:8/next_alternative_id = 2
 4:8/0 = 0
+4:8/0/modulate = Color(0.411765, 0.482353, 0.678431, 1)
 
 [sub_resource type="TileSet" id="TileSet_sppoq"]
 tile_size = Vector2i(20, 20)
@@ -59,7 +64,7 @@ scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_sppoq")
 format = 2
 layer_0/name = "clouds"
-layer_0/tile_data = PackedInt32Array(65536, 458752, 8, 65542, 327680, 268435464, 65543, 262144, 268435464, 131073, 327680, 268435464, 131074, 262144, 268435464, 131076, 262144, 8, 131077, 327680, 8, 65541, 458752, 268435464, 65539, 458752, 8, 196614, 393216, 268435464, 196608, 458752, 8, 196611, 458752, 268435464, 131079, 458752, 268435464, 262146, 393216, 268435464, 262149, 458752, 8)
+layer_0/tile_data = PackedInt32Array(65536, 458752, 8, 65542, 327680, 268435464, 65543, 262144, 268435464, 131073, 327680, 268435464, 131074, 262144, 268435464, 131076, 262144, 8, 131077, 327680, 8, 65541, 458752, 268435464, 65539, 458752, 8, 131079, 458752, 268435464, 196608, 458752, 8, 196611, 393216, 268435464, 196614, 458752, 268435464)
 
 [node name="Buildings_Far" type="ParallaxLayer" parent="."]
 z_index = -6
