@@ -130,9 +130,10 @@ script = ExtResource("1_tnf3b")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(-32, -64)
 scale = Vector2(2, 2)
 texture = ExtResource("2_dqjs2")
+centered = false
 hframes = 8
 vframes = 10
 
