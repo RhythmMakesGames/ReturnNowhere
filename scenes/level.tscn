@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://3nu6e6jshlqs"]
+[gd_scene load_steps=8 format=3 uid="uid://3nu6e6jshlqs"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_7dlpl"]
-[ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tile_map.tscn" id="2_g8k3m"]
 [ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_background.tscn" id="3_kwrwm"]
+[ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
+[ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/streetlight.tscn" id="4_d575r"]
+[ext_resource type="Texture2D" uid="uid://c1lrrahfk2wu5" path="res://assets/gradient_atmosphericlight_t.png" id="5_mt01p"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/gradient_atmosphericlight.png" id="6_t1qco"]
 
-[sub_resource type="Environment" id="Environment_bp4jm"]
+[sub_resource type="Environment" id="Environment_yeiki"]
 background_mode = 3
-background_canvas_max_layer = 1
 tonemap_mode = 3
-glow_enabled = true
 glow_levels/1 = 2.3
 glow_levels/2 = 1.18
 glow_levels/3 = 0.0
@@ -20,19 +21,16 @@ glow_hdr_scale = 0.73
 
 [node name="Level" type="Node2D"]
 
-[node name="TileMap" parent="." instance=ExtResource("2_g8k3m")]
-z_index = -1
-
 [node name="Player" parent="." instance=ExtResource("1_7dlpl")]
-z_index = 1
-position = Vector2(76, 76)
+z_index = 10
+position = Vector2(290, 80)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
 limit_bottom = 378
 limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 15.0
+position_smoothing_speed = 16.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_horizontal_offset = 1.0
@@ -41,15 +39,44 @@ drag_left_margin = 0.25
 drag_bottom_margin = 0.25
 editor_draw_limits = true
 
+[node name="TileMap" parent="." instance=ExtResource("3_st2g3")]
+
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_kwrwm")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bp4jm")
+environment = SubResource("Environment_yeiki")
 
-[node name="AmbientLight" type="DirectionalLight2D" parent="."]
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="WorldAmbient" type="DirectionalLight2D" parent="Lights"]
+visible = false
 rotation = 0.902335
-color = Color(0.192157, 0.192157, 0.192157, 1)
-energy = 0.58
+color = Color(0.129412, 0.172549, 0.317647, 1)
+energy = 0.4
 blend_mode = 2
 range_layer_min = -100
 shadow_filter = 1
+
+[node name="StreetLight" parent="Lights" instance=ExtResource("4_d575r")]
+position = Vector2(-42, 290)
+
+[node name="AtmosphericLight" type="Node2D" parent="Lights"]
+position = Vector2(255, 139)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
+modulate = Color(1, 1, 1, 0.196078)
+texture = ExtResource("5_mt01p")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight"]
+color = Color(0.368627, 0, 0.839216, 1)
+energy = 5.0
+texture = ExtResource("6_t1qco")
+
+[node name="AmbientLight" type="PointLight2D" parent="Lights"]
+position = Vector2(506, 276)
+scale = Vector2(2, 2)
+color = Color(0.937255, 0, 0, 1)
+energy = 5.0
+range_layer_min = -100
+texture = ExtResource("6_t1qco")

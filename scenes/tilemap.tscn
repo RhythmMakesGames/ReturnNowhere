@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvkdvx0lb5hp0"]
 
-[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_2x.png" id="1_q7fmv"]
-[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/tilemap_city.png" id="1_wovrn"]
+[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_2x.png" id="1_1enaj"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/tilemap_city.png" id="2_pw5th"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bepcp"]
 resource_name = "World (2x)"
-texture = ExtResource("1_q7fmv")
+texture = ExtResource("1_1enaj")
 texture_region_size = Vector2i(20, 20)
 12:0/size_in_atlas = Vector2i(4, 6)
 12:0/0 = 0
@@ -40,7 +40,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu2jb"]
 resource_name = "Platforms"
-texture = ExtResource("1_wovrn")
+texture = ExtResource("2_pw5th")
 texture_region_size = Vector2i(20, 20)
 0:0/next_alternative_id = 2
 0:0/0 = 0
