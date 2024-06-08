@@ -204,7 +204,7 @@ func _physics_process(delta: float) -> void:
 				#move_direction = get_wall_normal().x
 				#current_state = STATES.STATE_IN_AIR
 
-	print(velocity.x)
+	#print(velocity.x)
 	
 	# keeping track of current information for the next iteration
 	was_on_floor = is_on_floor()
