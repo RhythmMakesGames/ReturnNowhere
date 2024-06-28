@@ -125,8 +125,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ai18h"]
 size = Vector2(1, 0.818182)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("particles_jump", "particles_turn_ground")]
 script = ExtResource("1_tnf3b")
+particles_jump = NodePath("JumpParticles")
+particles_turn_ground = NodePath("TurnParticlesGround")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -159,5 +161,51 @@ one_shot = true
 position = Vector2(0, -9)
 scale = Vector2(20, 22)
 shape = SubResource("RectangleShape2D_ai18h")
+
+[node name="JumpParticles" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, 2)
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+direction = Vector2(0, -1)
+spread = 105.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 20.0
+scale_amount_max = 2.0
+color = Color(0.419608, 0.419608, 0.419608, 1)
+
+[node name="TurnParticlesGround" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(1, 0)
+emitting = false
+amount = 20
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+direction = Vector2(-1, -2)
+spread = 105.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 18.0
+initial_velocity_max = 18.0
+scale_amount_max = 2.0
+color = Color(0.419608, 0.419608, 0.419608, 1)
+
+[node name="RayCastStepTop" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+collide_with_areas = true
+
+[node name="RayCastStepBottom" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+collide_with_areas = true
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

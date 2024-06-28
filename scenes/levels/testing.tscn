@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=26 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_k0n6k"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_e6m48"]
@@ -10,20 +10,7 @@
 [ext_resource type="Shader" path="res://scenes/levels/shader1.gdshader" id="6_dlqw4"]
 [ext_resource type="Script" path="res://scripts/RainParticles.gd" id="6_en73v"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/gradient_atmosphericlight.png" id="6_y3uh1"]
-
-[sub_resource type="Environment" id="Environment_edssc"]
-background_mode = 3
-tonemap_mode = 3
-tonemap_exposure = 2.5
-glow_levels/1 = 2.3
-glow_levels/2 = 1.18
-glow_levels/3 = 0.0
-glow_levels/5 = 0.0
-glow_bloom = 0.01
-glow_blend_mode = 1
-glow_hdr_threshold = 0.75
-glow_hdr_scale = 0.73
-adjustment_enabled = true
+[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_2x.png" id="11_rrbq7"]
 
 [sub_resource type="Curve" id="Curve_hwwiy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -55,6 +42,25 @@ scale_min = 0.2
 scale_max = 2.0
 scale_curve = SubResource("CurveXYZTexture_dwbry")
 color = Color(0.54, 0.603, 0.75, 1)
+
+[sub_resource type="Environment" id="Environment_edssc"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 2.5
+glow_levels/1 = 2.3
+glow_levels/2 = 1.18
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.75
+glow_hdr_scale = 0.73
+adjustment_enabled = true
+
+[sub_resource type="Curve2D" id="Curve2D_iyok6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipx1s"]
+size = Vector2(36, 8)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x653i"]
 
@@ -93,6 +99,13 @@ drag_left_margin = 0.25
 drag_bottom_margin = 0.25
 editor_draw_limits = true
 
+[node name="RainParticles" type="GPUParticles2D" parent="Player"]
+amount = 400
+process_material = SubResource("ParticleProcessMaterial_46pnp")
+fixed_fps = 0
+draw_order = 0
+script = ExtResource("6_en73v")
+
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_p51j7")]
 
 [node name="TileMap" parent="." instance=ExtResource("3_e6m48")]
@@ -114,7 +127,9 @@ shadow_filter = 1
 position = Vector2(-42, 290)
 
 [node name="AtmosphericLight" type="Node2D" parent="Lights"]
-position = Vector2(227, 171)
+position = Vector2(156, 160)
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
 modulate = Color(1, 1, 1, 0.0392157)
@@ -126,7 +141,10 @@ energy = 3.0
 texture = ExtResource("6_y3uh1")
 
 [node name="AtmosphericLight2" type="Node2D" parent="Lights"]
-position = Vector2(409, 240)
+visible = false
+position = Vector2(458, 161)
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2"]
 modulate = Color(1, 1, 1, 0.0392157)
@@ -137,15 +155,87 @@ color = Color(1, 0, 0, 1)
 energy = 3.0
 texture = ExtResource("6_y3uh1")
 
-[node name="Particles" type="Node2D" parent="."]
+[node name="AtmosphericLight3" type="Node2D" parent="Lights"]
+position = Vector2(410, 187)
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
 
-[node name="RainParticles" type="GPUParticles2D" parent="Particles" node_paths=PackedStringArray("current_camera")]
-amount = 400
-process_material = SubResource("ParticleProcessMaterial_46pnp")
-fixed_fps = 0
-draw_order = 0
-script = ExtResource("6_en73v")
-current_camera = NodePath("../../Player/Camera2D")
+[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight3"]
+modulate = Color(1, 1, 1, 0.0392157)
+texture = ExtResource("6_y3uh1")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight3"]
+color = Color(0.368627, 0, 0.839216, 1)
+energy = 3.0
+texture = ExtResource("6_y3uh1")
+
+[node name="AtmosphericLight4" type="Node2D" parent="Lights"]
+visible = false
+position = Vector2(458, 161)
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight4"]
+modulate = Color(1, 1, 1, 0.0392157)
+texture = ExtResource("6_y3uh1")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight4"]
+color = Color(1, 0, 0, 1)
+energy = 3.0
+texture = ExtResource("6_y3uh1")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_iyok6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(181, 231)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ipx1s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("11_rrbq7")
+region_enabled = true
+region_rect = Rect2(40, 200, 40, 16)
+
+[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="."]
+position = Vector2(142, 228)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D2"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ipx1s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D2"]
+texture = ExtResource("11_rrbq7")
+region_enabled = true
+region_rect = Rect2(40, 200, 40, 16)
+
+[node name="AnimatableBody2D3" type="AnimatableBody2D" parent="."]
+position = Vector2(105, 223)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D3"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ipx1s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D3"]
+texture = ExtResource("11_rrbq7")
+region_enabled = true
+region_rect = Rect2(40, 200, 40, 16)
+
+[node name="AnimatableBody2D4" type="AnimatableBody2D" parent="."]
+position = Vector2(68, 215)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D4"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ipx1s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D4"]
+texture = ExtResource("11_rrbq7")
+region_enabled = true
+region_rect = Rect2(40, 200, 40, 16)
 
 [node name="RecycleBin" type="Node" parent="."]
 
@@ -218,3 +308,17 @@ color = Color(0.937255, 0, 0, 1)
 energy = 3.0
 range_layer_min = -100
 texture = ExtResource("6_y3uh1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="RecycleBin"]
+visible = false
+position = Vector2(290, -20)
+amount = 400
+emission_shape = 3
+emission_rect_extents = Vector2(50, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="RecycleBin"]
+visible = false
+position = Vector2(407, -19)
+amount = 400
+emission_shape = 3
+emission_rect_extents = Vector2(50, 1)
