@@ -200,11 +200,15 @@ initial_velocity_max = 18.0
 scale_amount_max = 2.0
 color = Color(0.419608, 0.419608, 0.419608, 1)
 
-[node name="RayCastStepTop" type="RayCast2D" parent="."]
+[node name="StepTop" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
 collide_with_areas = true
 
-[node name="RayCastStepBottom" type="RayCast2D" parent="."]
+[node name="StepBottom" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+collide_with_areas = true
+
+[node name="StepMeasure" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
 collide_with_areas = true
 
