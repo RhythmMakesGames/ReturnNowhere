@@ -13,5 +13,6 @@ texture = ExtResource("1_65ymi")
 [node name="LightCone" type="PointLight2D" parent="."]
 color = Color(1, 1, 0, 1)
 energy = 3.0
+range_layer_min = -3
 shadow_enabled = true
 texture = ExtResource("2_a30ic")
