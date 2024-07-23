@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://j7lxaoaejouc"]
+[gd_scene load_steps=8 format=3 uid="uid://j7lxaoaejouc"]
 
 [ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_x15xk"]
 [ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_2x.png" id="2_tdvwi"]
@@ -44,6 +44,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipx1s"]
 size = Vector2(36, 8)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lt1u7"]
+polygon = PackedVector2Array(-18, -8, -18, -1, 18, -1, 18, -8)
+
 [node name="Path2D" type="Path2D"]
 script = ExtResource("1_x15xk")
 
@@ -72,3 +75,6 @@ shape = SubResource("RectangleShape2D_ipx1s")
 texture = ExtResource("2_tdvwi")
 region_enabled = true
 region_rect = Rect2(40, 200, 40, 16)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatableBody2D"]
+occluder = SubResource("OccluderPolygon2D_lt1u7")

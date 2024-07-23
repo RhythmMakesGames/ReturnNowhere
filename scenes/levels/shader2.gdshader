@@ -1,11 +1,15 @@
 shader_type canvas_item;
+//render_mode blend_disabled;
 
-//render_mode blend_add;
-
-void vertex(){
-	//if (VERTEX.x > 140.0) {COLOR = vec4(1.0, 0.0, 1.0, 1.0); }
-}
+uniform vec4 mod = vec4(1, 0, 0, 1);
+//uniform vec4 mod = vec4(1);
 
 void fragment() {
-	// Called for every pixel the material is visible on.
+	//COLOR *= mod;
+	COLOR = texture(TEXTURE, UV);
+	COLOR.rgb = vec3(COLOR.r + COLOR.g + COLOR.b) / 3.0;
+	
+	
+	//vec4 color = texture(TEXTURE, UV);
+	//COLOR.rgb = vec3(dot(color.rgb, vector3(brightness, brightness, brightness)));
 }
