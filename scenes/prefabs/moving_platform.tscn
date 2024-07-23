@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://j7lxaoaejouc"]
 
 [ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_x15xk"]
-[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_2x.png" id="2_tdvwi"]
+[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_scaled_2x.png" id="2_y70if"]
 
 [sub_resource type="Animation" id="Animation_x0t7u"]
 length = 0.001
@@ -72,7 +72,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_ipx1s")
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
-texture = ExtResource("2_tdvwi")
+texture = ExtResource("2_y70if")
 region_enabled = true
 region_rect = Rect2(40, 200, 40, 16)
 
