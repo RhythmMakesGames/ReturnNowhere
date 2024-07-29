@@ -1,16 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=27 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_k0n6k"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_vq3ny"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_e6m48"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="3_k4s15"]
 [ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_background.tscn" id="3_p51j7"]
 [ext_resource type="Shader" path="res://scenes/levels/shader2.gdshader" id="4_n5mtx"]
-[ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/for_shader_test.jpg" id="5_8vxe5"]
 [ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/prefabs/streetlight.tscn" id="5_25sla"]
-[ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/images.png" id="5_813mp"]
 [ext_resource type="Shader" path="res://scenes/levels/shader1.gdshader" id="6_dlqw4"]
-[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/gradient_atmosphericlight.png" id="6_y3uh1"]
 [ext_resource type="PackedScene" uid="uid://j7lxaoaejouc" path="res://scenes/prefabs/moving_platform.tscn" id="7_xq5em"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="9_015q0"]
+[ext_resource type="PackedScene" uid="uid://d1eka51x8wcpe" path="res://scenes/prefabs/spikes/spike_double.tscn" id="9_waypd"]
+[ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/sprites/for_shader_test.jpg" id="11_jxbx7"]
+[ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/images.png" id="13_ms4a7"]
 
 [sub_resource type="Curve" id="Curve_hwwiy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -46,7 +48,6 @@ color = Color(0.54, 0.603, 0.75, 1)
 [sub_resource type="Environment" id="Environment_edssc"]
 background_mode = 3
 tonemap_mode = 3
-glow_strength = 1.25
 glow_blend_mode = 1
 
 [sub_resource type="Curve2D" id="Curve2D_1ievb"]
@@ -78,15 +79,14 @@ shader_parameter/Speed = 0.05
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_k0n6k")]
-modulate = Color(0.705882, 0.705882, 0.705882, 1)
 z_index = 2
 position = Vector2(290, 80)
 safe_margin = 0.05
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="DefaultCamera2D" type="Camera2D" parent="Player"]
+process_callback = 0
 limit_bottom = 378
-limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 16.0
 drag_horizontal_enabled = true
@@ -97,6 +97,19 @@ drag_left_margin = 0.25
 drag_bottom_margin = 0.25
 editor_draw_limits = true
 
+[node name="DeathParticles" type="CPUParticles2D" parent="Player"]
+visible = false
+position = Vector2(-63, -13)
+amount = 50
+explosiveness = 0.5
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+
 [node name="RainParticles" type="GPUParticles2D" parent="Player"]
 amount = 400
 process_material = SubResource("ParticleProcessMaterial_46pnp")
@@ -104,20 +117,20 @@ fixed_fps = 0
 draw_order = 0
 script = ExtResource("2_vq3ny")
 
-[node name="Glow" type="Node2D" parent="Player"]
+[node name="Torch" type="Node2D" parent="Player"]
 z_index = -1
 position = Vector2(2, -10)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/Glow"]
+[node name="Sprite2D" type="Sprite2D" parent="Player/Torch"]
 modulate = Color(1, 1, 1, 0.0980392)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
-[node name="PointLight2D" type="PointLight2D" parent="Player/Glow"]
+[node name="PointLight2D" type="PointLight2D" parent="Player/Torch"]
 range_layer_min = -1
 shadow_enabled = true
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 texture_scale = 0.5
 
 [node name="TileMap" parent="." instance=ExtResource("3_e6m48")]
@@ -131,11 +144,7 @@ metadata/_edit_lock_ = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_edssc")
 
-[node name="Lights" type="Node2D" parent="."]
-z_index = 3
-metadata/_edit_lock_ = true
-
-[node name="WorldAmbientBG" type="DirectionalLight2D" parent="Lights"]
+[node name="WorldAmbientBackground" type="DirectionalLight2D" parent="."]
 rotation = 0.902335
 energy = 0.3
 blend_mode = 1
@@ -144,12 +153,16 @@ range_layer_max = -100
 shadow_filter = 1
 metadata/_edit_lock_ = true
 
-[node name="WorldAmbientFG" type="DirectionalLight2D" parent="Lights"]
+[node name="WorldAmbientForeground" type="DirectionalLight2D" parent="."]
 rotation = 0.902335
-color = Color(0.113725, 0.113725, 0.113725, 1)
 energy = 0.3
-blend_mode = 2
+blend_mode = 1
+range_layer_min = -99
 shadow_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="Lights" type="Node2D" parent="."]
+z_index = 3
 metadata/_edit_lock_ = true
 
 [node name="StreetLight" parent="Lights" instance=ExtResource("5_25sla")]
@@ -166,12 +179,12 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
 modulate = Color(1, 1, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight"]
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight2" type="Node2D" parent="Lights"]
 visible = false
@@ -182,14 +195,14 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2"]
 modulate = Color(0.490196, 0.490196, 0.980392, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight2"]
 color = Color(0.490196, 0.490196, 0.980392, 1)
 energy = 2.0
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight3" type="Node2D" parent="Lights"]
 position = Vector2(143, 148)
@@ -198,14 +211,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight3"]
 modulate = Color(0.505882, 0.505882, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight3"]
 color = Color(0.505882, 0.505882, 1, 1)
 energy = 0.2
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight4" type="Node2D" parent="Lights"]
 position = Vector2(395, 145)
@@ -214,14 +227,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight4"]
 modulate = Color(0.505882, 0.505882, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight4"]
 color = Color(0.505882, 0.505882, 1, 1)
 energy = 0.2
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight5" type="Node2D" parent="Lights"]
 position = Vector2(-278, 231)
@@ -230,14 +243,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight5"]
 modulate = Color(0.505882, 0.505882, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight5"]
 color = Color(0.505882, 0.505882, 1, 1)
 energy = 0.2
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight6" type="Node2D" parent="Lights"]
 position = Vector2(-60, 119)
@@ -246,14 +259,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight6"]
 modulate = Color(0.505882, 0.505882, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight6"]
 color = Color(0.505882, 0.505882, 1, 1)
 energy = 0.2
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight7" type="Node2D" parent="Lights"]
 position = Vector2(629, 230)
@@ -262,37 +275,50 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight7"]
 modulate = Color(0.505882, 0.505882, 1, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight7"]
 color = Color(0.505882, 0.505882, 1, 1)
 energy = 0.2
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
-[node name="NormalMapTest" type="Node2D" parent="Lights"]
+[node name="NormalMapTest" type="Node2D" parent="."]
 visible = false
-position = Vector2(915, 124)
-scale = Vector2(2, 2)
+position = Vector2(309, 165)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Lights/NormalMapTest"]
+[node name="Sprite2D" type="Sprite2D" parent="NormalMapTest"]
 modulate = Color(1, 0.196078, 0.196078, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
-[node name="PointLight2D" type="PointLight2D" parent="Lights/NormalMapTest"]
+[node name="PointLight2D" type="PointLight2D" parent="NormalMapTest"]
 color = Color(1, 0.196078, 0.196078, 1)
 energy = 5.0
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
-[node name="Node" type="Node" parent="."]
+[node name="OneWayPlatform" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.847059, 0.886275, 0.945098, 1)
+position = Vector2(303, 281)
+texture = ExtResource("9_015q0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 20)
 
-[node name="MovingPlatform" parent="Node" instance=ExtResource("7_xq5em")]
+[node name="MovingPlatform" parent="." instance=ExtResource("7_xq5em")]
 position = Vector2(180, 230)
 curve = SubResource("Curve2D_1ievb")
+
+[node name="SpikeDouble" parent="." instance=ExtResource("9_waypd")]
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(232, 214)
+
+[node name="SpikeDouble2" parent="." instance=ExtResource("9_waypd")]
+position = Vector2(598, 254)
 
 [node name="Bin" type="Node" parent="."]
 
@@ -326,7 +352,7 @@ visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_cfys4")
 position = Vector2(-189, 242)
-texture = ExtResource("5_8vxe5")
+texture = ExtResource("11_jxbx7")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Bin"]
@@ -336,7 +362,7 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_ti27y")
 position = Vector2(-429, 180)
 scale = Vector2(2.36875, 2.60556)
-texture = ExtResource("5_813mp")
+texture = ExtResource("13_ms4a7")
 centered = false
 metadata/_edit_lock_ = true
 
@@ -368,7 +394,7 @@ scale = Vector2(2, 2)
 color = Color(0.937255, 0, 0, 1)
 energy = 3.0
 range_layer_min = -100
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 metadata/_edit_lock_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Bin"]
@@ -395,14 +421,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Bin/TOOmuchLight"]
 modulate = Color(0.490196, 0.490196, 0.980392, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Bin/TOOmuchLight"]
 color = Color(0.490196, 0.490196, 0.980392, 1)
 energy = 10.0
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="RadioactiveGreen" type="Node2D" parent="Bin"]
 visible = false
@@ -412,14 +438,14 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="Bin/RadioactiveGreen"]
 modulate = Color(0, 1, 0, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Bin/RadioactiveGreen"]
 position = Vector2(11.5, 16.5)
 color = Color(0, 1, 0, 1)
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="DarkenAmbience" type="DirectionalLight2D" parent="Bin"]
 visible = false
@@ -438,13 +464,13 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Bin/shadertest"]
-texture = ExtResource("5_8vxe5")
+texture = ExtResource("11_jxbx7")
 
 [node name="PointLight2D" type="PointLight2D" parent="Bin/shadertest"]
 visible = false
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="Magenta" type="Node2D" parent="Bin"]
 visible = false
@@ -455,13 +481,13 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Bin/Magenta"]
 modulate = Color(1, 0, 0.490196, 0.0980392)
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="PointLight2D" type="PointLight2D" parent="Bin/Magenta"]
 color = Color(1, 0, 0.490196, 1)
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("6_y3uh1")
+texture = ExtResource("3_k4s15")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Bin"]
 visible = false
@@ -469,4 +495,18 @@ modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -5
 position = Vector2(394, 162)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_813mp")
+texture = ExtResource("13_ms4a7")
+
+[node name="ghostparticles" type="CPUParticles2D" parent="Bin"]
+visible = false
+position = Vector2(227, 67)
+emitting = false
+amount = 50
+explosiveness = 0.5
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0

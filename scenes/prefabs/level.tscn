@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
 [ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/prefabs/streetlight.tscn" id="4_d575r"]
 [ext_resource type="Texture2D" uid="uid://c1lrrahfk2wu5" path="res://assets/gradient_atmosphericlight_t.png" id="5_mt01p"]
-[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/gradient_atmosphericlight.png" id="6_t1qco"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="6_t1qco"]
 
 [sub_resource type="Environment" id="Environment_yeiki"]
 background_mode = 3

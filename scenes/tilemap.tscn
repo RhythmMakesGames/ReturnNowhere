@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://dvkdvx0lb5hp0"]
 
-[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/tilemap_city_scaled_2x.png" id="1_ohdy7"]
-[ext_resource type="Texture2D" uid="uid://catb2ehha43l1" path="res://assets/tilemap_city_scaled_2x_n.png" id="2_7rjsl"]
-[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/tilemap_city.png" id="2_pw5th"]
-[ext_resource type="Texture2D" uid="uid://d0e5yrwhpqkac" path="res://assets/tilemap_city_n.png" id="3_351a5"]
+[ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/sprites/tilemap_city_scaled_2x.png" id="1_ohdy7"]
+[ext_resource type="Texture2D" uid="uid://catb2ehha43l1" path="res://assets/sprites/tilemap_city_scaled_2x_n.png" id="2_7rjsl"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="2_pw5th"]
+[ext_resource type="Texture2D" uid="uid://d0e5yrwhpqkac" path="res://assets/sprites/tilemap_city_n.png" id="3_351a5"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xewrf"]
 diffuse_texture = ExtResource("1_ohdy7")

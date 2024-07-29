@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dqqg1jo5sr6hm"]
 
-[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/bg_city.png" id="1_cn7cx"]
+[ext_resource type="Texture2D" uid="uid://cy3kd3setotnk" path="res://assets/sprites/bg_city.png" id="1_cn7cx"]
 [ext_resource type="Script" path="res://scripts/clouds.gd" id="2_hseci"]
-[ext_resource type="Texture2D" uid="uid://1o70o7r3uva2" path="res://assets/bg_city_buildings_far.png" id="3_71vjo"]
-[ext_resource type="Texture2D" uid="uid://btg0lu27663sp" path="res://assets/bg_city_buildings_near.png" id="4_cy1w7"]
+[ext_resource type="Texture2D" uid="uid://1o70o7r3uva2" path="res://assets/sprites/bg_city_buildings_far.png" id="3_71vjo"]
+[ext_resource type="Texture2D" uid="uid://btg0lu27663sp" path="res://assets/sprites/bg_city_buildings_near.png" id="4_cy1w7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_che5n"]
 texture = ExtResource("1_cn7cx")

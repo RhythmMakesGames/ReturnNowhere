@@ -1,11 +1,9 @@
 extends CharacterBody2D
 
-# remove later ig
+@export var disable_physics:bool = false
+## disable player movement controls (move, jump, etc..)
 @export var disable_movement:bool = false
 @onready var spawn_position = Vector2(position.x, position.y)
-
-@export var particles_jump = Node2D
-@export var particles_turn_ground = Node2D
 
 ## for stair/obstacle stepping
 @onready var raycast_step_top = $StepTop as RayCast2D
@@ -43,20 +41,30 @@ var step_tp_offset = 0.2
 
 @onready var coyote_timer = $CoyoteTimer as Timer
 @onready var jump_buffer = $JumpBuffer as Timer
+
+# becomes idle after a few seconds of inactivity
+@onready var idle_timer = $IdleTimer as Timer
+var is_idle
+
 var is_jump_key_held #notimplemented
+var disable_jump = false
 var was_on_floor = false
 var was_on_wall = false
-
-@onready var animation_player = $AnimationPlayer as AnimationPlayer
-@onready var player_sprite = $Sprite2D as Sprite2D
 
 var move_direction = 0
 var last_move_direction_h = 0
 var is_horizontally_flipped = false
 
-# becomes idle after a few seconds of inactivity
-@onready var idle_timer = $IdleTimer as Timer
-var is_idle
+# appearance
+@onready var animation_player = $AnimationPlayer as AnimationPlayer
+@onready var player_sprite = $Sprite2D as Sprite2D
+
+var default_color = Color(0.76, 0.76, 0.76)
+var damage_color = Color(0.76, 0.24, 0.24)
+
+@onready var particles_jump = $JumpParticles as Node2D
+@onready var particles_turn_ground = $TurnParticlesGround as Node2D
+@onready var death_particles = $DeathParticles as Node2D
 
 # literals
 var stand_animation:String = "standing"
@@ -90,7 +98,7 @@ func _ready() -> void:
 func _on_idle_timer_timeout() -> void:
 	is_idle = true
 
-	
+
 func _process(delta: float) -> void:
 	player_sprite.flip_h = true if is_horizontally_flipped else false
 	
@@ -128,6 +136,9 @@ func handle_ground_state_process(delta):
 
 
 func jump() -> void:
+	if disable_jump == true:
+		return
+	
 	# if randi_range(0,2) == 1 && is_on_floor():
 	if is_on_floor():
 		particles_jump.emitting = true
@@ -139,19 +150,26 @@ func jump() -> void:
 
 func _physics_process(delta: float) -> void:
 	move_direction = Input.get_axis(move_left_action, move_right_action)
+	
+	if disable_physics == true:
+		return
+	
+	if disable_movement == true:
+		move_direction = 0
+
 	# holding move key (not 0)
 	if move_direction:
 		# condition remains unchanged if move_direction is 0
 		is_horizontally_flipped = true if move_direction < 0 else false
 	
-	# update variables?
+	# update variables? and stuff
 	if is_horizontally_flipped:
 		raycast_step_top.rotation_degrees = 180
 		raycast_step_bottom.rotation_degrees = 180
 	else:
 		raycast_step_top.rotation_degrees = 0
 		raycast_step_bottom.rotation_degrees = 0
-		
+	
 	match current_state:
 		# on floor / coyote period
 		STATES.ON_GROUND:
@@ -159,8 +177,6 @@ func _physics_process(delta: float) -> void:
 		STATES.IN_AIR:
 			handle_air_state_physics(delta)
 		#STATES.ON_WALL:
-
-	print(velocity.x)
 	
 	## keeping track of current information for the next iteration
 	was_on_floor = is_on_floor()
@@ -168,10 +184,9 @@ func _physics_process(delta: float) -> void:
 	last_move_direction_h = move_direction
 	previous_state = current_state
 	
-	## remove this later!
-	if !disable_movement:
-		move_and_slide()
-		
+	#print(velocity.x)
+	move_and_slide()
+	
 	## Reset position for testing: press 4
 	if Input.is_action_pressed("reset_position"):
 		velocity.x = 0
@@ -282,3 +297,34 @@ func handle_air_state_physics(delta):
 
 #if is_on_wall_only():
 # if was on wall and release space (becomes walljump) within a walljump timer
+
+
+func die():
+	#print(get_tree().current_scene.name)
+	player_sprite.modulate = damage_color
+	await get_tree().create_timer(0.1).timeout
+	player_sprite.visible = false
+	disable_movement_controls()
+	await get_tree().create_timer(0.4).timeout
+	#.emitting = true
+	
+	player_sprite.modulate = default_color
+	player_sprite.visible = true
+	reset_player()
+
+
+func reset_player():
+	current_state = STATES.IN_AIR
+	position = spawn_position
+	velocity = Vector2(0, 0)
+	enable_movement_controls()
+
+
+func disable_movement_controls():
+	disable_movement = true
+	disable_jump = true
+
+
+func enable_movement_controls():
+	disable_movement = false
+	disable_jump = false
