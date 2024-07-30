@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var disable_physics:bool = false
 ## disable player movement controls (move, jump, etc..)
@@ -65,6 +66,7 @@ var damage_color = Color(0.76, 0.24, 0.24)
 @onready var particles_jump = $JumpParticles as Node2D
 @onready var particles_turn_ground = $TurnParticlesGround as Node2D
 @onready var death_particles = $DeathParticles as Node2D
+@onready var torch = $Torch
 
 # literals
 var stand_animation:String = "standing"
@@ -301,13 +303,24 @@ func handle_air_state_physics(delta):
 
 func die():
 	#print(get_tree().current_scene.name)
+	
+	# damage effect, and death particles
 	player_sprite.modulate = damage_color
+	death_particles.emitting = true
 	await get_tree().create_timer(0.1).timeout
 	player_sprite.visible = false
-	disable_movement_controls()
-	await get_tree().create_timer(0.4).timeout
-	#.emitting = true
 	
+	# particles remain for a while
+	torch.visible = false
+	disable_movement_controls()
+	await get_tree().create_timer(0.1).timeout
+	death_particles.emitting = false
+	
+	# respawn/wait time
+	await get_tree().create_timer(0.3).timeout
+	
+	# reset
+	torch.visible = true
 	player_sprite.modulate = default_color
 	player_sprite.visible = true
 	reset_player()

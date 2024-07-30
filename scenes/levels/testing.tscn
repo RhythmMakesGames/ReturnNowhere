@@ -4,15 +4,15 @@
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_vq3ny"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_e6m48"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="3_k4s15"]
-[ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_background.tscn" id="3_p51j7"]
 [ext_resource type="Shader" path="res://scenes/levels/shader2.gdshader" id="4_n5mtx"]
 [ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/prefabs/streetlight.tscn" id="5_25sla"]
+[ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_bg.tscn" id="5_mi2m3"]
 [ext_resource type="Shader" path="res://scenes/levels/shader1.gdshader" id="6_dlqw4"]
 [ext_resource type="PackedScene" uid="uid://j7lxaoaejouc" path="res://scenes/prefabs/moving_platform.tscn" id="7_xq5em"]
-[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="9_015q0"]
-[ext_resource type="PackedScene" uid="uid://d1eka51x8wcpe" path="res://scenes/prefabs/spikes/spike_double.tscn" id="9_waypd"]
 [ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/sprites/for_shader_test.jpg" id="11_jxbx7"]
+[ext_resource type="Texture2D" uid="uid://bdw75deujfkwa" path="res://assets/sprites/spike_falling.png" id="13_b3qc4"]
 [ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/images.png" id="13_ms4a7"]
+[ext_resource type="PackedScene" uid="uid://dquvb7yosttty" path="res://scenes/prefabs/spikes/spike_single_down.tscn" id="14_8g15c"]
 
 [sub_resource type="Curve" id="Curve_hwwiy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -98,17 +98,21 @@ drag_bottom_margin = 0.25
 editor_draw_limits = true
 
 [node name="DeathParticles" type="CPUParticles2D" parent="Player"]
-visible = false
-position = Vector2(-63, -13)
-amount = 50
-explosiveness = 0.5
-emission_shape = 1
-emission_sphere_radius = 10.0
-direction = Vector2(0, -1)
+position = Vector2(1, -9)
+emitting = false
+amount = 25
+one_shot = true
+speed_scale = 2.0
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, -2)
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_amount_max = 2.0
+color = Color(1, 0.0392157, 0.117647, 1)
 
 [node name="RainParticles" type="GPUParticles2D" parent="Player"]
 amount = 400
@@ -139,7 +143,7 @@ layer_1/tile_data = PackedInt32Array(1114092, 262148, 5, 1114102, 262148, 5, 111
 layer_2/tile_data = PackedInt32Array(1114117, 4, 3, 1114118, 65540, 3, 1114119, 65540, 3, 1114120, 65540, 3, 1114121, 131076, 3)
 metadata/_edit_lock_ = true
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("3_p51j7")]
+[node name="ParallaxBackground" parent="." instance=ExtResource("5_mi2m3")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_edssc")
@@ -237,6 +241,7 @@ range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight5" type="Node2D" parent="Lights"]
+visible = false
 position = Vector2(-278, 231)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -284,41 +289,16 @@ range_layer_min = -3
 range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
-[node name="NormalMapTest" type="Node2D" parent="."]
-visible = false
-position = Vector2(309, 165)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="NormalMapTest"]
-modulate = Color(1, 0.196078, 0.196078, 0.0980392)
-texture = ExtResource("3_k4s15")
-
-[node name="PointLight2D" type="PointLight2D" parent="NormalMapTest"]
-color = Color(1, 0.196078, 0.196078, 1)
-energy = 5.0
-range_layer_min = -3
-range_layer_max = 3
-texture = ExtResource("3_k4s15")
-
-[node name="OneWayPlatform" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.847059, 0.886275, 0.945098, 1)
-position = Vector2(303, 281)
-texture = ExtResource("9_015q0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 20, 20)
-
 [node name="MovingPlatform" parent="." instance=ExtResource("7_xq5em")]
 position = Vector2(180, 230)
 curve = SubResource("Curve2D_1ievb")
 
-[node name="SpikeDouble" parent="." instance=ExtResource("9_waypd")]
-modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(232, 214)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(315, 210)
+texture = ExtResource("13_b3qc4")
 
-[node name="SpikeDouble2" parent="." instance=ExtResource("9_waypd")]
-position = Vector2(598, 254)
+[node name="SpikeSingleDown" parent="." instance=ExtResource("14_8g15c")]
+position = Vector2(290, 206)
 
 [node name="Bin" type="Node" parent="."]
 
@@ -510,3 +490,19 @@ spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 10.0
 initial_velocity_max = 20.0
+
+[node name="NormalMapTest" type="Node2D" parent="Bin"]
+visible = false
+position = Vector2(309, 165)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Bin/NormalMapTest"]
+modulate = Color(1, 0.196078, 0.196078, 0.0980392)
+texture = ExtResource("3_k4s15")
+
+[node name="PointLight2D" type="PointLight2D" parent="Bin/NormalMapTest"]
+color = Color(1, 0.196078, 0.196078, 1)
+energy = 5.0
+range_layer_min = -3
+range_layer_max = 3
+texture = ExtResource("3_k4s15")
