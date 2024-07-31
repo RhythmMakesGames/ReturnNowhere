@@ -1,0 +1,4 @@
+Notes:
+
+1. Unexpected higher jump with trampoline when near floor
+2. 

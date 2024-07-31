@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rryg6"]
 
 [node name="ImmovableBlock" type="StaticBody2D"]
+collision_mask = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_aruwg")

@@ -7,6 +7,8 @@
 size = Vector2(29, 9)
 
 [node name="Trampoline" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 monitorable = false
 script = ExtResource("1_piitl")
 
