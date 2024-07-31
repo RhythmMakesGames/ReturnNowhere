@@ -7,18 +7,16 @@
 size = Vector2(16, 182)
 
 [node name="FallingSpike" type="Area2D"]
-z_index = 2
-monitorable = false
+z_index = -1
 script = ExtResource("1_hc8sj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_nard2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-5, -11, 0, 12, 5, -11)
+polygon = PackedVector2Array(-3, -4, 0, 12, 3, -4)
 
 [node name="ActivateZone" type="Area2D" parent="."]
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateZone"]
 position = Vector2(0, 80)

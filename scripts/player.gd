@@ -113,6 +113,7 @@ func _process(delta: float) -> void:
 			animation_player.set_speed_scale(0.25)
 			animation_player.play(run_animation)
 
+
 func handle_ground_state_process(delta):
 	animation_player.set_speed_scale(1)
 	if abs(velocity.x) > 0:

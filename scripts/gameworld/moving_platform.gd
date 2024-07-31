@@ -7,8 +7,8 @@ extends Path2D
 
 @onready var animation = $AnimationPlayer as AnimationPlayer
 @onready var path = $PathFollow2D as PathFollow2D
-
 var animation_name = "move"
+
 
 func _ready() -> void:
 	if not loop:

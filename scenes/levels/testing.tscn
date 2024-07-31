@@ -293,11 +293,18 @@ texture = ExtResource("3_k4s15")
 position = Vector2(180, 230)
 curve = SubResource("Curve2D_1ievb")
 
+[node name="MovingPlatform2" parent="." instance=ExtResource("7_xq5em")]
+position = Vector2(139, 218)
+
 [node name="SpikeSingleDown" parent="." instance=ExtResource("14_8g15c")]
 position = Vector2(290, 206)
 
 [node name="FallingSpike" parent="." instance=ExtResource("9_t6ttn")]
-position = Vector2(317, 210)
+position = Vector2(317, 211)
+speed = 200
+
+[node name="FallingSpike2" parent="." instance=ExtResource("9_t6ttn")]
+position = Vector2(136, 99)
 speed = 200
 
 [node name="Bin" type="Node" parent="."]
