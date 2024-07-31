@@ -1,11 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf4gjql1plwue"]
+[gd_scene load_steps=4 format=3 uid="uid://cf4gjql1plwue"]
 
+[ext_resource type="Script" path="res://scripts/gameworld/falling_spike.gd" id="1_hc8sj"]
 [ext_resource type="Texture2D" uid="uid://bdw75deujfkwa" path="res://assets/sprites/spike_falling.png" id="1_nard2"]
 
-[node name="Area2D" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6f3q"]
+size = Vector2(16, 182)
+
+[node name="FallingSpike" type="Area2D"]
+z_index = 2
+monitorable = false
+script = ExtResource("1_hc8sj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_nard2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-5, -11, 0, 12, 5, -11)
+
+[node name="ActivateZone" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateZone"]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_j6f3q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ActivateZone" to="." method="_on_activate_zone_body_entered"]

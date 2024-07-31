@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://j7lxaoaejouc"]
 
-[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_x15xk"]
+[ext_resource type="Script" path="res://scripts/gameworld/moving_platform.gd" id="1_x15xk"]
 [ext_resource type="Texture2D" uid="uid://cqrsqbujal5rb" path="res://assets/sprites/tilemap_city_scaled_2x.png" id="2_y70if"]
 
 [sub_resource type="Animation" id="Animation_x0t7u"]
