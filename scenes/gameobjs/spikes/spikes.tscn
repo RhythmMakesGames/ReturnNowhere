@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bncl37bh78f1t" path="res://assets/sprites/spikes.png" id="1_7meue"]
 
-[node name="Spikes_Quad" type="Area2D"]
+[node name="Spikes" type="Area2D"]
 monitorable = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

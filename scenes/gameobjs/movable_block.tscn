@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://6nx01p01ed81"]
+
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="1_m4aoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ecx"]
+
+[node name="MovableBlock" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m4aoc")
+region_enabled = true
+region_rect = Rect2(80, 60, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w3ecx")

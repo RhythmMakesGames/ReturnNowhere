@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://l3i582gavk3s"]
 
-[ext_resource type="PackedScene" uid="uid://qququp3171jh" path="res://scenes/prefabs/spikes/spikes.tscn" id="1_o33x5"]
+[ext_resource type="PackedScene" uid="uid://qququp3171jh" path="res://scenes/gameobjs/spikes/spikes.tscn" id="1_o33x5"]
 
 [node name="SpikeTwo" instance=ExtResource("1_o33x5")]
 

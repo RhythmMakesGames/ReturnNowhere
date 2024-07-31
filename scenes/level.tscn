@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_7dlpl"]
 [ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_bg.tscn" id="3_kwrwm"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
-[ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/prefabs/streetlight.tscn" id="4_d575r"]
+[ext_resource type="PackedScene" uid="uid://dqlck5q21qsww" path="res://scenes/gameobjs/streetlight.tscn" id="4_d575r"]
 [ext_resource type="Texture2D" uid="uid://c1lrrahfk2wu5" path="res://assets/gradient_atmosphericlight_t.png" id="5_mt01p"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="6_t1qco"]
 

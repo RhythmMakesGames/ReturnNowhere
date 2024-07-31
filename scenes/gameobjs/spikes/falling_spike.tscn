@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf4gjql1plwue"]
 
-[ext_resource type="Script" path="res://scripts/gameworld/falling_spike.gd" id="1_hc8sj"]
+[ext_resource type="Script" path="res://scripts/gameobjs/falling_spike.gd" id="1_hc8sj"]
 [ext_resource type="Texture2D" uid="uid://bdw75deujfkwa" path="res://assets/sprites/spike_falling.png" id="1_nard2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6f3q"]

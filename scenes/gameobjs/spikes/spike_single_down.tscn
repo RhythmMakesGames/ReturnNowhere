@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dquvb7yosttty"]
 
-[ext_resource type="PackedScene" uid="uid://4dy5twa458gc" path="res://scenes/prefabs/spikes/spike_single.tscn" id="1_annab"]
+[ext_resource type="PackedScene" uid="uid://4dy5twa458gc" path="res://scenes/gameobjs/spikes/spike_single.tscn" id="1_annab"]
 
 [node name="SpikeSingleDown" instance=ExtResource("1_annab")]
 rotation = 3.14159

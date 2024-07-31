@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://h35reuvp36id"]
 
 [ext_resource type="Texture2D" uid="uid://dat1u0coejjtn" path="res://assets/sprites/trampoline.png" id="1_g4vfb"]
-[ext_resource type="Script" path="res://scripts/gameworld/trampoline.gd" id="1_piitl"]
+[ext_resource type="Script" path="res://scripts/gameobjs/trampoline.gd" id="1_piitl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ew1dg"]
-size = Vector2(29, 5)
+size = Vector2(29, 9)
 
 [node name="Trampoline" type="Area2D"]
 monitorable = false

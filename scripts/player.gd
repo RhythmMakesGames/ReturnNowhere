@@ -146,7 +146,9 @@ func jump() -> void:
 	if is_on_floor():
 		particles_jump.emitting = true
 	
-	velocity.y += max_jump_velocity
+	# trampoline superjump fix
+	velocity.y = max_jump_velocity
+	
 	jump_buffer.stop()
 	is_jump_key_held = true
 
