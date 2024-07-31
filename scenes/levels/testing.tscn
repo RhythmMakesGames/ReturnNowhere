@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=28 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_k0n6k"]
 [ext_resource type="Script" path="res://scripts/gameworld/rain_particles.gd" id="2_vq3ny"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" path="res://scenes/levels/shader1.gdshader" id="6_dlqw4"]
 [ext_resource type="PackedScene" uid="uid://j7lxaoaejouc" path="res://scenes/prefabs/moving_platform.tscn" id="7_xq5em"]
 [ext_resource type="PackedScene" uid="uid://cf4gjql1plwue" path="res://scenes/prefabs/spikes/falling_spike.tscn" id="9_t6ttn"]
+[ext_resource type="PackedScene" uid="uid://h35reuvp36id" path="res://scenes/prefabs/trampoline.tscn" id="10_y5dvj"]
 [ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/sprites/for_shader_test.jpg" id="11_jxbx7"]
 [ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/images.png" id="13_ms4a7"]
 [ext_resource type="PackedScene" uid="uid://dquvb7yosttty" path="res://scenes/prefabs/spikes/spike_single_down.tscn" id="14_8g15c"]
@@ -166,7 +167,6 @@ shadow_filter = 1
 metadata/_edit_lock_ = true
 
 [node name="Lights" type="Node2D" parent="."]
-z_index = 3
 metadata/_edit_lock_ = true
 
 [node name="StreetLight" parent="Lights" instance=ExtResource("5_25sla")]
@@ -174,41 +174,8 @@ z_index = 3
 position = Vector2(-41, 290)
 metadata/_edit_lock_ = true
 
-[node name="AtmosphericLight" type="Node2D" parent="Lights"]
-visible = false
-position = Vector2(143, 148)
-scale = Vector2(2, 2)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
-modulate = Color(1, 1, 1, 0.0980392)
-texture = ExtResource("3_k4s15")
-
-[node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight"]
-range_layer_min = -3
-range_layer_max = 3
-texture = ExtResource("3_k4s15")
-
-[node name="AtmosphericLight2" type="Node2D" parent="Lights"]
-visible = false
-position = Vector2(405, 166)
-scale = Vector2(2, 2)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2"]
-modulate = Color(0.490196, 0.490196, 0.980392, 0.0980392)
-texture = ExtResource("3_k4s15")
-
-[node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight2"]
-color = Color(0.490196, 0.490196, 0.980392, 1)
-energy = 2.0
-range_layer_min = -3
-range_layer_max = 3
-texture = ExtResource("3_k4s15")
-
 [node name="AtmosphericLight3" type="Node2D" parent="Lights"]
+z_index = 3
 position = Vector2(143, 148)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -225,6 +192,7 @@ range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight4" type="Node2D" parent="Lights"]
+z_index = 3
 position = Vector2(395, 145)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -242,6 +210,7 @@ texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight5" type="Node2D" parent="Lights"]
 visible = false
+z_index = 3
 position = Vector2(-278, 231)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -258,6 +227,7 @@ range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight6" type="Node2D" parent="Lights"]
+z_index = 3
 position = Vector2(-60, 119)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -274,6 +244,7 @@ range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
 [node name="AtmosphericLight7" type="Node2D" parent="Lights"]
+z_index = 3
 position = Vector2(629, 230)
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
@@ -306,6 +277,10 @@ speed = 200
 [node name="FallingSpike2" parent="." instance=ExtResource("9_t6ttn")]
 position = Vector2(136, 99)
 speed = 200
+
+[node name="Trampoline" parent="." instance=ExtResource("10_y5dvj")]
+position = Vector2(385, 314)
+jump_boost = 500
 
 [node name="Bin" type="Node" parent="."]
 
