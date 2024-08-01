@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://6nx01p01ed81"]
+[gd_scene load_steps=6 format=3 uid="uid://c47g02voinilm"]
 
+[ext_resource type="Script" path="res://scripts/gameobjs/movable_block.gd" id="1_33786"]
 [ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="1_m4aoc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ecx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38lxh"]
 
-[node name="MovableBlock" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mypyy"]
+size = Vector2(6, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0k2d"]
+size = Vector2(6, 16)
+
+[node name="MovableBlock" type="CharacterBody2D" groups=["MoveableItem"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_33786")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m4aoc")
@@ -12,4 +22,27 @@ region_enabled = true
 region_rect = Rect2(80, 60, 20, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_w3ecx")
+shape = SubResource("RectangleShape2D_38lxh")
+
+[node name="LeftPushZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPushZone"]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_mypyy")
+
+[node name="RightPushZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPushZone"]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_u0k2d")
+
+[connection signal="body_entered" from="LeftPushZone" to="." method="_on_left_push_zone_body_entered"]
+[connection signal="body_exited" from="LeftPushZone" to="." method="_on_left_push_zone_body_exited"]
+[connection signal="body_entered" from="RightPushZone" to="." method="_on_right_push_zone_body_entered"]
+[connection signal="body_exited" from="RightPushZone" to="." method="_on_right_push_zone_body_exited"]

@@ -202,14 +202,17 @@ color = Color(0.419608, 0.419608, 0.419608, 1)
 
 [node name="StepTop" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
+collision_mask = 5
 collide_with_areas = true
 
 [node name="StepBottom" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
+collision_mask = 5
 collide_with_areas = true
 
 [node name="StepMeasure" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
+collision_mask = 5
 collide_with_areas = true
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

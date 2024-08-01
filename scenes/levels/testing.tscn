@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=31 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_k0n6k"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_vq3ny"]
@@ -14,8 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/sprites/for_shader_test.jpg" id="11_jxbx7"]
 [ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/images.png" id="13_ms4a7"]
 [ext_resource type="PackedScene" uid="uid://dquvb7yosttty" path="res://scenes/gameobjs/spikes/spike_single_down.tscn" id="14_8g15c"]
-[ext_resource type="PackedScene" uid="uid://6nx01p01ed81" path="res://scenes/gameobjs/movable_block.tscn" id="16_pdlyj"]
+[ext_resource type="PackedScene" uid="uid://6nx01p01ed81" path="res://scenes/gameobjs/rigidbody2d.tscn" id="16_pdlyj"]
 [ext_resource type="PackedScene" uid="uid://bvg2imwul6pvv" path="res://scenes/gameobjs/immovable_block.tscn" id="16_s544x"]
+[ext_resource type="PackedScene" uid="uid://c47g02voinilm" path="res://scenes/gameobjs/movable_block.tscn" id="17_4764v"]
 
 [sub_resource type="Curve" id="Curve_hwwiy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -81,7 +82,7 @@ shader_parameter/Speed = 0.05
 [node name="testing" type="Node2D"]
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("1_k0n6k")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_k0n6k")]
 z_index = 2
 position = Vector2(330, 80)
 safe_margin = 0.05
@@ -266,16 +267,6 @@ texture = ExtResource("3_k4s15")
 position = Vector2(180, 230)
 curve = SubResource("Curve2D_1ievb")
 
-[node name="MovingPlatform2" parent="." instance=ExtResource("7_xq5em")]
-position = Vector2(139, 218)
-
-[node name="SpikeSingleDown" parent="." instance=ExtResource("14_8g15c")]
-z_index = 0
-position = Vector2(290, 206)
-collision_layer = 1
-collision_mask = 1
-script = null
-
 [node name="FallingSpike" parent="." instance=ExtResource("9_t6ttn")]
 position = Vector2(317, 211)
 speed = 200
@@ -285,12 +276,15 @@ position = Vector2(136, 99)
 speed = 200
 
 [node name="FallingSpike3" parent="." instance=ExtResource("9_t6ttn")]
-position = Vector2(379, 156)
+position = Vector2(609, 50)
 speed = 200
 
 [node name="Trampoline" parent="." instance=ExtResource("10_y5dvj")]
-position = Vector2(364, 310)
+position = Vector2(-110, 229)
 jump_boost = 500
+
+[node name="SpikeSingleDown" parent="." instance=ExtResource("14_8g15c")]
+position = Vector2(585, 287)
 
 [node name="ImmovableBlock" parent="." instance=ExtResource("16_s544x")]
 position = Vector2(483, 170)
@@ -503,4 +497,16 @@ range_layer_max = 3
 texture = ExtResource("3_k4s15")
 
 [node name="MovableBlock" parent="." instance=ExtResource("16_pdlyj")]
-position = Vector2(313, 170)
+position = Vector2(651, 284)
+
+[node name="MovableBlock2" parent="." instance=ExtResource("16_pdlyj")]
+position = Vector2(688, 285)
+
+[node name="MovableBlock3" parent="." instance=ExtResource("17_4764v")]
+position = Vector2(361, 306)
+
+[node name="MovableBlock4" parent="." instance=ExtResource("17_4764v")]
+position = Vector2(175, 213)
+
+[node name="MovableBlock5" parent="." instance=ExtResource("17_4764v")]
+position = Vector2(291, 308)

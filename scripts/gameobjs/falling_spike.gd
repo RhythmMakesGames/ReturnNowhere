@@ -1,5 +1,7 @@
 extends Area2D
 
+var player_group = "Player"
+
 @export var speed = 500
 @onready var current_speed = 0
 
@@ -11,10 +13,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
+	#print(body)
+	if body.is_in_group(player_group):
 		body.die()
 		queue_free()
-	print(body)
 	# moving platform is animatablebody2d
 	#elif body is TileMap || body is AnimatableBody2D:
 		#queue_free()
@@ -23,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_activate_zone_body_entered(body: Node2D) -> void:
 	# keep collision masks in mind
-	if body is Player:
+	if body.is_in_group(player_group):
 		current_speed = speed
 		await get_tree().create_timer(10).timeout
 		queue_free()

@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+#class_name Player
 
 @export var disable_physics:bool = false
 ## disable player movement controls (move, jump, etc..)
@@ -16,13 +16,17 @@ class_name Player
 var step_tp_factor = 40
 var step_tp_offset = 0.2
 
-#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# miscellaneous
+#@export var push_force = 500.0
+
+# physics
 @export var gravity = 980
+#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var max_move_speed_ground = 140
 @export var max_move_speed_air = 250.0
 @export var max_jump_velocity = -300.0
 @export var max_drop_velocity = 500.0
-@export var scratch_down_speed = 25.0
+#@export var scratch_down_speed = 25.0
 
 @export var acceleration_air_h = 250
 @export var acceleration_ground_h = 2500
@@ -60,8 +64,8 @@ var is_horizontally_flipped = false
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var player_sprite = $Sprite2D as Sprite2D
 
-var default_color = Color(0.76, 0.76, 0.76)
-var damage_color = Color(0.76, 0.24, 0.24)
+@export var default_color = Color(0.76, 0.76, 0.76)
+@export var damage_color = Color(0.76, 0.24, 0.24)
 
 @onready var particles_jump = $JumpParticles as Node2D
 @onready var particles_turn_ground = $TurnParticlesGround as Node2D
@@ -191,6 +195,7 @@ func _physics_process(delta: float) -> void:
 	
 	#print(velocity.x)
 	move_and_slide()
+	#apply_push_force(delta)
 	
 	## Reset position for testing: press 4
 	if Input.is_action_pressed("reset_position"):
@@ -304,6 +309,15 @@ func handle_air_state_physics(delta):
 # if was on wall and release space (becomes walljump) within a walljump timer
 
 
+#func apply_push_force(delta):
+	#for i in get_slide_collision_count():
+		#var collision = get_slide_collision(i)
+		#var collider = collision.get_collider()
+		#if collider is RigidBody2D:
+			##collider.apply_central_impulse(-collision.get_normal() * push_force)
+			#collider.apply_central_force(-collision.get_normal() * push_force)
+
+
 func die():
 	#print(get_tree().current_scene.name)
 	
@@ -322,11 +336,14 @@ func die():
 	# respawn/wait time
 	await get_tree().create_timer(0.3).timeout
 	
-	# reset
-	torch.visible = true
-	player_sprite.modulate = default_color
-	player_sprite.visible = true
-	reset_player()
+	# reset only player
+	#torch.visible = true
+	#player_sprite.modulate = default_color
+	#player_sprite.visible = true
+	#reset_player()
+	
+	# or reload scene at death instead
+	get_tree().reload_current_scene()
 
 
 func reset_player():
