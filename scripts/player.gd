@@ -51,8 +51,14 @@ var step_tp_offset = 0.2
 @onready var idle_timer = $IdleTimer as Timer
 var is_idle
 
-var is_jump_key_held #notimplemented
+# pushing a moveable item
+var is_pushing_item = false
+
+# prevent die function from re-triggering while it's ongoing
+var is_dead = false
+
 var disable_jump = false
+var is_jump_key_held #notimplemented
 var was_on_floor = false
 var was_on_wall = false
 
@@ -120,6 +126,7 @@ func _process(delta: float) -> void:
 
 func handle_ground_state_process(delta):
 	animation_player.set_speed_scale(1)
+	
 	if abs(velocity.x) > 0:
 		animation_player.play(run_animation)
 	elif is_idle:
@@ -138,6 +145,8 @@ func handle_ground_state_process(delta):
 				animation_player.play(idle3_animation)
 			elif rand_anim >= 95 && rand_anim < 100:
 				animation_player.play(idle4_animation)
+	elif is_pushing_item:
+		animation_player.set_speed_scale(0.85)
 	else:
 		animation_player.play(stand_animation)
 
@@ -187,17 +196,30 @@ func _physics_process(delta: float) -> void:
 			handle_air_state_physics(delta)
 		#STATES.ON_WALL:
 	
-	## keeping track of current information for the next iteration
+	# keeping track of current information for the next iteration
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
 	last_move_direction_h = move_direction
 	previous_state = current_state
 	
+	# obviously the results are different before and after
 	#print(velocity.x)
 	move_and_slide()
+	#print(velocity.x)
+	
 	#apply_push_force(delta)
 	
-	## Reset position for testing: press 4
+	# check if pushing a moveable item
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("MoveableItem") && collision.get_normal().dot(Vector2(0,1)) == 0:
+			is_pushing_item = true
+		else:
+			is_pushing_item = false
+	
+	
+	# Reset position for testing: press 4
 	if Input.is_action_pressed("reset_position"):
 		velocity.x = 0
 		position = spawn_position
@@ -319,6 +341,12 @@ func handle_air_state_physics(delta):
 
 
 func die():
+	# so that the player doesn't die again while dying
+	if is_dead:
+		return
+	else:
+		is_dead = true
+	
 	#print(get_tree().current_scene.name)
 	
 	# damage effect, and death particles
@@ -326,6 +354,9 @@ func die():
 	death_particles.emitting = true
 	await get_tree().create_timer(0.1).timeout
 	player_sprite.visible = false
+	
+	# let the laser go through player
+	$CollisionShape2D.disabled = true
 	
 	# particles remain for a while
 	torch.visible = false
@@ -341,6 +372,9 @@ func die():
 	#player_sprite.modulate = default_color
 	#player_sprite.visible = true
 	#reset_player()
+	
+	#is_dead = false
+	#$CollisionShape2D.disabled = false
 	
 	# or reload scene at death instead
 	get_tree().reload_current_scene()

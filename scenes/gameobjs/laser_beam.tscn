@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://gc1nr2xlh65n"]
+
+[ext_resource type="Script" path="res://scripts/gameobjs/laser_beam.gd" id="1_h2ir0"]
+
+[node name="LaserBeam" type="Line2D"]
+z_index = -1
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(1.25, 0, 0, 1)
+script = ExtResource("1_h2ir0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 7
