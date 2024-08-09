@@ -5,6 +5,20 @@ extends Line2D
 # use the transform setting to change the starting point
 var player_group = "Player"
 
+## the laser shines at discrete intervals
+@export var discontinuous:bool = false
+## in seconds
+@export var on_duration:float = 2.0
+## in seconds
+@export var off_duration:float = 2.0
+
+## the laser turns left, and right scanning the area
+@export var oscillate:bool = false
+## in degrees
+@export var max_left_angle:int = 20
+## in degrees
+@export var max_right_angle:int = 20
+
 @onready var raycast = $RayCast2D as RayCast2D
 @onready var target_point:Vector2 = get_point_position(1)
 
