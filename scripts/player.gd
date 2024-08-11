@@ -117,14 +117,14 @@ func _process(delta: float) -> void:
 	#print(current_state, "-", randi())
 	match current_state:
 		STATES.ON_GROUND:
-			handle_ground_state_process(delta)
+			handle_ground_state_animation(delta)
 		STATES.IN_AIR:
 			# there is no jump animation, trick the player
 			animation_player.set_speed_scale(0.25)
 			animation_player.play(run_animation)
 
 
-func handle_ground_state_process(delta):
+func handle_ground_state_animation(delta):
 	animation_player.set_speed_scale(1)
 	
 	if abs(velocity.x) > 0:
@@ -151,19 +151,14 @@ func handle_ground_state_process(delta):
 		animation_player.play(stand_animation)
 
 
-func jump() -> void:
-	if disable_jump == true:
-		return
-	
-	# if randi_range(0,2) == 1 && is_on_floor():
-	if is_on_floor():
-		particles_jump.emitting = true
-	
-	# trampoline superjump fix
-	velocity.y = max_jump_velocity
-	
-	jump_buffer.stop()
-	is_jump_key_held = true
+func push_movable_items():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("MoveableItem") && collision.get_normal().dot(Vector2(0,1)) == 0:
+			is_pushing_item = true
+		else:
+			is_pushing_item = false
 
 
 func _physics_process(delta: float) -> void:
@@ -171,23 +166,17 @@ func _physics_process(delta: float) -> void:
 	
 	if disable_physics == true:
 		return
-	
 	if disable_movement == true:
 		move_direction = 0
 
-	# holding move key (not 0)
+	# update flip state (0 move_direction represents no change) 
 	if move_direction:
-		# condition remains unchanged if move_direction is 0
 		is_horizontally_flipped = true if move_direction < 0 else false
+		
+	raycast_step_top.rotation_degrees = 180 if is_horizontally_flipped else 0
+	raycast_step_bottom.rotation_degrees = 180 if is_horizontally_flipped else 0
 	
-	# update variables? and stuff
-	if is_horizontally_flipped:
-		raycast_step_top.rotation_degrees = 180
-		raycast_step_bottom.rotation_degrees = 180
-	else:
-		raycast_step_top.rotation_degrees = 0
-		raycast_step_bottom.rotation_degrees = 0
-	
+	# handle movement
 	match current_state:
 		# on floor / coyote period
 		STATES.ON_GROUND:
@@ -196,34 +185,29 @@ func _physics_process(delta: float) -> void:
 			handle_air_state_physics(delta)
 		#STATES.ON_WALL:
 	
-	# keeping track of current information for the next iteration
+	# keeping track of current info for the next iteration
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
 	last_move_direction_h = move_direction
 	previous_state = current_state
 	
-	# obviously the results are different before and after
+	# results are different before and after
 	#print(velocity.x)
 	move_and_slide()
 	#print(velocity.x)
 	
-	#apply_push_force(delta)
+	# check and push moveable items
+	push_movable_items()
+	#apply_push_force()
 	
-	# check if pushing a moveable item
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		if collider.is_in_group("MoveableItem") && collision.get_normal().dot(Vector2(0,1)) == 0:
-			is_pushing_item = true
-		else:
-			is_pushing_item = false
-	
-	
+	# some cheats for testing
+	debug_controls()
+
+
+func debug_controls():
 	# Reset position for testing: press 4
 	if Input.is_action_pressed("reset_position"):
-		velocity.x = 0
-		position = spawn_position
-		current_state = STATES.IN_AIR
+		reset_player()
 
 
 func handle_ground_state_physics(delta):
@@ -338,6 +322,21 @@ func handle_air_state_physics(delta):
 		#if collider is RigidBody2D:
 			##collider.apply_central_impulse(-collision.get_normal() * push_force)
 			#collider.apply_central_force(-collision.get_normal() * push_force)
+
+
+func jump() -> void:
+	if disable_jump == true:
+		return
+	
+	# if randi_range(0,2) == 1 && is_on_floor():
+	if is_on_floor():
+		particles_jump.emitting = true
+	
+	# trampoline superjump fix
+	velocity.y = max_jump_velocity
+	
+	jump_buffer.stop()
+	is_jump_key_held = true
 
 
 func die():

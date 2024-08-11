@@ -10,10 +10,12 @@ var player_group = "Player"
 @export var emit_period:float = 2.0 			## in seconds
 @export var cooldown_period:float = 1.0 			## in seconds
 
-## the laser turns left, and right scanning the area
-@export var oscillate:bool = false
-@export var max_left_angle:int = 20 			## in degrees
-@export var max_right_angle:int = 20 			## in degrees
+## the laser scans the area determined by the scan angle
+@export var scan_area:bool = false
+@export var scan_angle:int = 60 				## in degrees
+#@export var scan_period:int = 
+#@export var max_left_angle:int = 20 			## in degrees
+#@export var max_right_angle:int = 20 			## in degrees
 
 @onready var raycast = $RayCast2D as RayCast2D
 @onready var target_point:Vector2 = get_point_position(1)
@@ -30,9 +32,32 @@ func _ready() -> void:
 		raycast.target_position = target_point
 	else:
 		queue_free()
+	
+	#var tween:Tween = create_tween()
+	#tween.tween_property(raycast, "rotation", scan_angle, 1000)
+	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
+	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
 
 
 func _physics_process(delta: float) -> void:
+	if scan_area == true:
+		pass
+	
+	if discontinuous:
+		handle_discontinous_laser(delta)
+	else:
+		collision_check()
+
+
+func collision_check():
+	if raycast.is_colliding():
+		set_point_position(1, to_local(raycast.get_collision_point()))
+		var collider = raycast.get_collider()
+		if collider.is_in_group(player_group):
+			collider.die()
+
+
+func handle_discontinous_laser(delta):
 	if is_laser_on:
 		if elapsed_on_time >= emit_period:
 			elapsed_off_time = elapsed_on_time - emit_period
@@ -58,13 +83,5 @@ func _physics_process(delta: float) -> void:
 			
 		elif elapsed_off_time >= cooldown_period - fade_duration / 2:
 			modulate.a += (2 * delta) / fade_duration
-		
-		elapsed_off_time += delta
-
-
-func collision_check():
-	if raycast.is_colliding():
-		set_point_position(1, to_local(raycast.get_collision_point()))
-		var collider = raycast.get_collider()
-		if collider.is_in_group(player_group):
-			collider.die()
+	
+	elapsed_off_time += delta
