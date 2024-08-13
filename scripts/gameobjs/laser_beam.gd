@@ -26,6 +26,8 @@ var elapsed_on_time:float = 0.0
 var elapsed_off_time:float = 0.0
 var fade_duration:float = 0.14
 
+# fix chopped laser at collision point
+var line_overlap = 1.4
 
 func _ready() -> void:
 	if get_point_count() > 1:
@@ -37,6 +39,12 @@ func _ready() -> void:
 	#tween.tween_property(raycast, "rotation", scan_angle, 1000)
 	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
 	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
+
+
+func _process(delta: float) -> void:
+	# pulsate effect
+	#if randi_range(0, 4) == 3:
+	width = 3 + randf_range(0, 2)
 
 
 func _physics_process(delta: float) -> void:
@@ -51,8 +59,9 @@ func _physics_process(delta: float) -> void:
 
 func collision_check():
 	if raycast.is_colliding():
-		set_point_position(1, to_local(raycast.get_collision_point()))
 		var collider = raycast.get_collider()
+		var collision_point = to_local(raycast.get_collision_point())
+		set_point_position(1, collision_point + collision_point.normalized() * line_overlap )
 		if collider.is_in_group(player_group):
 			collider.die()
 

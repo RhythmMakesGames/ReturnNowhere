@@ -56,6 +56,9 @@ light_mode = 2
 [sub_resource type="Environment" id="Environment_edssc"]
 background_mode = 3
 tonemap_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 2.0
 
 [sub_resource type="Curve2D" id="Curve2D_1ievb"]
 _data = {
@@ -107,15 +110,15 @@ editor_draw_limits = true
 [node name="DeathParticles" type="CPUParticles2D" parent="Player"]
 position = Vector2(1, -9)
 emitting = false
-amount = 25
+amount = 50
 one_shot = true
 speed_scale = 2.0
 lifetime_randomness = 0.5
 emission_shape = 3
-emission_rect_extents = Vector2(2, 2)
+emission_rect_extents = Vector2(4, 1)
 direction = Vector2(0, -2)
 spread = 180.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, 10)
 initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 scale_amount_max = 2.0
@@ -292,8 +295,9 @@ position = Vector2(585, 287)
 position = Vector2(483, 170)
 
 [node name="LaserBeam" parent="." instance=ExtResource("12_2avkj")]
-position = Vector2(326, 197)
-points = PackedVector2Array(0, 0, 93, 181)
+modulate = Color(14.054, 1, 1, 1)
+position = Vector2(541, 157)
+points = PackedVector2Array(0, 0, -45, 237)
 discontinuous = true
 
 [node name="Bin" type="Node" parent="."]
