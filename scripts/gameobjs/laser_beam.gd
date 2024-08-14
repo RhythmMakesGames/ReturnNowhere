@@ -1,21 +1,24 @@
 extends Line2D
 
 # Note:
-# Do not move the 0th point (mismatch with the raycast position)
+# Do NOT move the 0th point (mismatch with the raycast position)
 # use the transform setting to change the starting point
 var player_group = "Player"
 
 ## the laser shines at discrete intervals
 @export var discontinuous:bool = false
 @export var emit_period:float = 2.0 			## in seconds
-@export var cooldown_period:float = 1.0 			## in seconds
+@export var cooldown_period:float = 1.0 		## in seconds
 
-## the laser scans the area determined by the scan angle
-@export var scan_area:bool = false
-@export var scan_angle:int = 60 				## in degrees
-#@export var scan_period:int = 
-#@export var max_left_angle:int = 20 			## in degrees
-#@export var max_right_angle:int = 20 			## in degrees
+## the laser scans the area determined by the scan angle.
+## (avoid making scanning lasers discontinuous)
+@export var scan_mode:bool = false
+## total scan angle in degrees
+@export_range(0, 360) var scan_angle:int = 60
+## time in seconds for one scan cycle
+@export var scan_period:float = 4.0
+## the direction in which the laser turns
+@export var clockwise = false
 
 @onready var raycast = $RayCast2D as RayCast2D
 @onready var target_point:Vector2 = get_point_position(1)
@@ -29,16 +32,12 @@ var fade_duration:float = 0.14
 # fix chopped laser at collision point
 var line_overlap = 1.4
 
+
 func _ready() -> void:
 	if get_point_count() > 1:
 		raycast.target_position = target_point
 	else:
 		queue_free()
-	
-	#var tween:Tween = create_tween()
-	#tween.tween_property(raycast, "rotation", scan_angle, 1000)
-	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
-	#tween.tween_property(raycast, "rotation", scan_angle, 2.0)
 
 
 func _process(delta: float) -> void:
@@ -48,13 +47,14 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if scan_area == true:
-		pass
+	if scan_mode == true:
+		handle_scan_mode(delta)
 	
 	if discontinuous:
-		handle_discontinous_laser(delta)
+		handle_discontinuous_mode(delta)
 	else:
 		collision_check()
+	#raycast.force_raycast_update()
 
 
 func collision_check():
@@ -62,11 +62,30 @@ func collision_check():
 		var collider = raycast.get_collider()
 		var collision_point = to_local(raycast.get_collision_point())
 		set_point_position(1, collision_point + collision_point.normalized() * line_overlap )
+		
 		if collider.is_in_group(player_group):
 			collider.die()
+	else:
+		#set_point_position(1, get_point_position(1).normalized() * target_point.length())
+		#set_point_position(1, Vector2.DOWN.rotated(raycast.rotation) * target_point.length())
+		set_point_position(1, target_point.rotated(raycast.rotation))
 
 
-func handle_discontinous_laser(delta):
+func handle_scan_mode(delta):
+	
+	if clockwise:
+		if raycast.rotation <= deg_to_rad(scan_angle):
+			raycast.rotation += deg_to_rad(scan_angle) * (delta / scan_period)
+		else:
+			raycast.rotation = 0
+	else:
+		if raycast.rotation >= deg_to_rad(-scan_angle):
+			raycast.rotation -= deg_to_rad(scan_angle) * (delta / scan_period)
+		else:
+			raycast.rotation = 0
+
+
+func handle_discontinuous_mode(delta):
 	if is_laser_on:
 		if elapsed_on_time >= emit_period:
 			elapsed_off_time = elapsed_on_time - emit_period

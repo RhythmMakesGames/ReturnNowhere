@@ -296,9 +296,11 @@ position = Vector2(483, 170)
 
 [node name="LaserBeam" parent="." instance=ExtResource("12_2avkj")]
 modulate = Color(14.054, 1, 1, 1)
-position = Vector2(541, 157)
-points = PackedVector2Array(0, 0, -45, 237)
+position = Vector2(406, 223)
+points = PackedVector2Array(0, 0, 23, 53)
 discontinuous = true
+scan_mode = true
+scan_angle = 360
 
 [node name="Bin" type="Node" parent="."]
 
