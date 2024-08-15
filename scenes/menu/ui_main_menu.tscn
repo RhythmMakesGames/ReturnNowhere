@@ -1,9 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://efpxwwc6rw2r"]
+[gd_scene load_steps=11 format=3 uid="uid://efpxwwc6rw2r"]
 
 [ext_resource type="Script" path="res://scripts/menu/ui_main_menu.gd" id="1_eyiso"]
 [ext_resource type="PackedScene" uid="uid://thgdqt845aqq" path="res://scenes/menu/ui_options_menu.tscn" id="2_2bif4"]
-[ext_resource type="FontFile" uid="uid://cdahsthp0cr68" path="res://assets/fonts/PrStart.ttf" id="2_8hcpc"]
 [ext_resource type="PackedScene" uid="uid://cwmehxebcatuo" path="res://scenes/levels/testing.tscn" id="2_qw34h"]
+[ext_resource type="Shader" path="res://scripts/menu/ui_background.gdshader" id="4_qtbne"]
+[ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="4_shfs0"]
+[ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="4_tja8x"]
+[ext_resource type="Texture2D" uid="uid://cwirbw5pyakq6" path="res://assets/ui/buttons/Button_Dark (3).png" id="5_deo5g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njstw"]
+shader = ExtResource("4_qtbne")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 0.2
+shader_parameter/speed = 0.6
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ji2m7"]
+texture = ExtResource("5_deo5g")
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+modulate_color = Color(1, 1, 1, 0.803922)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4fvnp"]
+texture = ExtResource("5_deo5g")
+expand_margin_left = 1.0
+expand_margin_top = 4.0
+expand_margin_right = 1.0
+expand_margin_bottom = 4.0
+modulate_color = Color(1, 1, 1, 0.803922)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,8 +39,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eyiso")
-tutorial_scene = ExtResource("2_qw34h")
+play_scene = ExtResource("2_qw34h")
 options_scene = ExtResource("2_2bif4")
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_njstw")
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+texture = ExtResource("4_shfs0")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_top = 36.0
+offset_right = 144.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.360784, 0.117647, 0.745098, 1)
+theme_override_fonts/font = ExtResource("4_tja8x")
+theme_override_font_sizes/font_size = 28
+text = "  Return Nowhere.."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -23,31 +73,40 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -176.0
-offset_right = 80.0
-offset_bottom = -68.0
+offset_left = -60.0
+offset_top = -130.0
+offset_right = 60.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8hcpc")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_tja8x")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_ji2m7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4fvnp")
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8hcpc")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_tja8x")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_ji2m7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4fvnp")
 text = "Options"
-
-[node name="CreditsButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8hcpc")
-text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8hcpc")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_tja8x")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_ji2m7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4fvnp")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_start_button_pressed"]
