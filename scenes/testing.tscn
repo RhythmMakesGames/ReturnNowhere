@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=34 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_iy2ub"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_iug3p"]
@@ -17,7 +17,6 @@
 [ext_resource type="Shader" path="res://scripts/gameobjs/shader1.gdshader" id="15_onjdc"]
 [ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/test_loop.png" id="16_m0lxx"]
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="17_u4fkk"]
-[ext_resource type="PackedScene" uid="uid://6nx01p01ed81" path="res://scenes/gameobjs/rigidbody2d.tscn" id="18_aorku"]
 [ext_resource type="PackedScene" uid="uid://c47g02voinilm" path="res://scenes/gameobjs/movable_block.tscn" id="19_mlm5r"]
 [ext_resource type="Texture2D" uid="uid://ck6gpbilcbuy3" path="res://assets/sprites/coins.png" id="20_7wrhc"]
 
@@ -497,12 +496,6 @@ energy = 5.0
 range_layer_min = -3
 range_layer_max = 3
 texture = ExtResource("3_dwq42")
-
-[node name="MovableBlock" parent="." instance=ExtResource("18_aorku")]
-position = Vector2(651, 284)
-
-[node name="MovableBlock2" parent="." instance=ExtResource("18_aorku")]
-position = Vector2(688, 285)
 
 [node name="MovableBlock3" parent="." instance=ExtResource("19_mlm5r")]
 position = Vector2(456, 168)

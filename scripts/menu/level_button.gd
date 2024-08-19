@@ -9,10 +9,8 @@ extends Button
 func _ready() -> void:
 	if thumb_path:
 		texture.texture = load(thumb_path)
-	else:
-		print("Thumbnail not found!")
-		print("Note: The level scene and the thumbnail should have the same name.")
-		print("The thumbnail should be of .png extension.")
+	#if level_path.contains("1"):
+		#disabled = true
 
 
 func _on_pressed() -> void:

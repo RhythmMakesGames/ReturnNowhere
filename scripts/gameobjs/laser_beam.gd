@@ -27,7 +27,7 @@ var player_group = "Player"
 var is_laser_on:bool = true
 var elapsed_on_time:float = 0.0
 var elapsed_off_time:float = 0.0
-var fade_duration:float = 0.14
+var fade_duration:float = 0.07
 
 # fix chopped laser at collision point
 var line_overlap = 1.4

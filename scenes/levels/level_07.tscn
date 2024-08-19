@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://j086gel2u6d8"]
+
+[ext_resource type="PackedScene" uid="uid://bjiwnjmbtx52v" path="res://scenes/levels/level_01.tscn" id="1_fdk0n"]
+
+[node name="Level_3" instance=ExtResource("1_fdk0n")]
+
+[node name="Lights" parent="." index="6"]
+visible = false

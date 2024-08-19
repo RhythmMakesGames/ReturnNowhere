@@ -1,6 +1,6 @@
 extends Node
 
-#var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
+var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
 
 #var current_scene = null
 var current_level = null
