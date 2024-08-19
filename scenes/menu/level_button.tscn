@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg7x22j5jx34f"]
+
+[ext_resource type="Script" path="res://scripts/menu/level_button.gd" id="1_5hssy"]
+[ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_wexf4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ia2d"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vo1i"]
+bg_color = Color(0, 0, 0, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0k6x"]
+bg_color = Color(0.6, 0.6, 0.6, 0.596078)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="LevelButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(96, 54)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -384.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_disabled_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_fonts/font = ExtResource("1_wexf4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7ia2d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7ia2d")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_4vo1i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_q0k6x")
+text = "Level 01"
+clip_text = true
+script = ExtResource("1_5hssy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

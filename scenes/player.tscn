@@ -126,6 +126,7 @@ _data = {
 size = Vector2(1, 0.818182)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 2
 collision_layer = 2
 collision_mask = 7
 safe_margin = 0.01
