@@ -1,19 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://thgdqt845aqq"]
 
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="1_gnr8i"]
-[ext_resource type="Shader" path="res://scripts/menu/ui_background.gdshader" id="1_jjh5j"]
 [ext_resource type="Script" path="res://scripts/menu/ui_options_menu.gd" id="1_yvn4o"]
+[ext_resource type="Shader" path="res://scripts/menu/ui_blur.gdshader" id="2_o2y5x"]
 [ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_kwiie"]
 [ext_resource type="Texture2D" uid="uid://cwirbw5pyakq6" path="res://assets/ui/buttons/Button_Dark (3).png" id="5_f486c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lh0lm"]
-shader = ExtResource("1_jjh5j")
-shader_parameter/octave_count = 10
-shader_parameter/amp_start = 0.5
-shader_parameter/amp_coeff = 0.5
-shader_parameter/freq_coeff = 2.0
-shader_parameter/shift_coeff = 0.5
-shader_parameter/speed = 0.6
+shader = ExtResource("2_o2y5x")
+shader_parameter/amount = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8fuol"]
 texture = ExtResource("5_f486c")
@@ -25,9 +20,9 @@ modulate_color = Color(1, 1, 1, 0.803922)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t6y8c"]
 texture = ExtResource("5_f486c")
-expand_margin_left = 2.0
+expand_margin_left = 3.0
 expand_margin_top = 3.0
-expand_margin_right = 2.0
+expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 modulate_color = Color(1, 1, 1, 0.803922)
 
@@ -124,6 +119,7 @@ offset_left = 216.0
 offset_top = 232.0
 offset_right = 273.0
 offset_bottom = 247.0
+focus_mode = 1
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_kwiie")
 theme_override_font_sizes/font_size = 16

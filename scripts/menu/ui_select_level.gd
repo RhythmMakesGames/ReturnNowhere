@@ -1,7 +1,6 @@
 extends Control
 
 
-var main_menu_scene = "res://scenes/menu/ui_main_menu.tscn"
 const LEVEL_BUTTON = preload("res://scenes/menu/level_button.tscn")
 
 @export_dir var levels_dir
@@ -51,4 +50,4 @@ func create_level_button(lvl_path: String, lvl_name: String):
 
 
 func _on_return_button_pressed() -> void:
-	get_tree().change_scene_to_file(main_menu_scene)
+	get_tree().change_scene_to_packed(Global.main_menu_scene)
