@@ -355,7 +355,7 @@ func die():
 	player_sprite.visible = false
 	
 	# let the laser go through player
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 	
 	# particles remain for a while
 	torch.visible = false
