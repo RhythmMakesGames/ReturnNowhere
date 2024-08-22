@@ -1,6 +1,10 @@
 extends CharacterBody2D
 #class_name Player
 
+@export var enable_debug_controls = false
+var enable_god_mode = false
+#var enable_infinite_jump = false
+
 @export var disable_physics:bool = false
 ## disable player movement controls (move, jump, etc..)
 @export var disable_movement:bool = false
@@ -87,7 +91,7 @@ var idle2_animation:String = "idle2"
 var idle3_animation:String = "idle3"
 var idle4_animation:String = "idle4"
 
-var jump_action:String = "jump"
+var jump_action:String = "move_jump"
 var move_left_action:String = "move_left"
 var move_right_action:String = "move_right"
 
@@ -197,18 +201,28 @@ func _physics_process(delta: float) -> void:
 	#print(velocity.x)
 	
 	# check and push moveable items
+	# could've done this before move and slide but why?
 	push_movable_items()
 	#apply_push_force()
 	
-	# some cheats for testing
-	debug_controls()
+	# some cheats for testing (one frame delay ofcourse)
+	if enable_debug_controls:
+		debug_controls()
 
 
 func debug_controls():
-	#return
 	# Reset player position for testing: press 4
-	if Input.is_action_pressed("reset_position"):
+	if Input.is_action_just_pressed("debug_reset_player"):
 		reset_player()
+		print("Player position was reset.")
+		
+	# toggle god mode
+	if Input.is_action_just_pressed("debug_toggle_godmode"):
+		enable_god_mode = !enable_god_mode
+		if enable_god_mode:
+			print("God mode enabled.")
+		else:
+			print("God mode disabled.")
 
 
 func handle_ground_state_physics(delta):
@@ -341,6 +355,9 @@ func jump() -> void:
 
 
 func die():
+	if enable_god_mode:
+		return
+	
 	# so that the player doesn't die again while dying
 	if is_dead:
 		return
@@ -385,6 +402,7 @@ func reset_player():
 	position = spawn_position
 	velocity = Vector2(0, 0)
 	enable_movement_controls()
+	$DefaultCamera2D.reset_smoothing()
 
 
 func disable_movement_controls():

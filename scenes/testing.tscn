@@ -93,6 +93,7 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_iy2ub")]
 position = Vector2(217, 214)
+enable_debug_controls = true
 metadata/_edit_lock_ = true
 
 [node name="DefaultCamera2D" type="Camera2D" parent="Player"]
