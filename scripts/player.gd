@@ -205,7 +205,8 @@ func _physics_process(delta: float) -> void:
 
 
 func debug_controls():
-	# Reset position for testing: press 4
+	#return
+	# Reset player position for testing: press 4
 	if Input.is_action_pressed("reset_position"):
 		reset_player()
 
@@ -376,7 +377,7 @@ func die():
 	#$CollisionShape2D.disabled = false
 	
 	# or reload scene at death instead
-	get_tree().reload_current_scene()
+	get_tree().reload_current_scene.call_deferred()
 
 
 func reset_player():

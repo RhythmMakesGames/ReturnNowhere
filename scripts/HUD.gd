@@ -12,12 +12,15 @@ func _input(event: InputEvent) -> void:
 			
 			if !get_tree().paused:
 				get_tree().paused = true
+				#get_tree().set_deferred("paused", true)
 				add_child(pause_menu_scene.instantiate())
 				#temp_node = pause_menu_scene.instantiate()
 				#add_child(temp_node)
+			
 			# this code will not run unless process set to always
 			# so, esc only works to pause the game, does not unpause it
 			else:
 				get_tree().paused = false
+				#get_tree().set_deferred("paused", false)
 				#if temp_node:
 					#remove_child(temp_node)

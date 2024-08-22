@@ -291,6 +291,7 @@ speed = 200
 position = Vector2(453, 135)
 rotation = 1.21824
 speed = 200
+can_respawn = true
 
 [node name="Trampoline" parent="." instance=ExtResource("9_y8ykt")]
 position = Vector2(-110, 229)

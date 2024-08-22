@@ -32,3 +32,9 @@ func _on_quit_to_main_menu_button_pressed() -> void:
 		#else:
 			##print("closed pause menu")
 			#call_deferred("_on_resume_button_pressed")
+
+
+func _on_tree_exiting() -> void:
+	# fix the bug where the tree is paused, but the node is removed (eg. during scene transition)
+	get_tree().paused = false
+	#$"../../Player"
