@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=36 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_iy2ub"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_iug3p"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="17_u4fkk"]
 [ext_resource type="PackedScene" uid="uid://c47g02voinilm" path="res://scenes/gameobjs/movable_block.tscn" id="19_mlm5r"]
 [ext_resource type="Texture2D" uid="uid://ck6gpbilcbuy3" path="res://assets/sprites/coins.png" id="20_7wrhc"]
+[ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="21_rirox"]
 
 [sub_resource type="Curve" id="Curve_dc70x"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -92,7 +93,7 @@ shader_parameter/Speed = 0.05
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_iy2ub")]
-position = Vector2(217, 214)
+position = Vector2(222, 213)
 enable_debug_controls = true
 metadata/_edit_lock_ = true
 
@@ -279,6 +280,8 @@ curve = SubResource("Curve2D_1ievb")
 [node name="FallingSpike" parent="." instance=ExtResource("8_r5wa3")]
 position = Vector2(317, 211)
 speed = 200
+can_respawn = true
+respawn_wait = 5.0
 
 [node name="FallingSpike2" parent="." instance=ExtResource("8_r5wa3")]
 position = Vector2(136, 99)
@@ -290,7 +293,7 @@ speed = 200
 
 [node name="FallingSpike4" parent="." instance=ExtResource("8_r5wa3")]
 position = Vector2(453, 135)
-rotation = 1.21824
+rotation = 1.5708
 speed = 200
 can_respawn = true
 
@@ -520,3 +523,6 @@ position = Vector2(291, 308)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(489, 211)
 texture = ExtResource("20_7wrhc")
+
+[node name="SendToLevel" parent="." instance=ExtResource("21_rirox")]
+position = Vector2(850, 150)

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 #class_name Player
 
+signal player_died
+
 @export var enable_debug_controls = false
 var enable_god_mode = false
 #var enable_infinite_jump = false
@@ -205,6 +207,10 @@ func _physics_process(delta: float) -> void:
 	push_movable_items()
 	#apply_push_force()
 	
+	# special inputs
+	if Input.is_action_just_pressed("restart_level"):
+		get_tree().reload_current_scene.call_deferred()
+	
 	# some cheats for testing (one frame delay ofcourse)
 	if enable_debug_controls:
 		debug_controls()
@@ -363,7 +369,6 @@ func die():
 		return
 	else:
 		is_dead = true
-	
 	#print(get_tree().current_scene.name)
 	
 	# damage effect, and death particles
@@ -375,6 +380,10 @@ func die():
 	# let the laser go through player
 	$CollisionShape2D.set_deferred("disabled", true)
 	
+	# after the 0.1 second delay, death overlaps the transition
+	# and collision is already disabled
+	player_died.emit()
+	
 	# particles remain for a while
 	torch.visible = false
 	disable_movement_controls()
@@ -384,23 +393,30 @@ func die():
 	# respawn/wait time
 	await get_tree().create_timer(0.3).timeout
 	
-	# reset only player
-	#torch.visible = true
-	#player_sprite.modulate = default_color
-	#player_sprite.visible = true
-	#reset_player()
+	# reset player only (or reload the scene instead)
+	reset_player()
+	#get_tree().reload_current_scene.call_deferred()
 	
-	#is_dead = false
-	#$CollisionShape2D.disabled = false
-	
-	# or reload scene at death instead
-	get_tree().reload_current_scene.call_deferred()
+	# play death transition
 
 
+# to how it was at the beginnning of the scene
 func reset_player():
 	current_state = STATES.IN_AIR
 	position = spawn_position
 	velocity = Vector2(0, 0)
+	
+	# fixes the bug where the collisionshape is still seemingly active while disabled
+	# and activates area2d's and falling spikes etc. to die again eg. after falling through a tilemap
+	await get_tree().create_timer(0.01).timeout
+	
+	$CollisionShape2D.set_deferred("disabled", false)
+	
+	player_sprite.modulate = default_color
+	player_sprite.visible = true
+	torch.visible = true
+	is_dead = false
+	
 	enable_movement_controls()
 	$DefaultCamera2D.reset_smoothing()
 
