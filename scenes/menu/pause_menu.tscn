@@ -9,7 +9,7 @@
 shader = ExtResource("1_0u62k")
 shader_parameter/amount = 1.75
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_woc0u"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_y5yuo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3nn0c"]
 texture = ExtResource("3_jxnvq")
@@ -75,7 +75,7 @@ material = SubResource("ShaderMaterial_y5eah")
 layout_mode = 2
 offset_right = 480.0
 offset_bottom = 270.0
-texture = SubResource("CanvasTexture_woc0u")
+texture = SubResource("CanvasTexture_y5yuo")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

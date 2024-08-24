@@ -210,6 +210,8 @@ func _physics_process(delta: float) -> void:
 	
 	# special inputs
 	if Input.is_action_just_pressed("restart_level"):
+		ScreenTransitions.fade_transition()
+		await ScreenTransitions.transition_halfpoint
 		get_tree().reload_current_scene.call_deferred()
 	
 	# some cheats for testing (one frame delay ofcourse)
@@ -404,10 +406,12 @@ func die():
 	
 	# reset player only (or reload the scene instead)
 	reset_player()
-	#get_tree().reload_current_scene.call_deferred()
 	
 	# play death transition
-
+	ScreenTransitions.wipe_transition()
+	await ScreenTransitions.transition_halfpoint
+	
+	#get_tree().reload_current_scene.call_deferred()
 
 # to how it was at the beginnning of the scene
 func reset_player():

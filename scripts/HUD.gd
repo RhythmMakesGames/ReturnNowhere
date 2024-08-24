@@ -20,6 +20,7 @@ func _input(event: InputEvent) -> void:
 			# this code will not run unless process set to always
 			# so, esc only works to pause the game, does not unpause it
 			else:
+				print("therefore, this should never print")
 				get_tree().paused = false
 				#get_tree().set_deferred("paused", false)
 				#if temp_node:

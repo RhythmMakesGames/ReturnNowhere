@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal transition_halfpoint
+signal transition_complete
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -9,7 +10,7 @@ signal transition_halfpoint
 func _ready() -> void:
 	color_rect.visible = false
 	animation_player.animation_finished.connect(_on_animation_finished)
-	animation_player.speed_scale = 1.5
+	#animation_player.speed_scale = 1.5
 
 
 func fade_transition() -> void:
@@ -20,8 +21,8 @@ func fade_transition() -> void:
 func wipe_transition() -> void:
 	color_rect.visible = true
 	animation_player.play("wipe_exit")
-	
-	
+
+
 # hoping only 1 animation plays at a time
 func _on_animation_finished(animation_name):
 	if animation_name == "fade_exit":
@@ -34,3 +35,4 @@ func _on_animation_finished(animation_name):
 		# need not know what enter animation
 		animation_player.play("RESET")
 		color_rect.visible = false
+		transition_complete.emit()

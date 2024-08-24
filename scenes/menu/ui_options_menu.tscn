@@ -1,6 +1,5 @@
 [gd_scene load_steps=11 format=3 uid="uid://thgdqt845aqq"]
 
-[ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="1_gnr8i"]
 [ext_resource type="Script" path="res://scripts/menu/ui_options_menu.gd" id="1_yvn4o"]
 [ext_resource type="Shader" path="res://scripts/menu/ui_blur.gdshader" id="2_o2y5x"]
 [ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_kwiie"]
@@ -8,7 +7,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lh0lm"]
 shader = ExtResource("2_o2y5x")
-shader_parameter/amount = 2.0
+shader_parameter/amount = 1.75
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ndbq0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8fuol"]
 texture = ExtResource("5_f486c")
@@ -73,9 +74,9 @@ script = ExtResource("1_yvn4o")
 [node name="Background" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_lh0lm")
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_gnr8i")
+offset_right = 480.0
+offset_bottom = 270.0
+texture = SubResource("CanvasTexture_ndbq0")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -109,9 +110,9 @@ alignment = 1
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
 theme_override_fonts/font = ExtResource("3_kwiie")
-text = "Left/Right: A/D
+text = "Move: A/D
 Jump: Space
-Restart Level: R"
+Restart: R"
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1
