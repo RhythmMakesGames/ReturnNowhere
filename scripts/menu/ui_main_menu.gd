@@ -35,4 +35,7 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_select_level_button_pressed() -> void:
-	get_tree().change_scene_to_file(select_level_scene)
+	var select_levels = load(select_level_scene).instantiate()
+	add_child(select_levels)
+	
+	#get_tree().change_scene_to_file(select_level_scene)

@@ -21,6 +21,12 @@ func _ready() -> void:
 		print("No thumbnail directory provided.")
 
 
+func _input(event: InputEvent) -> void:
+	# toggle pause while in a level
+	if Input.is_action_just_pressed("ui_cancel"):
+		queue_free.call_deferred()
+
+
 func get_levels(path) -> void:
 	var dir = DirAccess.open(path)
 	if dir:
