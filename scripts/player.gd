@@ -8,8 +8,6 @@ var enable_god_mode = false
 #var enable_infinite_jump = false
 
 @export var disable_physics:bool = false
-## disable player movement controls (move, jump, etc..)
-@export var disable_movement:bool = false
 @onready var spawn_position = Vector2(position.x, position.y)
 
 ## for stair/obstacle stepping
@@ -63,7 +61,9 @@ var is_pushing_item = false
 # prevent die function from re-triggering while it's ongoing
 var is_dead = false
 
-var disable_jump = false
+# disable player movement controls (move, jump, etc..)
+var is_movement_disabled = false
+var is_jump_disabled = false
 var is_jump_key_held #notimplemented
 var was_on_floor = false
 var was_on_wall = false
@@ -172,7 +172,8 @@ func _physics_process(delta: float) -> void:
 	
 	if disable_physics == true:
 		return
-	if disable_movement == true:
+
+	if is_movement_disabled:
 		move_direction = 0
 
 	# update flip state (0 move_direction represents no change) 
@@ -229,6 +230,14 @@ func debug_controls():
 			print("God mode enabled.")
 		else:
 			print("God mode disabled.")
+	
+	if Input.is_action_just_pressed("debug_toggle_disable_movement"):
+		if is_movement_disabled:
+			enable_movement_controls()
+			print("Movement controls enabled.")
+		else:
+			disable_movement_controls()
+			print("Movement controls disabled.")
 
 
 func handle_ground_state_physics(delta):
@@ -346,7 +355,7 @@ func handle_air_state_physics(delta):
 
 
 func jump() -> void:
-	if disable_jump == true:
+	if is_jump_disabled:
 		return
 	
 	# if randi_range(0,2) == 1 && is_on_floor():
@@ -422,10 +431,10 @@ func reset_player():
 
 
 func disable_movement_controls():
-	disable_movement = true
-	disable_jump = true
+	is_movement_disabled = true
+	is_jump_disabled = true
 
 
 func enable_movement_controls():
-	disable_movement = false
-	disable_jump = false
+	is_movement_disabled = false
+	is_jump_disabled = false

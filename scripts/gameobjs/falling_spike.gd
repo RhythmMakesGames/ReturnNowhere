@@ -88,7 +88,7 @@ func disable_or_respawn():
 func reset_item() -> void:
 	respawn_timer.stop()
 	position = initial_position
-	print("reset spike position")
+	#print("reset spike position")
 	$CollisionPolygon2D.set_deferred("disabled", false)
 	$ActivateZone/CollisionShape2D.set_deferred("disabled", false)
 	visible = true
