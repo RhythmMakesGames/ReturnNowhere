@@ -2,8 +2,8 @@ extends Node
 
 var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
 
-#var current_scene = null
 var current_level = null
+var save_path = "user://player_data.save"
 
 
 func _ready() -> void:
@@ -13,3 +13,6 @@ func _ready() -> void:
 
 	#Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_ARROW, Vector2(64, 64))
 	pass
+
+
+

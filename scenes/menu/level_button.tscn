@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg7x22j5jx34f"]
+[gd_scene load_steps=7 format=3 uid="uid://cg7x22j5jx34f"]
 
 [ext_resource type="Script" path="res://scripts/menu/level_button.gd" id="1_5hssy"]
 [ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_wexf4"]
@@ -29,6 +29,9 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="LabelSettings" id="LabelSettings_gnywh"]
+font_size = 8
+
 [node name="LevelButton" type="Button"]
 clip_contents = true
 custom_minimum_size = Vector2(96, 54)
@@ -56,6 +59,12 @@ show_behind_parent = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="FastestTime" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_gnywh")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -40,7 +40,7 @@ func _on_animation_finished(animation_name):
 		animation_player.play("RESET")
 		color_rect.visible = false
 		transition_complete.emit()
-	
+
 
 func _on_transition_complete():
 	is_screen_transitioning = false

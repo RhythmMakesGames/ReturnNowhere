@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_tmerf"]
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="3_06eb6"]
 
-[node name="Level" instance=ExtResource("1_l77wo")]
+[node name="Level_1" instance=ExtResource("1_l77wo")]
 
 [node name="Player" parent="." index="0"]
 position = Vector2(143, 270)

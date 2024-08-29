@@ -3,6 +3,12 @@ extends CanvasLayer
 var pause_menu_scene = preload("res://scenes/menu/pause_menu.tscn")
 #var temp_node = null
 @onready var player = $"../Player"
+@onready var level_name = $LevelName
+@onready var coins_collected = $Coins/Collected
+
+
+func _ready() -> void:
+	level_name.text = get_tree().current_scene.name.replace('_', ' ')
 
 
 func _input(_event: InputEvent) -> void:
