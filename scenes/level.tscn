@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_q0s7c"]
 [ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_bg.tscn" id="3_kwrwm"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
-[ext_resource type="Script" path="res://scripts/HUD.gd" id="5_gphst"]
+[ext_resource type="PackedScene" uid="uid://hlxf2vgaai2k" path="res://scenes/hud.tscn" id="4_6c0lb"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="6_t1qco"]
 
 [sub_resource type="Curve" id="Curve_5dikw"]
@@ -112,8 +112,7 @@ texture = ExtResource("6_t1qco")
 [node name="TileMap" parent="." instance=ExtResource("3_st2g3")]
 metadata/_edit_lock_ = true
 
-[node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("5_gphst")
+[node name="HUD" parent="." instance=ExtResource("4_6c0lb")]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_kwrwm")]
 

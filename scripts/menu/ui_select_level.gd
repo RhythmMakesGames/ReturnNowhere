@@ -6,7 +6,8 @@ const LEVEL_BUTTON = preload("res://scenes/menu/level_button.tscn")
 @export_dir var levels_dir
 @export_dir var thumbs_dir
 
-@onready var grid_container = $ScrollContainer/GridContainer
+@onready var grid_container: GridContainer = $ScrollContainer/MarginContainer/GridContainer
+
 
 func _ready() -> void:
 	# Note: zero-pad the level names to avoid order issues
@@ -21,7 +22,7 @@ func _ready() -> void:
 		print("No thumbnail directory provided.")
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# toggle pause while in a level
 	if Input.is_action_just_pressed("ui_cancel"):
 		queue_free.call_deferred()

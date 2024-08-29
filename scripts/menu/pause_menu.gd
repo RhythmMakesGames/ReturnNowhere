@@ -7,7 +7,7 @@ var options_scene := "res://scenes/menu/ui_options_menu.tscn"
 # no idea why else part is causing this error spam:
 # add: Condition "p_elem->_root" is true.
 # adding a small delay fixed it
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# toggle pause while in a level
 	if Input.is_action_just_pressed("ui_cancel"):
 		var options = get_node_or_null("OptionsMenu")

@@ -2,11 +2,17 @@ extends CanvasLayer
 
 var pause_menu_scene = preload("res://scenes/menu/pause_menu.tscn")
 #var temp_node = null
+@onready var player = $"../Player"
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# toggle pause with esc while in a level
 	if Input.is_action_just_pressed("ui_cancel"):
+		if ScreenTransitions.is_screen_transitioning:
+			return
+		if player.is_dead:
+			return
+		
 		if get_tree().get_current_scene().scene_file_path.contains('levels/level') || \
 			get_tree().get_current_scene().scene_file_path.contains('testing'):
 			

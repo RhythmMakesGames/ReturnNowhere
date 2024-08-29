@@ -76,7 +76,7 @@ var is_horizontally_flipped = false
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var player_sprite = $Sprite2D as Sprite2D
 
-@export var default_color = Color(0.76, 0.76, 0.76)
+@export var default_color = Color(1.0, 1.0, 1.0)
 @export var damage_color = Color(0.76, 0.24, 0.24)
 
 @onready var particles_jump = $JumpParticles as Node2D
@@ -130,7 +130,7 @@ func _process(delta: float) -> void:
 			animation_player.play(run_animation)
 
 
-func handle_ground_state_animation(delta):
+func handle_ground_state_animation(_delta):
 	animation_player.set_speed_scale(1)
 	
 	if abs(velocity.x) > 0:
@@ -442,3 +442,7 @@ func disable_movement_controls():
 func enable_movement_controls():
 	is_movement_disabled = false
 	is_jump_disabled = false
+
+
+func on_level_complete():
+	disable_movement_controls()

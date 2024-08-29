@@ -15,6 +15,9 @@ func _ready() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	ScreenTransitions.fade_transition()
+	await ScreenTransitions.transition_halfpoint
+	
 	# continue, if not running for the first time
 	if Global.current_level != null:
 		get_tree().change_scene_to_packed(Global.current_level)

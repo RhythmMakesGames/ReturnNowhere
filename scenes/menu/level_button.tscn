@@ -39,6 +39,7 @@ offset_right = -384.0
 offset_bottom = -216.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(48, 27)
 focus_mode = 1
 theme_override_colors/font_disabled_color = Color(0.470588, 0.470588, 0.470588, 1)
 theme_override_fonts/font = ExtResource("1_wexf4")

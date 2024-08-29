@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjiwnjmbtx52v"]
+[gd_scene load_steps=4 format=3 uid="uid://flvh1i0fda4x"]
 
-[ext_resource type="PackedScene" uid="uid://3nu6e6jshlqs" path="res://scenes/level.tscn" id="1_l77wo"]
-[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_tmerf"]
-[ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="3_06eb6"]
+[ext_resource type="PackedScene" uid="uid://3nu6e6jshlqs" path="res://scenes/level.tscn" id="1_3ne2e"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_tbvfa"]
+[ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="3_evokn"]
 
-[node name="Level" instance=ExtResource("1_l77wo")]
+[node name="Level" instance=ExtResource("1_3ne2e")]
 
 [node name="Player" parent="." index="0"]
 position = Vector2(143, 270)
@@ -12,7 +12,7 @@ position = Vector2(143, 270)
 [node name="RainParticles" parent="Player" index="13"]
 amount = 200
 
-[node name="TileMap" parent="." index="1"]
+[node name="TileMap" parent="." index="2"]
 modulate = Color(1, 0.5, 0.5, 1)
 layer_0/tile_data = PackedInt32Array(1179651, 65540, 0, 1179652, 65540, 0, 1179653, 65540, 0, 1179654, 65540, 0, 1179655, 65540, 1, 1179656, 65540, 1, 1179657, 65540, 1, 1179658, 65540, 1, 1179659, 65540, 1, 1179660, 65540, 1, 1179661, 65540, 0, 1179662, 65540, 0, 1179663, 65540, 0, 1179664, 65540, 0, 1179665, 65540, 0, 1179666, 65540, 0, 1179667, 65540, 0, 1179668, 65540, 0, 1179669, 65540, 0, 1179670, 65540, 1, 1179671, 65540, 1, 1179650, 65540, 0, 1179649, 65540, 0, 1179648, 65540, 0, 1179672, 65540, 1, 1179673, 65540, 1, 1114136, 65540, 1, 1114137, 65540, 1, 1048600, 65540, 1, 1048601, 65540, 1, 983064, 65540, 0, 983065, 65540, 0, 917530, 65540, 0, 983066, 65540, 1, 1048602, 65540, 1, 1114138, 65540, 1, 1179674, 65540, 1, 1048603, 65540, 1, 1048604, 65540, 1, 1048605, 65540, 1, 1048606, 65540, 1, 1114139, 65540, 1, 1179675, 65540, 1, 1114140, 65540, 1, 1179676, 65540, 1, 1114141, 65540, 1, 1179677, 65540, 1, 1179678, 65540, 1, 1114142, 65540, 1, 983069, 65540, 0, 983070, 65540, 0, 983071, 65540, 0, 983072, 65540, 0, 983073, 65540, 0, 983074, 65540, 0, 983075, 65540, 0, 1048607, 65540, 1, 1048608, 65540, 1, 1114143, 65540, 1, 1114144, 65540, 1, 1179679, 65540, 1, 1179680, 65540, 1, 1048609, 65540, 1, 1114145, 65540, 1, 1179681, 65540, 1, 1179682, 65540, 1, 1114146, 65540, 1, 1048610, 65540, 1, 1048611, 65540, 1, 1114147, 65540, 1, 1179683, 65540, 1, 1114119, 65540, 0, 1114120, 65540, 0, 1114121, 65540, 0, 1114122, 65540, 0, 1114123, 65540, 0, 1114124, 65540, 0, 1179684, 65540, 0, 1179685, 65540, 0, 1179686, 65540, 1, 1179687, 65540, 1, 1179688, 65540, 1, 1179689, 65540, 1, 1179690, 65540, 1, 1179691, 65540, 1, 1114134, 65540, 0, 1114135, 65540, 0, 1114150, 65540, 0, 1114151, 65540, 0, 1114152, 65540, 0, 1114153, 65540, 1, 1114154, 65540, 1, 1048617, 65540, 0, 1048618, 65540, 0, 1114155, 65540, 1, 1048619, 65540, 0)
 layer_1/tile_data = PackedInt32Array(1048588, 458756, 5)
@@ -42,12 +42,12 @@ scale = Vector2(2, 2)
 color = Color(1, 0.196078, 0.196078, 1)
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D2" index="0"]
 modulate = Color(1, 0.196078, 0.196078, 0.0980392)
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 
 [node name="AtmosphericLight2D3" type="PointLight2D" parent="Lights" index="2"]
 z_index = 3
@@ -56,12 +56,12 @@ scale = Vector2(4, 4)
 color = Color(1, 0.196078, 0.196078, 1)
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D3" index="0"]
 modulate = Color(1, 0.196078, 0.196078, 0.0980392)
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 
 [node name="AtmosphericLight2D4" type="PointLight2D" parent="Lights" index="3"]
 z_index = 3
@@ -70,13 +70,13 @@ scale = Vector2(4, 4)
 color = Color(1, 0.196078, 0.196078, 1)
 range_layer_min = -3
 range_layer_max = 3
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D4" index="0"]
 modulate = Color(1, 0.196078, 0.196078, 0.0980392)
-texture = ExtResource("2_tmerf")
+texture = ExtResource("2_tbvfa")
 
-[node name="SendToLevel" parent="." index="8" instance=ExtResource("3_06eb6")]
+[node name="SendToLevel" parent="." index="8" instance=ExtResource("3_evokn")]
 position = Vector2(250, 330)
 target_level_path = "res://scenes/levels/level_02.tscn"
