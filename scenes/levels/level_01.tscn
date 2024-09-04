@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjiwnjmbtx52v"]
+[gd_scene load_steps=6 format=3 uid="uid://bjiwnjmbtx52v"]
 
 [ext_resource type="PackedScene" uid="uid://3nu6e6jshlqs" path="res://scenes/level.tscn" id="1_l77wo"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_tmerf"]
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="3_06eb6"]
+[ext_resource type="PackedScene" uid="uid://g0roxjonljx1" path="res://scenes/gameobjs/coin.tscn" id="4_55nht"]
+[ext_resource type="PackedScene" uid="uid://qququp3171jh" path="res://scenes/gameobjs/spikes/spikes.tscn" id="5_aloq6"]
 
 [node name="Level_1" instance=ExtResource("1_l77wo")]
 
@@ -80,3 +82,9 @@ texture = ExtResource("2_tmerf")
 [node name="SendToLevel" parent="." index="8" instance=ExtResource("3_06eb6")]
 position = Vector2(250, 330)
 target_level_path = "res://scenes/levels/level_02.tscn"
+
+[node name="Coin" parent="." index="9" instance=ExtResource("4_55nht")]
+position = Vector2(346, 351)
+
+[node name="Spikes" parent="." index="10" instance=ExtResource("5_aloq6")]
+position = Vector2(411, 354)

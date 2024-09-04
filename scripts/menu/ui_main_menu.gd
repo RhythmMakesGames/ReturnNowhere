@@ -3,7 +3,6 @@ extends Control
 #@export var play_scene = PackedScene
 #@export var options_scene = PackedScene
 
-var start_scene := preload("res://scenes/testing.tscn")
 var options_scene := "res://scenes/menu/ui_options_menu.tscn"
 var select_level_scene := "res://scenes/menu/ui_select_level.tscn"
 @onready var play_button = $VBoxContainer/PlayButton
@@ -17,13 +16,9 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	ScreenTransitions.fade_transition()
 	await ScreenTransitions.transition_halfpoint
-	
-	# continue, if not running for the first time
+	# runs latest unlocked level (make sure that level 1 is unlocked)
 	if GameManager.current_level != "":
 		get_tree().change_scene_to_file(GameManager.current_level)
-	else:
-		get_tree().change_scene_to_packed(start_scene)
-		#get_tree().change_scene_to_file(start_scene)
 
 
 func _on_options_button_pressed() -> void:

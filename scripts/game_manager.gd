@@ -64,99 +64,18 @@ var default_level_data:Dictionary = {
 		"unlocks": "res://scenes/levels/level_02.tscn",
 		"completed": false,
 		"coins_collected": 0,
-		"coins_total": 3
+		"coins_total": 1
 	},
 	"res://scenes/levels/level_02.tscn":{
 		"name": "",
 		"best_time": 0.0,
 		"unlocked": false,
-		"unlocks": "",
+		"unlocks": "res://scenes/levels/level_03.tscn",
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 0
 	},
 	"res://scenes/levels/level_03.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_04.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_05.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_06.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_07.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_08.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_09.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_10.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_11.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0
-	},
-	"res://scenes/levels/level_12.tscn":{
 		"name": "",
 		"best_time": 0.0,
 		"unlocked": false,

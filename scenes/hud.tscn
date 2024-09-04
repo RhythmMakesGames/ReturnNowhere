@@ -20,7 +20,7 @@ font = ExtResource("2_5wmt6")
 font_size = 14
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="HUD" type="CanvasLayer" groups=["coin_collected_listener"]]
+[node name="HUD" type="CanvasLayer" groups=["coin_collected_listeners"]]
 script = ExtResource("1_tut2x")
 
 [node name="LevelName" type="Label" parent="."]
@@ -29,15 +29,6 @@ offset_top = 5.0
 offset_right = 115.0
 offset_bottom = 21.0
 text = "Level 0"
-label_settings = SubResource("LabelSettings_tmarc")
-
-[node name="LevelName2" type="Label" parent="."]
-visible = false
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 115.0
-offset_bottom = 21.0
-text = "Stormy day"
 label_settings = SubResource("LabelSettings_tmarc")
 
 [node name="Stopwatch" type="Label" parent="." groups=["level_complete_listeners"]]

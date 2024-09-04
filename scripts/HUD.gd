@@ -34,9 +34,7 @@ func _input(_event: InputEvent) -> void:
 		if player.is_dead:
 			return
 		
-		if get_tree().get_current_scene().scene_file_path.contains('levels/level') || \
-			get_tree().get_current_scene().scene_file_path.contains('testing'):
-			
+		if get_tree().get_current_scene().scene_file_path.contains('levels/level'):
 			if !get_tree().paused:
 				get_tree().paused = true
 				#get_tree().set_deferred("paused", true)
@@ -57,4 +55,10 @@ func _input(_event: InputEvent) -> void:
 # save count to level data
 func on_coin_collected():
 	collected_coins += 1
-	GameManager.level_data[current_scene.scene_file_path]["coins_collected"] += 1
+	var path = current_scene.scene_file_path
+	if GameManager.level_data[path]["coins_collected"] < collected_coins:
+		GameManager.level_data[path]["coins_collected"] = collected_coins
+	
+	# update HUD
+	collected_label.text = "%d/%d" % [collected_coins, total_coins]
+	

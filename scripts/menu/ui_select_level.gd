@@ -14,12 +14,12 @@ func _ready() -> void:
 	if levels_dir != null:
 		get_levels(levels_dir)
 	else:
-		print("No levels directory added.")
+		printerr("No levels directory added.")
 	
 	# Note: The level scene and the thumbnail should have the same name.
 	# The thumbnail should be of .png extension.
 	if thumbs_dir == null:
-		print("No thumbnail directory provided.")
+		printerr("No thumbnail directory provided.")
 
 
 func _input(_event: InputEvent) -> void:
