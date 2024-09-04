@@ -4,12 +4,26 @@ var pause_menu_scene = preload("res://scenes/menu/pause_menu.tscn")
 #var temp_node = null
 @onready var player = $"../Player"
 @onready var level_name = $LevelName
-@onready var coins_collected = $Coins/Collected
+@onready var collected_label = $Coins/Collected
+
+# using HUD to store the total collected coins
+@onready var current_scene = get_tree().get_current_scene()
+var total_coins = 0
+var collected_coins = 0
 
 
 func _ready() -> void:
-	#level_name.text = get_tree().current_scene.name.replace('_', ' ')
-	pass
+	# fetching data
+	total_coins = GameManager.level_data[current_scene.scene_file_path]["coins_total"]
+	collected_label.text = "%d/%d" % [collected_coins, total_coins]
+	#if total_coins == 0:
+		#$Coins.visible = false
+	
+	if GameManager.level_data[current_scene.scene_file_path]["name"] != "":
+		level_name.text = GameManager.level_data[current_scene.scene_file_path]["name"]
+	else:
+		# gets name from the scene root (make sure it's always capitalized)
+		level_name.text = current_scene.name.replace('_', ' ')
 
 
 func _input(_event: InputEvent) -> void:
@@ -42,4 +56,5 @@ func _input(_event: InputEvent) -> void:
 
 # save count to level data
 func on_coin_collected():
-	pass
+	collected_coins += 1
+	GameManager.level_data[current_scene.scene_file_path]["coins_collected"] += 1

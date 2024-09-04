@@ -19,8 +19,8 @@ func _on_start_button_pressed() -> void:
 	await ScreenTransitions.transition_halfpoint
 	
 	# continue, if not running for the first time
-	if Global.current_level != "":
-		get_tree().change_scene_to_file(Global.current_level)
+	if GameManager.current_level != "":
+		get_tree().change_scene_to_file(GameManager.current_level)
 	else:
 		get_tree().change_scene_to_packed(start_scene)
 		#get_tree().change_scene_to_file(start_scene)

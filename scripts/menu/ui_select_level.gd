@@ -57,4 +57,4 @@ func create_level_button(lvl_path: String, lvl_name: String):
 
 
 func _on_return_button_pressed() -> void:
-	get_tree().change_scene_to_packed(Global.main_menu_scene)
+	get_tree().change_scene_to_packed(GameManager.main_menu_scene)

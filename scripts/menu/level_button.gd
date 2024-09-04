@@ -14,7 +14,6 @@ var anim_duration := 0.1
 
 # hover data
 @onready var button_text = text
-@onready var is_level_completed = true
 
 
 func _ready() -> void:
@@ -24,6 +23,9 @@ func _ready() -> void:
 		#disabled = true
 	best_time.visible = false
 	coins.visible = false
+	
+	if !GameManager.level_data[level_path]["unlocked"]:
+		disabled = true
 
 
 func _on_pressed() -> void:
@@ -35,19 +37,35 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
-	if is_level_completed:
+	if GameManager.level_data[level_path]["completed"]:
+		var time = GameManager.level_data[level_path]["best_time"]
+		var milliseconds = int(fmod(time, 1) * 1000)
+		var seconds = int(fmod(time, 60))
+		var minutes = int(fmod(time, 3600) / 60)
+		best_time.text = "%02d:%02d:%03d" % [minutes, seconds, milliseconds]
+		
+		$VBoxContainer/Coins/Collected.text = "%d/%d" % \
+			[GameManager.level_data[level_path]["coins_collected"]\
+			,GameManager.level_data[level_path]["coins_total"]]
+		
 		text = ""
 		best_time.visible = true
-		coins.visible = true
-	animate_size(new_size, anim_duration)
+		#coins.visible = true
+		if GameManager.level_data[level_path]["coins_total"] != 0:
+			coins.visible = true
+
+	
+	if !disabled:
+		animate_size(new_size, anim_duration)
 
 
 func _on_mouse_exited() -> void:
-	if is_level_completed:
-		text = button_text
-		best_time.visible = false
-		coins.visible = false
-	animate_size(original_size, anim_duration)
+	text = button_text
+	best_time.visible = false
+	coins.visible = false
+	
+	if !disabled:
+		animate_size(original_size, anim_duration)
 
 
 func animate_size(final_size: Vector2, duration: float) -> void:

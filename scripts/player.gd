@@ -449,7 +449,9 @@ func on_level_complete():
 	
 	# save level_data to file when player completes a level
 	var level_name = get_tree().current_scene.get_scene_file_path()
-	Global.level_data[level_name]["completed"] = true
-	var level_to_unlock = Global.level_data[level_name]["unlocks"]
-	Global.level_data[level_to_unlock]["unlocked"] = true
-	Global.save_level_data.call_deferred()
+	GameManager.level_data[level_name]["completed"] = true
+	
+	var level_to_unlock = GameManager.level_data[level_name]["unlocks"]
+	if level_to_unlock != "":
+		GameManager.level_data[level_to_unlock]["unlocked"] = true
+	GameManager.save_level_data_to_file.call_deferred()

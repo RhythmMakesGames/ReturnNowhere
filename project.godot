@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
+GameManager="*res://scripts/game_manager.gd"
 ScreenTransitions="*res://scenes/screen_transitions.tscn"
 
 [display]

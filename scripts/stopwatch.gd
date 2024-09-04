@@ -23,6 +23,6 @@ func on_level_complete():
 	set_process(false)
 	# save completion time
 	var level_name = get_tree().current_scene.get_scene_file_path()
-	var saved_time = Global.level_data[level_name]["best_time"]
+	var saved_time = GameManager.level_data[level_name]["best_time"]
 	if elapsed_time < saved_time || saved_time == 0.0:
-		Global.level_data[level_name]["best_time"] = elapsed_time
+		GameManager.level_data[level_name]["best_time"] = elapsed_time
