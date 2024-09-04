@@ -8,7 +8,8 @@ var pause_menu_scene = preload("res://scenes/menu/pause_menu.tscn")
 
 
 func _ready() -> void:
-	level_name.text = get_tree().current_scene.name.replace('_', ' ')
+	#level_name.text = get_tree().current_scene.name.replace('_', ' ')
+	pass
 
 
 func _input(_event: InputEvent) -> void:
@@ -37,3 +38,8 @@ func _input(_event: InputEvent) -> void:
 				#get_tree().set_deferred("paused", false)
 				#if temp_node:
 					#remove_child(temp_node)
+
+
+# save count to level data
+func on_coin_collected():
+	pass

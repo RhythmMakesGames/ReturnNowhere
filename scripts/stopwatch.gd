@@ -16,9 +16,13 @@ func _process(delta: float) -> void:
 	minutes = int(fmod(elapsed_time, 3600) / 60)
 	#minutes = int(elapsed_time) / 60
 	text = "%02d:" % minutes + "%02d:" % seconds + "%03d" % milliseconds
+	#print(elapsed_time)
 
 
 func on_level_complete():
 	set_process(false)
-	var level_name = get_tree().current_scene.name.replace('_', ' ')
-	# save time, for the level
+	# save completion time
+	var level_name = get_tree().current_scene.get_scene_file_path()
+	var saved_time = Global.level_data[level_name]["best_time"]
+	if elapsed_time < saved_time || saved_time == 0.0:
+		Global.level_data[level_name]["best_time"] = elapsed_time

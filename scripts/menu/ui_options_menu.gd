@@ -5,6 +5,7 @@ extends Control
 func _ready() -> void:
 	if get_parent().name != "PauseMenu":
 		$BackgroundGlitch.visible = true
+		$ColorRect.visible = true
 
 
 func _input(_event: InputEvent) -> void:

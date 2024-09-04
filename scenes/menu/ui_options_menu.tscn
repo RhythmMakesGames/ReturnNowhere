@@ -97,6 +97,15 @@ offset_right = 480.0
 offset_bottom = 270.0
 texture = ExtResource("1_gnr8i")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 200.0
+color = Color(0, 0, 0, 0.705882)
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -131,6 +140,8 @@ theme_override_colors/font_shadow_color = Color(0.0509804, 0.0509804, 0.0509804,
 theme_override_fonts/font = ExtResource("3_kwiie")
 text = "Move: A/D
 Jump: Space
+
+Fullscreen: f11
 Restart: R"
 
 [node name="ReturnButton" type="Button" parent="."]

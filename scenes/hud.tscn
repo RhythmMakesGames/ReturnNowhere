@@ -24,11 +24,20 @@ shadow_color = Color(0, 0, 0, 1)
 script = ExtResource("1_tut2x")
 
 [node name="LevelName" type="Label" parent="."]
+visible = false
 offset_left = 8.0
-offset_top = 4.0
-offset_right = 74.0
-offset_bottom = 27.0
-text = "Level 1"
+offset_top = 5.0
+offset_right = 115.0
+offset_bottom = 21.0
+text = "Level 0"
+label_settings = SubResource("LabelSettings_tmarc")
+
+[node name="LevelName2" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 115.0
+offset_bottom = 21.0
+text = "Stormy day"
 label_settings = SubResource("LabelSettings_tmarc")
 
 [node name="Stopwatch" type="Label" parent="." groups=["level_complete_listeners"]]
@@ -59,7 +68,7 @@ pivot_offset = Vector2(52, -4)
 
 [node name="Collected" type="Label" parent="Coins"]
 layout_mode = 2
-text = "0/3"
+text = "0/0"
 label_settings = SubResource("LabelSettings_0eev3")
 
 [node name="TextureRect" type="TextureRect" parent="Coins"]

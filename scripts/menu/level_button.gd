@@ -4,11 +4,17 @@ extends Button
 @export_file var level_path
 @export_file var thumb_path
 @onready var texture = $TextureRect
+@onready var best_time = $VBoxContainer/BestTime
+@onready var coins = $VBoxContainer/Coins
 
 # button grow on hover effect
 var original_size := scale
 var new_size := Vector2(1.1, 1.1)
 var anim_duration := 0.1
+
+# hover data
+@onready var button_text = text
+@onready var is_level_completed = true
 
 
 func _ready() -> void:
@@ -16,6 +22,8 @@ func _ready() -> void:
 		texture.texture = load(thumb_path)
 	#if level_path.contains("1"):
 		#disabled = true
+	best_time.visible = false
+	coins.visible = false
 
 
 func _on_pressed() -> void:
@@ -27,10 +35,18 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
+	if is_level_completed:
+		text = ""
+		best_time.visible = true
+		coins.visible = true
 	animate_size(new_size, anim_duration)
 
 
 func _on_mouse_exited() -> void:
+	if is_level_completed:
+		text = button_text
+		best_time.visible = false
+		coins.visible = false
 	animate_size(original_size, anim_duration)
 
 
