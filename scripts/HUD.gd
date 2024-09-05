@@ -5,6 +5,8 @@ var pause_menu_scene = preload("res://scenes/menu/pause_menu.tscn")
 @onready var player = $"../Player"
 @onready var level_name = $LevelName
 @onready var collected_label = $Coins/Collected
+@onready var level_complete = $LevelComplete
+@onready var animation_player = $AnimationPlayer
 
 # using HUD to store the total collected coins
 @onready var current_scene = get_tree().get_current_scene()
@@ -24,6 +26,9 @@ func _ready() -> void:
 	else:
 		# gets name from the scene root (make sure it's always capitalized)
 		level_name.text = current_scene.name.replace('_', ' ')
+	
+	# other stuff
+	level_complete.visible = false
 
 
 func _input(_event: InputEvent) -> void:
@@ -62,3 +67,7 @@ func on_coin_collected():
 	# update HUD
 	collected_label.text = "%d/%d" % [collected_coins, total_coins]
 	
+	
+func on_level_complete():
+	level_complete.visible = true
+	animation_player.play("faded_zoom")

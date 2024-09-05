@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://hlxf2vgaai2k"]
+[gd_scene load_steps=12 format=3 uid="uid://hlxf2vgaai2k"]
 
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_tut2x"]
 [ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="2_5wmt6"]
@@ -20,7 +20,72 @@ font = ExtResource("2_5wmt6")
 font_size = 14
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="HUD" type="CanvasLayer" groups=["coin_collected_listeners"]]
+[sub_resource type="LabelSettings" id="LabelSettings_bxefl"]
+font = ExtResource("2_5wmt6")
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_bubr6"]
+resource_name = "faded_zoom"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelComplete:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelComplete:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_emfei"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelComplete:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelComplete:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mi87t"]
+_data = {
+"RESET": SubResource("Animation_emfei"),
+"faded_zoom": SubResource("Animation_bubr6")
+}
+
+[node name="HUD" type="CanvasLayer" groups=["coin_collected_listeners", "level_complete_listeners"]]
 script = ExtResource("1_tut2x")
 
 [node name="LevelName" type="Label" parent="."]
@@ -66,3 +131,24 @@ label_settings = SubResource("LabelSettings_0eev3")
 layout_mode = 2
 texture = ExtResource("4_px4mr")
 stretch_mode = 3
+
+[node name="LevelComplete" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(75, 12.5)
+text = "Level Complete!!"
+label_settings = SubResource("LabelSettings_bxefl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mi87t")
+}
