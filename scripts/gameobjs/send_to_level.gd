@@ -29,7 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 			await get_tree().create_timer(2.5).timeout
 			
 			# transition to next level
-			ScreenTransitions.wipe_transition()
+			ScreenTransitions.arrow_transition()
 			await ScreenTransitions.transition_halfpoint
 			get_tree().change_scene_to_file.call_deferred(target_level_path)
 		else:
