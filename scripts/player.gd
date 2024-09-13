@@ -169,6 +169,7 @@ func push_movable_items():
 
 func _physics_process(delta: float) -> void:
 	move_direction = Input.get_axis(move_left_action, move_right_action)
+	# Input.get_vector()
 	
 	if disable_physics == true:
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c47g02voinilm"]
+[gd_scene load_steps=7 format=3 uid="uid://c47g02voinilm"]
 
 [ext_resource type="Script" path="res://scripts/gameobjs/movable_block.gd" id="1_33786"]
 [ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="1_m4aoc"]
@@ -10,6 +10,9 @@ size = Vector2(6, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0k2d"]
 size = Vector2(6, 12)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r05fn"]
+polygon = PackedVector2Array(-10, -10, -10, 10, 10, 10, 10, -10)
 
 [node name="MovableBlock" type="CharacterBody2D" groups=["MoveableItem"]]
 collision_layer = 4
@@ -42,6 +45,9 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightPushZone"]
 position = Vector2(9, 0)
 shape = SubResource("RectangleShape2D_u0k2d")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_r05fn")
 
 [connection signal="body_entered" from="LeftPushZone" to="." method="_on_left_push_zone_body_entered"]
 [connection signal="body_exited" from="LeftPushZone" to="." method="_on_left_push_zone_body_exited"]

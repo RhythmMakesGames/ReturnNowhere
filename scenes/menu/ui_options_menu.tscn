@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="1_gnr8i"]
 [ext_resource type="Script" path="res://scripts/menu/ui_options_menu.gd" id="1_yvn4o"]
-[ext_resource type="Shader" path="res://scripts/menu/ui_background.gdshader" id="2_f5ys7"]
-[ext_resource type="Shader" path="res://scripts/menu/ui_blur.gdshader" id="2_o2y5x"]
+[ext_resource type="Shader" path="res://scripts/shaders/ui_background.gdshader" id="2_f5ys7"]
+[ext_resource type="Shader" path="res://scripts/shaders/ui_blur.gdshader" id="2_o2y5x"]
 [ext_resource type="FontFile" uid="uid://bot2r4qwl2gtn" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_kwiie"]
 [ext_resource type="Texture2D" uid="uid://cwirbw5pyakq6" path="res://assets/ui/buttons/Button_Dark (3).png" id="5_f486c"]
 

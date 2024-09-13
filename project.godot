@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/game_manager.gd"
 ScreenTransitions="*res://scenes/screen_transitions.tscn"
+AudioManager="*res://scenes/audio_manager.tscn"
 
 [display]
 
@@ -78,6 +79,7 @@ debug_toggle_disable_movement={
 [layer_names]
 
 2d_render/layer_1="Default"
+2d_render/layer_3="Torch"
 2d_physics/layer_1="default (world)"
 2d_physics/layer_2="player"
 2d_physics/layer_3="interactable objs"

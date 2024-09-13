@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://g0roxjonljx1"]
+[gd_scene load_steps=15 format=3 uid="uid://g0roxjonljx1"]
 
 [ext_resource type="Script" path="res://scripts/gameobjs/coin.gd" id="1_57skt"]
 [ext_resource type="Texture2D" uid="uid://b3eqjv34hoi8y" path="res://assets/sprites/coins/coin_01.png" id="2_4e06a"]
@@ -27,6 +27,72 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_4e06a")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nsvev"]
+resource_name = "collect"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_4e06a"), ExtResource("3_b5cfr"), ExtResource("4_51exv"), ExtResource("5_7dhim"), ExtResource("6_g36ij"), ExtResource("7_7hi0i"), ExtResource("8_5k4pe"), ExtResource("9_tm8uq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.68302, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_61qf0"]
 resource_name = "spin"
@@ -48,6 +114,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p2r0l"]
 _data = {
 "RESET": SubResource("Animation_qae0b"),
+"collect": SubResource("Animation_nsvev"),
 "spin": SubResource("Animation_61qf0")
 }
 

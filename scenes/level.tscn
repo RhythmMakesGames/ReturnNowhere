@@ -96,8 +96,8 @@ script = ExtResource("2_q0s7c")
 [node name="Torch" type="PointLight2D" parent="Player"]
 z_index = -1
 position = Vector2(2, -10)
-energy = 0.5
-range_layer_min = -1
+energy = 0.25
+range_item_cull_mask = 4
 shadow_enabled = true
 texture = ExtResource("6_t1qco")
 texture_scale = 0.5
@@ -105,6 +105,8 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Torch"]
 modulate = Color(1, 1, 1, 0.0980392)
+show_behind_parent = true
+light_mask = 4
 material = SubResource("CanvasItemMaterial_klxhx")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_t1qco")
@@ -142,8 +144,6 @@ metadata/_edit_lock_ = true
 [node name="AtmosphericLight2D" type="PointLight2D" parent="Lights"]
 z_index = 3
 energy = 0.2
-range_layer_min = -3
-range_layer_max = 3
 texture = ExtResource("6_t1qco")
 metadata/_edit_group_ = true
 
