@@ -43,6 +43,7 @@ func _on_options_button_pressed() -> void:
 
 func _on_quit_to_main_menu_button_pressed() -> void:
 	get_tree().paused = false
+	GameManager.scene_changing.emit(GameManager.main_menu_scene)
 	get_tree().change_scene_to_packed(GameManager.main_menu_scene)
 
 

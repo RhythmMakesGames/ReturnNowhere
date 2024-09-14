@@ -30,6 +30,7 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			# transition to next level
 			ScreenTransitions.arrow_transition()
+			GameManager.scene_changing.emit(target_level_path)
 			await ScreenTransitions.transition_halfpoint
 			get_tree().change_scene_to_file.call_deferred(target_level_path)
 		else:

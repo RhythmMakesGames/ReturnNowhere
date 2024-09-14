@@ -14,10 +14,11 @@ func _ready() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	ScreenTransitions.fade_transition()
-	await ScreenTransitions.transition_halfpoint
 	# runs latest unlocked level (make sure that level 1 is unlocked)
 	if GameManager.current_level != "":
+		ScreenTransitions.fade_transition()
+		GameManager.scene_changing.emit(GameManager.current_level)
+		await ScreenTransitions.transition_halfpoint
 		get_tree().change_scene_to_file(GameManager.current_level)
 
 
@@ -35,5 +36,3 @@ func _on_quit_button_pressed() -> void:
 func _on_select_level_button_pressed() -> void:
 	var select_levels = load(select_level_scene).instantiate()
 	add_child(select_levels)
-	
-	#get_tree().change_scene_to_file(select_level_scene)

@@ -32,6 +32,7 @@ func _on_pressed() -> void:
 	if level_path == null:
 		return
 	ScreenTransitions.fade_transition()
+	GameManager.scene_changing.emit(level_path)
 	await ScreenTransitions.transition_halfpoint
 	get_tree().change_scene_to_file(level_path)	
 

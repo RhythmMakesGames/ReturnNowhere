@@ -1,5 +1,7 @@
 extends Node
 
+signal scene_changing(scene)
+
 var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
 
 var current_level:String = ""
@@ -11,6 +13,7 @@ var level_data:Dictionary = {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	scene_changing.connect(AudioManager.on_scene_changing)
 	
 	# load level data from previous save file
 	if FileAccess.file_exists(save_path):

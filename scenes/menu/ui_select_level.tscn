@@ -95,6 +95,7 @@ metadata/_edit_lock_ = true
 [node name="BackgroundBlur" type="TextureRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_ae0oe")
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 270.0
 texture = SubResource("CanvasTexture_5q7ts")
