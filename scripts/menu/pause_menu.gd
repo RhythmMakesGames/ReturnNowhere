@@ -1,7 +1,15 @@
 extends Control
 
+signal paused
+signal unpaused
 
 var options_scene := "res://scenes/menu/ui_options_menu.tscn"
+
+func _ready() -> void:
+	for node in get_tree().get_nodes_in_group("paused_unpaused_listeners"):
+		paused.connect(node.on_paused)
+		unpaused.connect(node.on_unpaused)
+	paused.emit()
 
 
 # no idea why else part is causing this error spam:
@@ -41,4 +49,5 @@ func _on_quit_to_main_menu_button_pressed() -> void:
 func _on_tree_exiting() -> void:
 	# fix the bug where the tree is paused, but the node is removed (eg. during scene transition)
 	get_tree().paused = false
+	unpaused.emit()
 	#$"../../Player"

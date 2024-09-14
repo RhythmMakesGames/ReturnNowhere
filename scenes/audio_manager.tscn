@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_akfh5"]
 
-[node name="AudioManager" type="Node"]
+[node name="AudioManager" type="Node" groups=["paused_unpaused_listeners"]]
+process_mode = 3
 script = ExtResource("1_akfh5")
 
 [node name="AudioPlayers" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
-max_polyphony = 5
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
