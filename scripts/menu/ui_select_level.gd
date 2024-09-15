@@ -57,4 +57,5 @@ func create_level_button(lvl_path: String, lvl_name: String):
 
 
 func _on_return_button_pressed() -> void:
+	AudioManager.play_sound_effect(AudioManager.MENU_CLICK)
 	queue_free()

@@ -9,6 +9,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	# using class method
 	if body.is_in_group(player_group):
+		AudioManager.play_sound_effect(AudioManager.SPIKE)
 		body.die()
 
 # Note: spikes.tscn is the base scene other spike scenes derive from (except falling_spike)

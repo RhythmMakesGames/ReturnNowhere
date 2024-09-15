@@ -193,6 +193,13 @@ func _physics_process(delta: float) -> void:
 			handle_air_state_physics(delta)
 		#STATES.ON_WALL:
 	
+	# land on surface (detect type using raycast)
+	if !was_on_floor && is_on_floor():
+		AudioManager.play_sound_effect(AudioManager.LAND_DEFAULT)
+	# play walk sound
+	elif abs(velocity.x) > 50.0 && is_on_floor():
+		AudioManager.play_step_sounds()
+	
 	# keeping track of current info for the next iteration
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
@@ -213,7 +220,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart_level"):
 		ScreenTransitions.fade_transition()
 		await ScreenTransitions.transition_halfpoint
-		get_tree().reload_current_scene.call_deferred()
+		if get_tree().current_scene != null:		
+			get_tree().reload_current_scene.call_deferred()
 	
 	# some cheats for testing (one frame delay ofcourse)
 	if enable_debug_controls:
@@ -361,12 +369,15 @@ func jump() -> void:
 	if is_jump_disabled:
 		return
 	
+	
 	# if randi_range(0,2) == 1 && is_on_floor():
 	if is_on_floor():
 		particles_jump.emitting = true
 	
 	# trampoline superjump fix
 	velocity.y = max_jump_velocity
+	#if randi_range(1,2) == 2:
+	AudioManager.play_sound_effect(AudioManager.JUMP)
 	
 	jump_buffer.stop()
 	is_jump_key_held = true

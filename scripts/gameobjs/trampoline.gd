@@ -8,3 +8,4 @@ var player_group = "Player"
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(player_group):
 		body.velocity.y = -jump_boost
+		AudioManager.play_sound_effect(AudioManager.TRAMPOLINE)

@@ -67,7 +67,8 @@ var default_level_data:Dictionary = {
 		"unlocks": "res://scenes/levels/level_02.tscn",
 		"completed": false,
 		"coins_collected": 0,
-		"coins_total": 1
+		"coins_total": 1,
+		"level_song": ""
 	},
 	"res://scenes/levels/level_02.tscn":{
 		"name": "",
@@ -76,7 +77,8 @@ var default_level_data:Dictionary = {
 		"unlocks": "res://scenes/levels/level_03.tscn",
 		"completed": false,
 		"coins_collected": 0,
-		"coins_total": 0
+		"coins_total": 0,
+		"level_song": ""
 	},
 	"res://scenes/levels/level_03.tscn":{
 		"name": "",
@@ -85,6 +87,7 @@ var default_level_data:Dictionary = {
 		"unlocks": "",
 		"completed": false,
 		"coins_collected": 0,
-		"coins_total": 0
+		"coins_total": 0,
+		"level_song": ""
 	}
 }

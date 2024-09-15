@@ -31,6 +31,7 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	if level_path == null:
 		return
+	AudioManager.play_sound_effect(AudioManager.MENU_CLICK_2)
 	ScreenTransitions.fade_transition()
 	GameManager.scene_changing.emit(level_path)
 	await ScreenTransitions.transition_halfpoint

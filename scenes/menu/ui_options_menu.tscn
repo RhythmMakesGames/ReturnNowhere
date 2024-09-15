@@ -133,9 +133,9 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 139.0
-offset_top = 50.0
+offset_top = 45.0
 offset_right = 346.0
-offset_bottom = 137.0
+offset_bottom = 132.0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
@@ -144,7 +144,6 @@ theme_override_colors/font_shadow_color = Color(0.0509804, 0.0509804, 0.0509804,
 theme_override_fonts/font = ExtResource("3_kwiie")
 text = "Move: A/D
 Jump: Space
-
 Fullscreen: f11
 Restart: R"
 
@@ -156,9 +155,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 139.0
-offset_top = 145.0
+offset_top = 137.0
 offset_right = 346.0
-offset_bottom = 168.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -176,9 +175,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 139.0
-offset_top = 170.0
+offset_top = 165.0
 offset_right = 299.0
-offset_bottom = 220.0
+offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -187,18 +186,6 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/h_separation = 16
 columns = 2
-
-[node name="Music" type="Label" parent="VBoxContainer2/GridContainer"]
-layout_mode = 2
-text = "Music"
-label_settings = SubResource("LabelSettings_reurc")
-
-[node name="MusicSlider" type="HSlider" parent="VBoxContainer2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.05
-value = 1.0
 
 [node name="Game" type="Label" parent="VBoxContainer2/GridContainer"]
 layout_mode = 2
@@ -209,7 +196,31 @@ label_settings = SubResource("LabelSettings_reurc")
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
-step = 0.05
+step = 0.01
+value = 1.0
+
+[node name="Music" type="Label" parent="VBoxContainer2/GridContainer"]
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_reurc")
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFX" type="Label" parent="VBoxContainer2/GridContainer"]
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_reurc")
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
 value = 1.0
 
 [node name="ReturnButton" type="Button" parent="."]
@@ -228,6 +239,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_e02gl")
 theme_override_styles/focus = SubResource("StyleBoxFlat_c6i5r")
 text = "Return"
 
-[connection signal="value_changed" from="VBoxContainer2/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer2/GridContainer/GameSlider" to="." method="_on_game_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

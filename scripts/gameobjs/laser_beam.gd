@@ -65,6 +65,7 @@ func collision_check():
 		
 		if collider.is_in_group(player_group):
 			collider.die()
+			AudioManager.play_sound_effect(AudioManager.LASER)
 	else:
 		#set_point_position(1, get_point_position(1).normalized() * target_point.length())
 		#set_point_position(1, Vector2.DOWN.rotated(raycast.rotation) * target_point.length())

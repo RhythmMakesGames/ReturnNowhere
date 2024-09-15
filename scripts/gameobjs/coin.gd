@@ -12,6 +12,8 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		coin_collected.emit()
+		set_deferred("monitoring", false)
+		AudioManager.play_sound_effect(AudioManager.COIN_COLLECT)
 		$AnimationPlayer.play("collect")
 		# waiting for the animation
 		await get_tree().create_timer(0.5).timeout

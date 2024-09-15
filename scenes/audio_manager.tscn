@@ -1,21 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6d523ytsgwwo"]
+[gd_scene load_steps=8 format=3 uid="uid://c6d523ytsgwwo"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_akfh5"]
+[ext_resource type="AudioStream" uid="uid://btu50sgiq844" path="res://assets/sounds/step_01.mp3" id="2_3fo62"]
+[ext_resource type="AudioStream" uid="uid://dbntxd3wevb3o" path="res://assets/sounds/step_02.mp3" id="3_5jstd"]
 
-[sub_resource type="Animation" id="Animation_q8dg5"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MusicPlayer:volume_db")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -40.0]
-}
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tt216"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("2_3fo62")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_5jstd")
+stream_1/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_33fgo"]
 length = 0.001
@@ -32,6 +27,21 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_q8dg5"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MusicPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -40.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_louvk"]
 _data = {
 "RESET": SubResource("Animation_33fgo"),
@@ -45,6 +55,25 @@ script = ExtResource("1_akfh5")
 [node name="AudioPlayers" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AudioPlayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="AudioPlayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="AudioPlayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="AudioPlayers"]
+bus = &"SFX"
+
+[node name="StepSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_tt216")
+bus = &"SFX"
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

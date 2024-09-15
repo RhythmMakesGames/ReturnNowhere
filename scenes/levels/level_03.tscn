@@ -380,7 +380,7 @@ position = Vector2(483, 170)
 [node name="LaserBeam" parent="." instance=ExtResource("13_bm10n")]
 modulate = Color(5, 1, 1, 1)
 position = Vector2(406, 223)
-points = PackedVector2Array(0, 0, 23, 53)
+points = PackedVector2Array(0, 0, 23, 85)
 discontinuous = true
 
 [node name="Bin" type="Node" parent="."]

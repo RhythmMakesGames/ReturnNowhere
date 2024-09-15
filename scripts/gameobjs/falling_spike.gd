@@ -43,6 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	# collision with player (dont respawn, disable. reset by signal)
 	if body.is_in_group(player_group):
+		AudioManager.play_sound_effect(AudioManager.FALLING_SPIKE)
 		body.die()
 		disable_item()
 	# tilemap, moving platform etc..
