@@ -20,7 +20,8 @@ var player_group = "Player"
 
 
 func _ready() -> void:
-	var player = $"../Player"
+	#var player = $"../Player"
+	var player = get_tree().current_scene.get_node("Player")
 	#if player == null:
 		#player = get_tree().current_scene.find_child("Player")
 	player.player_died.connect(_on_player_died)

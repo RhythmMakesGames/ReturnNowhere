@@ -5,9 +5,11 @@ signal player_died
 
 @export var enable_debug_controls = false
 var enable_god_mode = false
+var enable_no_clip = false
+
 #var enable_infinite_jump = false
 
-@export var disable_physics:bool = false
+var disable_physics:bool = false
 @onready var spawn_position = Vector2(position.x, position.y)
 
 ## for stair/obstacle stepping
@@ -58,6 +60,7 @@ var is_idle
 # pushing a moveable item
 var is_pushing_item = false
 
+
 # prevent die function from re-triggering while it's ongoing
 var is_dead = false
 
@@ -83,6 +86,11 @@ var is_horizontally_flipped = false
 @onready var particles_turn_ground = $TurnParticlesGround as Node2D
 @onready var death_particles = $DeathParticles as Node2D
 @onready var torch = $Torch
+
+# might be better to add the sound players to the items themselves
+# and disable any interaction and wait queue free on destroy
+@onready var step_sound_player: AudioStreamPlayer = $StepSoundPlayer
+@onready var def_pitch_scale = step_sound_player.get_pitch_scale()
 
 # literals
 var stand_animation:String = "standing"
@@ -152,7 +160,7 @@ func handle_ground_state_animation(_delta):
 			elif rand_anim >= 95 && rand_anim < 100:
 				animation_player.play(idle4_animation)
 	elif is_pushing_item:
-		animation_player.set_speed_scale(0.85)
+		animation_player.set_speed_scale(0.4)
 	else:
 		animation_player.play(stand_animation)
 
@@ -171,16 +179,16 @@ func _physics_process(delta: float) -> void:
 	move_direction = Input.get_axis(move_left_action, move_right_action)
 	# Input.get_vector()
 	
-	if disable_physics == true:
-		return
-
-	if is_movement_disabled:
-		move_direction = 0
-
 	# update flip state (0 move_direction represents no change) 
 	if move_direction:
 		is_horizontally_flipped = true if move_direction < 0 else false
-		
+	
+	handle_inputs() # also no clip movement
+	if disable_physics == true: return
+	
+	if is_movement_disabled: 
+		move_direction = 0
+	
 	raycast_step_top.rotation_degrees = 180 if is_horizontally_flipped else 0
 	raycast_step_bottom.rotation_degrees = 180 if is_horizontally_flipped else 0
 	
@@ -198,8 +206,14 @@ func _physics_process(delta: float) -> void:
 		AudioManager.play_sound_effect(AudioManager.LAND_DEFAULT)
 	# play walk sound
 	elif abs(velocity.x) > 50.0 && is_on_floor():
-		AudioManager.play_step_sounds()
-	
+		if not step_sound_player.is_playing():
+			step_sound_player.play()
+	# slow down if pushing object
+	if is_pushing_item:
+		step_sound_player.set_pitch_scale(0.7)
+	else:
+		step_sound_player.set_pitch_scale(def_pitch_scale)
+
 	# keeping track of current info for the next iteration
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
@@ -215,17 +229,30 @@ func _physics_process(delta: float) -> void:
 	# could've done this before move and slide but why?
 	push_movable_items()
 	#apply_push_force()
-	
-	# special inputs
+
+
+func handle_inputs():
 	if Input.is_action_just_pressed("restart_level"):
 		ScreenTransitions.fade_transition()
 		await ScreenTransitions.transition_halfpoint
-		if get_tree().current_scene != null:		
+		if get_tree().current_scene != null:
 			get_tree().reload_current_scene.call_deferred()
 	
 	# some cheats for testing (one frame delay ofcourse)
 	if enable_debug_controls:
 		debug_controls()
+	
+	# handle controls while no clipping
+	if enable_no_clip:
+		var move_by_pixels = 5
+		if Input.is_action_pressed("move_up"):
+			position.y -= move_by_pixels
+		if Input.is_action_pressed("move_down"):
+			position.y += move_by_pixels
+		if Input.is_action_pressed("move_left"):
+			position.x -= move_by_pixels
+		if Input.is_action_pressed("move_right"):
+			position.x += move_by_pixels
 
 
 func debug_controls():
@@ -249,6 +276,15 @@ func debug_controls():
 		else:
 			disable_movement_controls()
 			print("Movement controls disabled.")
+	
+	# toggle no clip
+	if Input.is_action_just_pressed("debug_toggle_noclip"):
+		enable_no_clip = !enable_no_clip
+		disable_physics = !disable_physics
+		if enable_no_clip:
+			print("No clip enabled.")
+		else:
+			print("No clip disabled.")
 
 
 func handle_ground_state_physics(delta):
@@ -416,13 +452,15 @@ func die():
 	# respawn/wait time
 	await get_tree().create_timer(0.3).timeout
 	
-	# reset player only (or reload the scene instead)
+	# may have been a better idea to simply reload the scene on death
+	# this causes some complications (eg. stuck on a level state)
 	reset_player()
 	
 	# play death transition
 	ScreenTransitions.wipe_transition()
 	await ScreenTransitions.transition_halfpoint
 	
+	# reset player only or reload the scene instead
 	#get_tree().reload_current_scene.call_deferred()
 
 # to how it was at the beginnning of the scene

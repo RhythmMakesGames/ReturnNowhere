@@ -39,6 +39,7 @@ func _on_music_slider_value_changed(value: float) -> void:
 	var music_bus := AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_volume_db(music_bus, linear_to_db(value))
 	AudioServer.set_bus_mute(music_bus, value < 0.02)
+	AudioManager.music_slider_value_changed.emit()
 
 
 func _on_sfx_slider_value_changed(value: float) -> void:

@@ -18,7 +18,7 @@ func _on_start_button_pressed() -> void:
 	if GameManager.current_level != "":
 		AudioManager.play_sound_effect(AudioManager.MENU_CLICK_2)
 		ScreenTransitions.fade_transition()
-		GameManager.scene_changing.emit(GameManager.current_level)
+		GameManager.scene_change_started.emit(GameManager.current_level)
 		await ScreenTransitions.transition_halfpoint
 		get_tree().change_scene_to_file(GameManager.current_level)
 

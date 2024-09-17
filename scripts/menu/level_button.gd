@@ -33,7 +33,7 @@ func _on_pressed() -> void:
 		return
 	AudioManager.play_sound_effect(AudioManager.MENU_CLICK_2)
 	ScreenTransitions.fade_transition()
-	GameManager.scene_changing.emit(level_path)
+	GameManager.scene_change_started.emit(level_path)
 	await ScreenTransitions.transition_halfpoint
 	get_tree().change_scene_to_file(level_path)	
 

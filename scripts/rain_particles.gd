@@ -11,6 +11,7 @@ func _ready() -> void:
 	camera_position = current_camera.get_screen_center_position()
 	last_camera_position = camera_position
 
+
 # fixing rain bunching effect (also not using _process)
 func _physics_process(delta: float) -> void:
 	camera_position = current_camera.get_screen_center_position()

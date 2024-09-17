@@ -1,6 +1,6 @@
 extends Node
 
-signal scene_changing(scene)
+signal scene_change_started(scene)
 
 var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
 
@@ -13,7 +13,7 @@ var level_data:Dictionary = {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	scene_changing.connect(AudioManager.on_scene_changing)
+	scene_change_started.connect(AudioManager.on_scene_change_started)
 	
 	# load level data from previous save file
 	if FileAccess.file_exists(save_path):
@@ -68,7 +68,10 @@ var default_level_data:Dictionary = {
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 1,
-		"level_song": ""
+		"level_song": "res://assets/sounds/synthwavehouse.ogg",
+		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.5
 	},
 	"res://scenes/levels/level_02.tscn":{
 		"name": "",
@@ -78,7 +81,10 @@ var default_level_data:Dictionary = {
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 0,
-		"level_song": ""
+		"level_song": "res://assets/sounds/synthwavehouse.ogg",
+		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.0
 	},
 	"res://scenes/levels/level_03.tscn":{
 		"name": "",
@@ -88,6 +94,9 @@ var default_level_data:Dictionary = {
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 0,
-		"level_song": ""
+		"level_song": "",
+		"level_ambient": "",
+		"song_volume": 0.0,
+		"ambient_volume": 0.0
 	}
 }

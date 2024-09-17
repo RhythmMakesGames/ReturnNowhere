@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=35 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_xx6v6"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_7i52x"]
@@ -23,25 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="21_xvkms"]
 [ext_resource type="PackedScene" uid="uid://qququp3171jh" path="res://scenes/gameobjs/spikes/spikes.tscn" id="22_4taat"]
 
-[sub_resource type="Curve" id="Curve_dc70x"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_js24w"]
-min_value = 1.0
-max_value = 5.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_pkasi"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fv00s"]
-curve_x = SubResource("Curve_dc70x")
-curve_y = SubResource("Curve_js24w")
-curve_z = SubResource("Curve_pkasi")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_46pnp"]
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -150, 0)
@@ -51,8 +32,10 @@ emission_box_extents = Vector3(1, 1, 0)
 gravity = Vector3(0, 980, 0)
 scale_min = 0.2
 scale_max = 2.0
-scale_curve = SubResource("CurveXYZTexture_fv00s")
 color = Color(0.54, 0.603, 0.75, 1)
+collision_mode = 1
+collision_friction = 0.51
+collision_bounce = 0.01
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ulwet"]
 resource_local_to_scene = true
@@ -135,7 +118,7 @@ scale_amount_max = 2.0
 color = Color(1, 0.0392157, 0.117647, 1)
 
 [node name="RainParticles" type="GPUParticles2D" parent="Player"]
-amount = 600
+amount = 800
 process_material = SubResource("ParticleProcessMaterial_46pnp")
 fixed_fps = 0
 draw_order = 0
@@ -583,13 +566,13 @@ range_layer_max = 3
 texture = ExtResource("3_cviav")
 
 [node name="MovableBlock3" parent="." instance=ExtResource("19_xn4sp")]
-position = Vector2(456, 168)
+position = Vector2(456, 170)
 
 [node name="MovableBlock4" parent="." instance=ExtResource("19_xn4sp")]
-position = Vector2(179, 211)
+position = Vector2(180, 212)
 
 [node name="MovableBlock5" parent="." instance=ExtResource("19_xn4sp")]
-position = Vector2(291, 308)
+position = Vector2(293, 310)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(489, 211)
