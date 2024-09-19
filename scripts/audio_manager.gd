@@ -107,10 +107,14 @@ func on_scene_changed():
 	if animation_player.is_playing():
 		await animation_player.animation_finished
 		# this line was causing problems with setting volume_db few lines down
+		# because of 0.001 sec delay?
 		#animation_player.play("RESET")
 		music_player.stop()
 		ambient_player.stop()
 	is_waiting_for_animation = false
+	
+	music_player.volume_db = linear_to_db(1)
+	ambient_player.volume_db = linear_to_db(1)
 	
 	var scene = get_tree().current_scene
 	if scene == null: return
@@ -126,8 +130,6 @@ func on_scene_changed():
 			var song_vol:float = GameManager.level_data[scene.scene_file_path]["song_volume"]
 			if song_vol != 0.0:
 				music_player.volume_db = linear_to_db(song_vol)
-			else:
-				music_player.volume_db = linear_to_db(1)
 		else:
 			music_player.stop()
 			
@@ -139,8 +141,6 @@ func on_scene_changed():
 			var ambient_vol:float = GameManager.level_data[scene.scene_file_path]["ambient_volume"]
 			if ambient_vol != 0.0:
 				ambient_player.volume_db = linear_to_db(ambient_vol)
-			else:
-				ambient_player.volume_db = linear_to_db(1)
 		else:
 			ambient_player.stop()
 

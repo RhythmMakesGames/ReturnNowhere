@@ -52,7 +52,8 @@ background_mode = 3
 tonemap_mode = 3
 glow_enabled = true
 glow_levels/4 = 2.0
-glow_blend_mode = 0
+glow_normalized = true
+glow_blend_mode = 1
 
 [sub_resource type="Curve2D" id="Curve2D_1ievb"]
 _data = {
@@ -208,8 +209,19 @@ metadata/_edit_lock_ = true
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("6_f8o8e")]
 
+[node name="Buildings_Far" parent="ParallaxBackground" index="2"]
+motion_scale = Vector2(0.16, 0)
+
+[node name="Buildings_Near" parent="ParallaxBackground" index="3"]
+motion_scale = Vector2(0.2, 0)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_edssc")
+
+[node name="MovingPlatform" parent="." instance=ExtResource("8_gthuw")]
+modulate = Color(10, 2, 5, 1)
+position = Vector2(180, 230)
+curve = SubResource("Curve2D_1ievb")
 
 [node name="WorldAmbientBackground" type="DirectionalLight2D" parent="."]
 rotation = 0.902335
@@ -228,6 +240,14 @@ range_layer_min = -99
 shadow_filter = 1
 metadata/_edit_lock_ = true
 
+[node name="LaserBeam" parent="." instance=ExtResource("13_bm10n")]
+modulate = Color(5, 0, 0, 1)
+position = Vector2(367, 42)
+points = PackedVector2Array(-131, 51, -59, 264)
+discontinuous = true
+scan_mode = true
+scan_angle = 360
+
 [node name="Lights" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
@@ -238,7 +258,7 @@ position = Vector2(-41, 290)
 metadata/_edit_lock_ = true
 
 [node name="StreetLight2" parent="Lights" instance=ExtResource("7_iimuv")]
-modulate = Color(2, 1.5, 1, 1)
+modulate = Color(3.5, 1.5, 1, 1)
 position = Vector2(-41, 290)
 metadata/_edit_lock_ = true
 
@@ -266,7 +286,7 @@ scale = Vector2(2, 2)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight4"]
-modulate = Color(0.505882, 0.505882, 1, 0.0980392)
+modulate = Color(2, 2, 4, 0.00784314)
 texture = ExtResource("3_cviav")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/AtmosphericLight4"]
@@ -327,10 +347,6 @@ range_layer_min = -3
 range_layer_max = 3
 texture = ExtResource("3_cviav")
 
-[node name="MovingPlatform" parent="." instance=ExtResource("8_gthuw")]
-position = Vector2(180, 230)
-curve = SubResource("Curve2D_1ievb")
-
 [node name="FallingSpike" parent="." instance=ExtResource("9_x1pqr")]
 position = Vector2(317, 211)
 speed = 200
@@ -359,12 +375,6 @@ position = Vector2(585, 287)
 
 [node name="ImmovableBlock" parent="." instance=ExtResource("12_otd61")]
 position = Vector2(483, 170)
-
-[node name="LaserBeam" parent="." instance=ExtResource("13_bm10n")]
-modulate = Color(5, 1, 1, 1)
-position = Vector2(406, 223)
-points = PackedVector2Array(0, 0, 23, 85)
-discontinuous = true
 
 [node name="Bin" type="Node" parent="."]
 
@@ -583,3 +593,5 @@ position = Vector2(850, 150)
 
 [node name="Spikes" parent="." instance=ExtResource("22_4taat")]
 position = Vector2(523, 314)
+
+[editable path="ParallaxBackground"]

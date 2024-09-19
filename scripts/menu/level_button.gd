@@ -17,10 +17,11 @@ var anim_duration := 0.1
 
 
 func _ready() -> void:
-	if thumb_path:
+	if ResourceLoader.exists(thumb_path):
 		texture.texture = load(thumb_path)
-	#if level_path.contains("1"):
-		#disabled = true
+	else:
+		print("Error loading resource: ", thumb_path, " doesn't exist.")
+	
 	best_time.visible = false
 	coins.visible = false
 	

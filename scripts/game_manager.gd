@@ -61,7 +61,7 @@ func _input(_event: InputEvent) -> void:
 # HUD gets name from the scene root if not provided
 var default_level_data:Dictionary = {
 	"res://scenes/levels/level_01.tscn":{
-		"name": "Getting Ready",
+		"name": "",
 		"best_time": 0.0,
 		"unlocked": true,
 		"unlocks": "res://scenes/levels/level_02.tscn",
@@ -71,7 +71,7 @@ var default_level_data:Dictionary = {
 		"level_song": "res://assets/sounds/synthwavehouse.ogg",
 		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
 		"song_volume": 0.0,
-		"ambient_volume": 0.5
+		"ambient_volume": 0.0
 	},
 	"res://scenes/levels/level_02.tscn":{
 		"name": "",

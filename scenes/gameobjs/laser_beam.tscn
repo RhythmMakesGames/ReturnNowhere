@@ -6,7 +6,7 @@
 [node name="LaserBeam" type="Line2D"]
 z_index = -1
 points = PackedVector2Array(0, 0, 32, 0)
-width = 5.0
+width = 3.0
 texture = ExtResource("1_p7xq5")
 texture_mode = 1
 script = ExtResource("1_h2ir0")
