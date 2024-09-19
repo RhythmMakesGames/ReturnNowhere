@@ -61,42 +61,16 @@ func _input(_event: InputEvent) -> void:
 # HUD gets name from the scene root if not provided
 var default_level_data:Dictionary = {
 	"res://scenes/levels/level_01.tscn":{
-		"name": "",
+		"name": "Getting Started",
 		"best_time": 0.0,
 		"unlocked": true,
-		"unlocks": "res://scenes/levels/level_02.tscn",
+		"unlocks": "",
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 1,
 		"level_song": "res://assets/sounds/synthwavehouse.ogg",
 		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
 		"song_volume": 0.0,
-		"ambient_volume": 0.0
-	},
-	"res://scenes/levels/level_02.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "res://scenes/levels/level_03.tscn",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0,
-		"level_song": "res://assets/sounds/synthwavehouse.ogg",
-		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
-		"song_volume": 0.0,
-		"ambient_volume": 0.0
-	},
-	"res://scenes/levels/level_03.tscn":{
-		"name": "",
-		"best_time": 0.0,
-		"unlocked": false,
-		"unlocks": "",
-		"completed": false,
-		"coins_collected": 0,
-		"coins_total": 0,
-		"level_song": "",
-		"level_ambient": "",
-		"song_volume": 0.0,
-		"ambient_volume": 0.0
+		"ambient_volume": 0.25
 	}
 }

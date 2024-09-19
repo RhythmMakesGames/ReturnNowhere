@@ -10,6 +10,8 @@ extends Path2D
 var animation_name = "move"
 
 
+# make sure to only move the platform using transform
+# and the initial curve points should be at origin
 func _ready() -> void:
 	if not loop:
 		# because 2 is the duration of our move animation

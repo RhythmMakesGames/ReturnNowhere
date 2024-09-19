@@ -6,6 +6,7 @@ signal player_died
 @export var enable_debug_controls = false
 var enable_god_mode = false
 var enable_no_clip = false
+@onready var default_z_index = z_index
 
 #var enable_infinite_jump = false
 
@@ -283,8 +284,10 @@ func debug_controls():
 		disable_physics = !disable_physics
 		if enable_no_clip:
 			print("No clip enabled.")
+			z_index = 5
 		else:
 			print("No clip disabled.")
+			z_index = default_z_index
 
 
 func handle_ground_state_physics(delta):

@@ -240,10 +240,8 @@ sources/1 = SubResource("TileSetAtlasSource_bepcp")
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource("TileSet_apeod")
 format = 2
-layer_0/name = "center"
-layer_1/name = "back"
-layer_1/z_index = -3
+layer_0/name = "back"
+layer_0/z_index = -3
+layer_1/name = "front"
+layer_1/z_index = 3
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "front"
-layer_2/z_index = 3
-layer_2/tile_data = PackedInt32Array()

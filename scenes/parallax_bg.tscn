@@ -88,13 +88,21 @@ centered = false
 region_rect = Rect2(0, 80, 160, 80)
 
 [node name="Fog_layer" type="ParallaxLayer" parent="."]
-visible = false
-modulate = Color(0.305882, 0.341176, 0.411765, 0.588235)
 motion_scale = Vector2(0, 0)
 
-[node name="ColorRect" type="ColorRect" parent="Fog_layer"]
+[node name="BackgroundFog" type="ColorRect" parent="Fog_layer"]
 offset_right = 640.0
 offset_bottom = 360.0
+color = Color(0.305882, 0.341176, 0.411765, 0.235294)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Fog_layer"]
+layer = 0
+visible = false
+
+[node name="ForegroundFog" type="ColorRect" parent="Fog_layer/CanvasLayer"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.305882, 0.341176, 0.411765, 0.235294)
 
 [node name="Bin" type="Node" parent="."]
 

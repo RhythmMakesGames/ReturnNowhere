@@ -59,7 +59,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# pulsate effect
 	#if randi_range(0, 4) == 3:
-	width = 3 + randf_range(0, 2)
+	width = 2 + randf_range(0, 2)
 
 
 func _physics_process(delta: float) -> void:
