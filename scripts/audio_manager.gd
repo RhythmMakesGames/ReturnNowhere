@@ -32,6 +32,7 @@ const MUSIC_BUS:String = "Music"
 var def_game_vol = 1.0
 var def_music_vol = 0.4
 var def_sfx_vol = 1.0
+#var def_music_vol = 0.0
 
 # these buses allow us to change vol separate from the ui sliders, or audioplayer's volume_db
 # this allows us to define different volume or effects for each level's music/ambient 

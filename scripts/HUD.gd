@@ -55,9 +55,12 @@ func _input(_event: InputEvent) -> void:
 # save count to level data
 func on_coin_collected():
 	collected_coins += 1
-	var path = current_scene.scene_file_path
-	if GameManager.level_data[path]["coins_collected"] < collected_coins:
-		GameManager.level_data[path]["coins_collected"] = collected_coins
 	
 	# update HUD
 	collected_label.text = "%d/%d" % [collected_coins, total_coins]
+
+
+func on_level_complete():
+	var path = current_scene.scene_file_path
+	if GameManager.level_data[path]["coins_collected"] < collected_coins:
+		GameManager.level_data[path]["coins_collected"] = collected_coins

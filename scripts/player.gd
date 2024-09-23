@@ -457,14 +457,14 @@ func die():
 	
 	# may have been a better idea to simply reload the scene on death
 	# this causes some complications (eg. stuck on a level state)
-	reset_player()
+	#reset_player()
 	
 	# play death transition
 	ScreenTransitions.wipe_transition()
 	await ScreenTransitions.transition_halfpoint
 	
 	# reset player only or reload the scene instead
-	#get_tree().reload_current_scene.call_deferred()
+	get_tree().reload_current_scene.call_deferred()
 
 # to how it was at the beginnning of the scene
 func reset_player():

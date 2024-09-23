@@ -15,11 +15,11 @@ func _ready() -> void:
 
 func _on_start_button_pressed() -> void:
 	# runs latest unlocked level (make sure that level 1 is unlocked)
+	AudioManager.play_sound_effect(AudioManager.MENU_CLICK_2)
+	ScreenTransitions.fade_transition()
+	GameManager.scene_change_started.emit(GameManager.current_level)
+	await ScreenTransitions.transition_halfpoint
 	if GameManager.current_level != "":
-		AudioManager.play_sound_effect(AudioManager.MENU_CLICK_2)
-		ScreenTransitions.fade_transition()
-		GameManager.scene_change_started.emit(GameManager.current_level)
-		await ScreenTransitions.transition_halfpoint
 		get_tree().change_scene_to_file(GameManager.current_level)
 
 

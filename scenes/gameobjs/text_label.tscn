@@ -11,6 +11,7 @@ content_margin_bottom = 2.0
 [sub_resource type="LabelSettings" id="LabelSettings_m6awr"]
 font = ExtResource("1_uucfy")
 font_size = 14
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="TextLabel" type="Label"]
 z_index = 5

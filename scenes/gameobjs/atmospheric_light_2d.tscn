@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4o4heyrng21"]
+
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="1_1wvse"]
+
+[node name="AtmosphericLight2D" type="PointLight2D"]
+z_index = 3
+energy = 0.2
+texture = ExtResource("1_1wvse")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.0980392)
+texture = ExtResource("1_1wvse")

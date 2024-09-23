@@ -14,3 +14,5 @@ metadata/_edit_group_ = true
 [node name="GradientOverlay" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0.392157, 0.392157)
 texture = ExtResource("2_88avf")
+
+[node name="LampHead" type="Polygon2D" parent="."]
