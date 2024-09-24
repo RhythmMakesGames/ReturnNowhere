@@ -77,12 +77,25 @@ var default_level_data:Dictionary = {
 		"name": "Moving Platforms",
 		"best_time": 0.0,
 		"unlocked": false,
-		"unlocks": "",
+		"unlocks": "res://scenes/levels/level_03.tscn",
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 2,
 		"level_song": "res://assets/sounds/synthwavehouse.ogg",
 		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.25
+	},
+		"res://scenes/levels/level_03.tscn":{
+		"name": "Lasers",
+		"best_time": 0.0,
+		"unlocked": false,
+		"unlocks": "",
+		"completed": false,
+		"coins_collected": 0,
+		"coins_total": 2,
+		"level_song": "res://assets/sounds/synthwavehouse.ogg",
+		"level_ambient": "res://assets/sounds/rooftop_rain.mp3",
 		"song_volume": 0.0,
 		"ambient_volume": 0.25
 	}

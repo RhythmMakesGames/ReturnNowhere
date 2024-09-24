@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4gvigkhxmo1i"]
+[gd_scene load_steps=21 format=3 uid="uid://b4gvigkhxmo1i"]
 
 [ext_resource type="PackedScene" uid="uid://3nu6e6jshlqs" path="res://scenes/level.tscn" id="1_trc82"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_4gqbr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://4dy5twa458gc" path="res://scenes/gameobjs/spikes/spike_single.tscn" id="10_qr3v3"]
 [ext_resource type="PackedScene" uid="uid://2cvkpuxw4x1i" path="res://scenes/gameobjs/text_label.tscn" id="11_w6few"]
 [ext_resource type="PackedScene" uid="uid://bvg2imwul6pvv" path="res://scenes/gameobjs/immovable_block.tscn" id="12_cb1ka"]
+[ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="13_8rfd6"]
 
 [sub_resource type="Curve2D" id="Curve2D_6sref"]
 _data = {
@@ -98,18 +99,12 @@ position = Vector2(0, 400)
 [node name="Lights" parent="." index="9"]
 metadata/_edit_group_ = true
 
-[node name="AtmosphericLight2D" parent="Lights" index="0"]
+[node name="AtmosphericLight" parent="Lights" index="0"]
 visible = false
-position = Vector2(107, 231)
-scale = Vector2(2, 2)
-color = Color(0.482353, 0.392157, 1, 1)
-
-[node name="Sprite2D" parent="Lights/AtmosphericLight2D" index="0"]
-modulate = Color(0.482353, 0.392157, 1, 0.0980392)
 
 [node name="AtmosphericLight2D4" type="PointLight2D" parent="Lights" index="1"]
 z_index = 3
-position = Vector2(96, 411)
+position = Vector2(87, 391)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -117,12 +112,12 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D4" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
 [node name="AtmosphericLight2D5" type="PointLight2D" parent="Lights" index="2"]
 z_index = 3
-position = Vector2(405, 368)
+position = Vector2(457, 366)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -130,12 +125,12 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D5" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
 [node name="AtmosphericLight2D6" type="PointLight2D" parent="Lights" index="3"]
 z_index = 3
-position = Vector2(877, 386)
+position = Vector2(935, 401)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -143,12 +138,12 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D6" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
 [node name="AtmosphericLight2D9" type="PointLight2D" parent="Lights" index="4"]
 z_index = 3
-position = Vector2(1463, 349)
+position = Vector2(1545, 385)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -156,27 +151,14 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D9" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D10" type="PointLight2D" parent="Lights" index="5"]
-z_index = 3
-position = Vector2(1701, 344)
-scale = Vector2(2, 2)
-color = Color(1, 0, 0.490196, 1)
-energy = 0.2
-texture = ExtResource("2_4gqbr")
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D10" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
-texture = ExtResource("2_4gqbr")
-
-[node name="AtmosphericLight2D11" type="PointLight2D" parent="Lights" index="6"]
+[node name="AtmosphericLight2D11" type="PointLight2D" parent="Lights" index="5"]
 z_index = 3
 position = Vector2(1619, 148)
 color = Color(1, 0, 0.490196, 1)
-energy = 0.1
+energy = 0.2
 texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
@@ -184,9 +166,9 @@ metadata/_edit_group_ = true
 modulate = Color(1, 0, 0.490196, 0.0784314)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D13" type="PointLight2D" parent="Lights" index="7"]
+[node name="AtmosphericLight2D13" type="PointLight2D" parent="Lights" index="6"]
 z_index = 3
-position = Vector2(1913, 219)
+position = Vector2(1896, 244)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -194,25 +176,24 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D13" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D14" type="PointLight2D" parent="Lights" index="8"]
+[node name="AtmosphericLight2D14" type="PointLight2D" parent="Lights" index="7"]
 z_index = 3
-position = Vector2(2058, 357)
-scale = Vector2(2, 2)
+position = Vector2(2058, 353)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
 texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D14" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D15" type="PointLight2D" parent="Lights" index="9"]
+[node name="AtmosphericLight2D15" type="PointLight2D" parent="Lights" index="8"]
 z_index = 3
-position = Vector2(2536, 383)
+position = Vector2(2542, 391)
 scale = Vector2(2, 2)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
@@ -220,13 +201,12 @@ texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D15" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D18" type="PointLight2D" parent="Lights" index="10"]
+[node name="AtmosphericLight2D18" type="PointLight2D" parent="Lights" index="9"]
 z_index = 3
-position = Vector2(2807, -60)
-scale = Vector2(2, 2)
+position = Vector2(2889, 5)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
 texture = ExtResource("2_4gqbr")
@@ -236,10 +216,9 @@ metadata/_edit_group_ = true
 modulate = Color(1, 0, 0.490196, 0.0784314)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D19" type="PointLight2D" parent="Lights" index="11"]
+[node name="AtmosphericLight2D19" type="PointLight2D" parent="Lights" index="10"]
 z_index = 3
-position = Vector2(3018, 217)
-scale = Vector2(2, 2)
+position = Vector2(3019, 241)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
 texture = ExtResource("2_4gqbr")
@@ -249,23 +228,21 @@ metadata/_edit_group_ = true
 modulate = Color(1, 0, 0.490196, 0.0784314)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D21" type="PointLight2D" parent="Lights" index="12"]
+[node name="AtmosphericLight2D21" type="PointLight2D" parent="Lights" index="11"]
 z_index = 3
-position = Vector2(3195, 385)
-scale = Vector2(2, 2)
+position = Vector2(3207, 396)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
 texture = ExtResource("2_4gqbr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D21" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+modulate = Color(1, 0, 0.490196, 0.0980392)
 texture = ExtResource("2_4gqbr")
 
-[node name="AtmosphericLight2D22" type="PointLight2D" parent="Lights" index="13"]
+[node name="AtmosphericLight2D22" type="PointLight2D" parent="Lights" index="12"]
 z_index = 3
-position = Vector2(3568, 370)
-scale = Vector2(2, 2)
+position = Vector2(3563, 332)
 color = Color(1, 0, 0.490196, 1)
 energy = 0.2
 texture = ExtResource("2_4gqbr")
@@ -273,19 +250,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D22" index="0"]
 modulate = Color(1, 0, 0.490196, 0.0784314)
-texture = ExtResource("2_4gqbr")
-
-[node name="AtmosphericLight2D23" type="PointLight2D" parent="Lights" index="14"]
-z_index = 3
-position = Vector2(3570, 79)
-scale = Vector2(2, 2)
-color = Color(1, 0, 0.490196, 1)
-energy = 0.2
-texture = ExtResource("2_4gqbr")
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight2D23" index="0"]
-modulate = Color(1, 0, 0.490196, 0.0784314)
+position = Vector2(-4, 32)
 texture = ExtResource("2_4gqbr")
 
 [node name="Node" type="Node" parent="." index="10"]
@@ -405,4 +370,8 @@ Aren't you?"
 [node name="SpikeSingle" parent="." index="15" instance=ExtResource("10_qr3v3")]
 position = Vector2(2849, -6)
 
-[editable path="Lights/AtmosphericLight2D"]
+[node name="SendToLevel" parent="." index="16" instance=ExtResource("13_8rfd6")]
+position = Vector2(3370, 350)
+target_level_path = "res://scenes/levels/level_03.tscn"
+
+[editable path="Lights/AtmosphericLight"]

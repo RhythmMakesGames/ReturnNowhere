@@ -35,6 +35,7 @@ var fade_duration:float = 0.07
 
 # fix chopped laser at collision point
 var line_overlap = 1.4
+var player_was_hit = false
 
 
 func _ready() -> void:
@@ -81,9 +82,12 @@ func collision_check():
 		set_point_position(1, collision_point + collision_point.normalized() * line_overlap )
 		
 		if collider.is_in_group(player_group):
-			if is_laser_activated:
+			if is_laser_activated && !player_was_hit:
+				player_was_hit = true
 				collider.die()
 				AudioManager.play_sound_effect(AudioManager.LASER)
+		else:
+			player_was_hit = false
 	else:
 		# rotated raycast is the vector from p0 to new_p1 = new_p1 - p0
 		set_point_position(1,\
