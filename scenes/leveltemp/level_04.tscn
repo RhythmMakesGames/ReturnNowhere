@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_uw6wg"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_4sjrj"]
-[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="2_tmerf"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmospheric_light.png" id="2_tmerf"]
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="3_06eb6"]
 [ext_resource type="AudioStream" uid="uid://dywiyqtvrrp2c" path="res://assets/sounds/laser2.mp3" id="4_0vfm4"]
 [ext_resource type="PackedScene" uid="uid://g0roxjonljx1" path="res://scenes/gameobjs/coin.tscn" id="4_55nht"]

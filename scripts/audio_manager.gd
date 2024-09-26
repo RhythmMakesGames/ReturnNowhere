@@ -30,9 +30,9 @@ const MUSIC_BUS:String = "Music"
 # set default values for the sliders
 # a value of 1 is 0 db
 var def_game_vol = 1.0
-var def_music_vol = 0.4
 var def_sfx_vol = 1.0
-#var def_music_vol = 0.0
+#var def_music_vol = 0.4
+var def_music_vol = 0.0
 
 # these buses allow us to change vol separate from the ui sliders, or audioplayer's volume_db
 # this allows us to define different volume or effects for each level's music/ambient 
@@ -108,10 +108,9 @@ func on_scene_changed():
 	if animation_player.is_playing():
 		await animation_player.animation_finished
 		# this line was causing problems with setting volume_db few lines down
-		# because of 0.001 sec delay?
 		#animation_player.play("RESET")
-		music_player.stop()
-		ambient_player.stop()
+	music_player.stop()
+	ambient_player.stop()
 	is_waiting_for_animation = false
 	
 	music_player.volume_db = linear_to_db(1)
@@ -131,8 +130,8 @@ func on_scene_changed():
 			var song_vol:float = GameManager.level_data[scene.scene_file_path]["song_volume"]
 			if song_vol != 0.0:
 				music_player.volume_db = linear_to_db(song_vol)
-		else:
-			music_player.stop()
+			else:
+				music_player.stop()
 			
 		var ambient_path = GameManager.level_data[scene.scene_file_path]["level_ambient"]
 		if ambient_path != "":
@@ -142,8 +141,8 @@ func on_scene_changed():
 			var ambient_vol:float = GameManager.level_data[scene.scene_file_path]["ambient_volume"]
 			if ambient_vol != 0.0:
 				ambient_player.volume_db = linear_to_db(ambient_vol)
-		else:
-			ambient_player.stop()
+			else:
+				ambient_player.stop()
 
 
 func on_paused():

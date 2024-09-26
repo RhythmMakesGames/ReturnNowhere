@@ -14,16 +14,27 @@ var level_data:Dictionary = {}
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	scene_change_started.connect(AudioManager.on_scene_change_started)
-	
+
 	# load level data from previous save file
 	if FileAccess.file_exists(save_path):
-		# load from previous save file
 		var save = FileAccess.open(save_path, FileAccess.READ)
 		var json_string = save.get_line()
 		var json = JSON.new()
 		json.parse(json_string)
 		level_data = json.get_data()
 		save.close()
+		
+		# update loaded level data with new default level data
+		for key in default_level_data:
+			if not level_data.has(key):
+				level_data[key] = default_level_data[key]
+			else:
+				# modify entries that can be ovewritten
+				for entry in level_data[key]:
+					if entry in ["best_time", "unlocked", "completed", "coins_collected"]:
+						continue
+					else:
+						level_data[key][entry] = default_level_data[key][entry]
 	else:
 		# load default level data
 		level_data = default_level_data
@@ -90,12 +101,25 @@ var default_level_data:Dictionary = {
 		"name": "Lasers",
 		"best_time": 0.0,
 		"unlocked": false,
-		"unlocks": "",
+		"unlocks": "res://scenes/levels/level_04.tscn",
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 2,
 		"level_song": "res://assets/sounds/synthwavehouse.ogg",
 		"level_ambient": "res://assets/sounds/rooftop_rain.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.25
+	},
+	"res://scenes/levels/level_04.tscn":{
+		"name": "Falling Spikes",
+		"best_time": 0.0,
+		"unlocked": false,
+		"unlocks": "",
+		"completed": false,
+		"coins_collected": 0,
+		"coins_total": 1,
+		"level_song": "res://assets/sounds/caller.mp3",
+		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
 		"song_volume": 0.0,
 		"ambient_volume": 0.25
 	}

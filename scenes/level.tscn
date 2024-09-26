@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://3nu6e6jshlqs"]
+[gd_scene load_steps=16 format=3 uid="uid://3nu6e6jshlqs"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_7dlpl"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_q0s7c"]
 [ext_resource type="PackedScene" uid="uid://dqqg1jo5sr6hm" path="res://scenes/parallax_bg.tscn" id="3_kwrwm"]
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
 [ext_resource type="PackedScene" uid="uid://hlxf2vgaai2k" path="res://scenes/hud.tscn" id="4_6c0lb"]
-[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmosphericlight.png" id="6_t1qco"]
-[ext_resource type="PackedScene" uid="uid://x4o4heyrng21" path="res://scenes/gameobjs/atmospheric_light_2d.tscn" id="7_n41t7"]
+[ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmospheric_light.png" id="6_t1qco"]
 
 [sub_resource type="Gradient" id="Gradient_7dh24"]
 colors = PackedColorArray(0.541176, 0.603922, 0.74902, 1, 0.958803, 0.94874, 0.997136, 1)
@@ -150,6 +149,13 @@ metadata/_edit_lock_ = true
 [node name="Lights" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="AtmosphericLight" parent="Lights" instance=ExtResource("7_n41t7")]
+[node name="AtmosphericLight" type="PointLight2D" parent="Lights"]
+visible = false
+z_index = 3
+energy = 0.2
+texture = ExtResource("6_t1qco")
+metadata/_edit_group_ = true
 
-[editable path="Lights/AtmosphericLight"]
+[node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
+modulate = Color(1, 1, 1, 0.0980392)
+texture = ExtResource("6_t1qco")
