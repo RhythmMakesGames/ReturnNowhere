@@ -41,13 +41,10 @@ motion_scale = Vector2(0.2, 0.1)
 visible = false
 
 [node name="WorldDeathBarrier" parent="." index="7" instance=ExtResource("2_sjh21")]
-position = Vector2(0, 400)
+position = Vector2(0, 500)
 
 [node name="Lights" parent="." index="8"]
 metadata/_edit_group_ = true
-
-[node name="AtmosphericLight" parent="Lights" index="0"]
-visible = false
 
 [node name="AtmosphericLight2D2" type="PointLight2D" parent="Lights" index="1"]
 z_index = 3
@@ -290,5 +287,4 @@ position = Vector2(1727, 274)
 position = Vector2(1571, 9)
 
 [editable path="ParallaxBackground"]
-[editable path="Lights/AtmosphericLight"]
 [editable path="StreetLight"]

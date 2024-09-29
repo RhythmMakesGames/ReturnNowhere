@@ -15,20 +15,18 @@ var player_group = "Player"
 @onready var initial_position = position
 @onready var is_disabled = false
 
-#@export var reset_after_player_death = true
+@export var reset_at_player_respawn = true
 @onready var respawn_timer = $RespawnTimer
 
 
 func _ready() -> void:
 	#var player = $"../Player"
 	
-	# decided to simply reload the scene on player death
-	# rather than keeping the current scene and objects where they are
-	
-	#var player = get_tree().current_scene.get_node("Player")
+	# to reset player if using checkpoints
+	var player = get_tree().current_scene.get_node("Player")
 	#if player == null:
 		#player = get_tree().current_scene.find_child("Player")
-	#player.player_died.connect(_on_player_died)
+	player.player_respawn.connect(_on_player_respawn)
 	
 	respawn_timer.wait_time = respawn_wait
 
@@ -63,29 +61,19 @@ func _on_activate_zone_body_entered(body: Node2D) -> void:
 		current_speed = speed
 
 
-# not on_reset_player because we reload the level instead
 # triggers 0.1 seconds after body entered
-#func _on_player_died() -> void:
-	# # don't reload spike immediately, let camera/player reset?
-	#await get_tree().create_timer(0.5).timeout
-	#
-	#if is_disabled && reset_after_player_death:
-		#reset_item()
+func _on_player_respawn() -> void:
+	#return # reloading level on player death
+	 # don't reload spike immediately, let camera/player reset?
+	await get_tree().create_timer(0.5).timeout
+	
+	if is_disabled && reset_at_player_respawn:
+		reset_item()
 
 
 func _on_respawn_timer_timeout() -> void:
 	if is_disabled:
-		#reset_item()
-		respawn_timer.stop()
-		position = initial_position
-		#print("reset spike position")
-		$CollisionPolygon2D.set_deferred("disabled", false)
-		$ActivateZone/CollisionShape2D.set_deferred("disabled", false)
-		visible = true
-		is_disabled = false
-		current_speed = 0
-		
-		set_physics_process(true)
+		reset_item()
 
 
 func disable_or_respawn():
@@ -101,8 +89,17 @@ func disable_or_respawn():
 		respawn_timer.start()
 
 
-#func reset_item() -> void:
-	#pass
+func reset_item() -> void:
+	respawn_timer.stop()
+	position = initial_position
+	#print("reset spike position")
+	$CollisionPolygon2D.set_deferred("disabled", false)
+	$ActivateZone/CollisionShape2D.set_deferred("disabled", false)
+	visible = true
+	is_disabled = false
+	current_speed = 0
+	
+	set_physics_process(true)
 
 
 func disable_item():

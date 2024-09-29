@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhb0lmn3b1r8v"]
+[gd_scene load_steps=19 format=3 uid="uid://dhb0lmn3b1r8v"]
 
 [ext_resource type="PackedScene" uid="uid://3nu6e6jshlqs" path="res://scenes/level.tscn" id="1_eyhb2"]
 [ext_resource type="Texture2D" uid="uid://brg553uxoordm" path="res://assets/sprites/gradient_neutral_point_light.png" id="2_6ym0e"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://2cvkpuxw4x1i" path="res://scenes/gameobjs/text_label.tscn" id="11_3sh64"]
 [ext_resource type="PackedScene" uid="uid://j7lxaoaejouc" path="res://scenes/gameobjs/moving_platform.tscn" id="11_m7f8n"]
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="13_tkcec"]
+[ext_resource type="PackedScene" uid="uid://38yn486v7ekr" path="res://scenes/gameobjs/checkpoint.tscn" id="16_ddcfh"]
 
 [sub_resource type="Environment" id="Environment_too06"]
 background_mode = 3
@@ -46,7 +47,6 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." index="1"]
-position = Vector2(88, 350)
 enable_debug_controls = true
 
 [node name="DefaultCamera2D" parent="Player" index="12"]
@@ -371,24 +371,24 @@ text = "wait how?!!"
 [node name="Coin2" parent="." index="13" instance=ExtResource("3_q00jl")]
 position = Vector2(2610, 50)
 
-[node name="Node" type="Node" parent="." index="14"]
+[node name="WorldDeathBarrier" parent="." index="14" instance=ExtResource("8_1bovf")]
+position = Vector2(0, 500)
 
-[node name="WorldDeathBarrier" parent="Node" index="0" instance=ExtResource("8_1bovf")]
-position = Vector2(0, 400)
+[node name="Node" type="Node" parent="." index="15"]
 
-[node name="ImmovableBlock" parent="Node" index="1" instance=ExtResource("8_qrn1o")]
+[node name="ImmovableBlock" parent="Node" index="0" instance=ExtResource("8_qrn1o")]
 position = Vector2(810, 350)
 
-[node name="Spikes" parent="Node" index="2" instance=ExtResource("4_ir012")]
+[node name="Spikes" parent="Node" index="1" instance=ExtResource("4_ir012")]
 position = Vector2(519, 354)
 
-[node name="SpikeSingle" parent="Node" index="3" instance=ExtResource("6_0t70i")]
+[node name="SpikeSingle" parent="Node" index="2" instance=ExtResource("6_0t70i")]
 position = Vector2(607, 354)
 
-[node name="SpikeSingleDown" parent="Node" index="4" instance=ExtResource("6_vs2ev")]
+[node name="SpikeSingleDown" parent="Node" index="3" instance=ExtResource("6_vs2ev")]
 position = Vector2(654, 326)
 
-[node name="LaserBeam" parent="Node" index="5" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam" parent="Node" index="4" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1060, 237)
 points = PackedVector2Array(0, 0, -35, 128)
@@ -396,21 +396,21 @@ initial_wait = 2.0
 discontinuous = true
 cooldown_period = 0.8
 
-[node name="LaserBeam2" parent="Node" index="6" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam2" parent="Node" index="5" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1160, 238)
 points = PackedVector2Array(0, 0, 56, 124)
 discontinuous = true
 cooldown_period = 0.8
 
-[node name="LaserBeam3" parent="Node" index="7" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam3" parent="Node" index="6" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1525, 344)
 points = PackedVector2Array(0, 0, -270, 0)
 discontinuous = true
 cooldown_period = 0.8
 
-[node name="LaserBeam4" parent="Node" index="8" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam4" parent="Node" index="7" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1680, 236)
 points = PackedVector2Array(0, 0, -14, 132)
@@ -419,7 +419,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam5" parent="Node" index="9" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam5" parent="Node" index="8" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1721, 232)
 points = PackedVector2Array(0, 0, -1, 131)
@@ -428,7 +428,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam6" parent="Node" index="10" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam6" parent="Node" index="9" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1779, 237)
 points = PackedVector2Array(0, 0, -21, 128)
@@ -437,7 +437,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam7" parent="Node" index="11" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam7" parent="Node" index="10" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1807, 236)
 points = PackedVector2Array(0, 0, 17, 128)
@@ -446,7 +446,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam8" parent="Node" index="12" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam8" parent="Node" index="11" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1862, 236)
 points = PackedVector2Array(0, 0, 8, 131)
@@ -455,7 +455,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam9" parent="Node" index="13" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam9" parent="Node" index="12" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1916, 238)
 points = PackedVector2Array(0, 0, -3, 126)
@@ -464,7 +464,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam10" parent="Node" index="14" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam10" parent="Node" index="13" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(1968, 236)
 points = PackedVector2Array(0, 0, -5, 130)
@@ -473,7 +473,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam11" parent="Node" index="15" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam11" parent="Node" index="14" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(2013, 237)
 points = PackedVector2Array(0, 0, 15, 129)
@@ -482,7 +482,7 @@ discontinuous = true
 emit_period = 1.0
 cooldown_period = 0.7
 
-[node name="LaserBeam12" parent="Node" index="16" instance=ExtResource("7_30mc5")]
+[node name="LaserBeam12" parent="Node" index="15" instance=ExtResource("7_30mc5")]
 modulate = Color(5, 0, 0, 1)
 position = Vector2(2638, 71)
 points = PackedVector2Array(0, 0, 500, 0)
@@ -490,32 +490,36 @@ discontinuous = true
 emit_period = 0.2
 cooldown_period = 0.5
 
-[node name="ImmovableBlock2" parent="Node" index="17" instance=ExtResource("8_qrn1o")]
+[node name="ImmovableBlock2" parent="Node" index="16" instance=ExtResource("8_qrn1o")]
 position = Vector2(3213, 350)
 
-[node name="ImmovableBlock3" parent="Node" index="18" instance=ExtResource("8_qrn1o")]
+[node name="ImmovableBlock3" parent="Node" index="17" instance=ExtResource("8_qrn1o")]
 position = Vector2(3233, 350)
 
-[node name="ImmovableBlock4" parent="Node" index="19" instance=ExtResource("8_qrn1o")]
+[node name="ImmovableBlock4" parent="Node" index="18" instance=ExtResource("8_qrn1o")]
 position = Vector2(3227, 330)
 
-[node name="ImmovableBlock5" parent="Node" index="20" instance=ExtResource("8_qrn1o")]
+[node name="ImmovableBlock5" parent="Node" index="19" instance=ExtResource("8_qrn1o")]
 position = Vector2(3145, 70)
 
-[node name="MovingPlatform" parent="." index="15" instance=ExtResource("11_m7f8n")]
+[node name="MovingPlatform" parent="Node" index="20" instance=ExtResource("11_m7f8n")]
 modulate = Color(2.5, 2.5, 12, 1)
 position = Vector2(2307, 371)
 curve = SubResource("Curve2D_cv7tp")
 
-[node name="SpikeTwo" parent="." index="16" instance=ExtResource("10_1euvl")]
+[node name="SpikeTwo" parent="Node" index="21" instance=ExtResource("10_1euvl")]
 position = Vector2(3144, 354)
 
-[node name="SpikeTwo2" parent="." index="17" instance=ExtResource("10_1euvl")]
+[node name="SpikeTwo2" parent="Node" index="22" instance=ExtResource("10_1euvl")]
 position = Vector2(3500, 154)
 
-[node name="SendToLevel" parent="." index="18" instance=ExtResource("13_tkcec")]
+[node name="SendToLevel" parent="Node" index="23" instance=ExtResource("13_tkcec")]
 position = Vector2(4790, 287)
 scale = Vector2(1, 8)
 target_level_path = "res://scenes/levels/level_04.tscn"
+
+[node name="Checkpoint" parent="." index="16" instance=ExtResource("16_ddcfh")]
+position = Vector2(2239, 302)
+scale = Vector2(1, 5)
 
 [editable path="StreetLight"]

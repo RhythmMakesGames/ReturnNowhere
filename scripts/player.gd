@@ -2,6 +2,7 @@ extends CharacterBody2D
 #class_name Player
 
 signal player_died
+signal player_respawn
 
 @export var enable_debug_controls = false
 var enable_god_mode = false
@@ -12,6 +13,7 @@ var enable_no_clip = false
 
 var disable_physics:bool = false
 @onready var spawn_position = Vector2(position.x, position.y)
+@onready var checkpoint_position:Vector2 = spawn_position
 
 ## for stair/obstacle stepping
 @onready var raycast_step_top = $StepTop as RayCast2D
@@ -234,6 +236,7 @@ func _physics_process(delta: float) -> void:
 
 func handle_inputs():
 	if Input.is_action_just_pressed("restart_level"):
+		if is_dead: return
 		ScreenTransitions.fade_transition()
 		await ScreenTransitions.transition_halfpoint
 		if get_tree().current_scene != null:
@@ -258,9 +261,9 @@ func handle_inputs():
 
 func debug_controls():
 	# Reset player position for testing: press 4
-	if Input.is_action_just_pressed("debug_reset_player"):
-		reset_player()
-		print("Player position was reset.")
+	if Input.is_action_just_pressed("debug_teleport_to_spawn"):
+		position = spawn_position
+		print("Player was teleported to level spawn.")
 		
 	# toggle god mode
 	if Input.is_action_just_pressed("debug_toggle_godmode"):
@@ -448,7 +451,7 @@ func die():
 	
 	# particles remain for a while
 	torch.visible = false
-	disable_movement_controls()
+	disable_physics = true
 	await get_tree().create_timer(0.1).timeout
 	death_particles.emitting = false
 	
@@ -457,25 +460,19 @@ func die():
 	
 	# may have been a better idea to simply reload the scene on death
 	# this causes some complications (eg. stuck on a level state)
-	#reset_player()
+	respawn_player_at_checkpoint()
 	
 	# play death transition
 	ScreenTransitions.wipe_transition()
 	await ScreenTransitions.transition_halfpoint
 	
 	# reset player only or reload the scene instead
-	get_tree().reload_current_scene.call_deferred()
-
-# to how it was at the beginnning of the scene
-func reset_player():
-	current_state = STATES.IN_AIR
-	position = spawn_position
-	velocity = Vector2(0, 0)
+	#get_tree().reload_current_scene.call_deferred()
+	#return
 	
 	# fixes the bug where the collisionshape is still seemingly active while disabled
 	# and activates area2d's and falling spikes etc. to die again eg. after falling through a tilemap
-	await get_tree().create_timer(0.01).timeout
-	
+	await get_tree().create_timer(0.01).timeout # not needed now
 	$CollisionShape2D.set_deferred("disabled", false)
 	
 	player_sprite.modulate = default_color
@@ -483,8 +480,25 @@ func reset_player():
 	torch.visible = true
 	is_dead = false
 	
-	enable_movement_controls()
+	disable_physics = false
+	
+	# fix debug conflicts
+	if enable_no_clip: disable_physics = true
+
+
+func set_checkpoint_at_position():
+	checkpoint_position = position
+
+
+# to how it was at the beginnning of the scene
+func respawn_player_at_checkpoint():
+	current_state = STATES.IN_AIR
+	#position = spawn_position
+	velocity = Vector2(0, 0)
+	position = checkpoint_position
+	
 	$DefaultCamera2D.reset_smoothing()
+	player_respawn.emit()
 
 
 func disable_movement_controls():

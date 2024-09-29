@@ -12,13 +12,13 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var move_sound_player: AudioStreamPlayer = $MoveSoundPlayer
 var was_on_floor = true
 
-#@export var reset_after_player_death = false
+@export var reset_at_player_respawn = false
 @onready var initial_position = position
 
 
 func _ready() -> void:
 	var player = get_tree().current_scene.get_node("Player")
-	player.player_died.connect(_on_player_died)
+	player.player_respawn.connect(_on_player_respawn)
 
 
 func _physics_process(delta: float) -> void:
@@ -70,7 +70,6 @@ func _on_right_push_zone_body_exited(body: Node2D) -> void:
 		is_getting_pushed = false
 
 
-func _on_player_died():
-	pass
-	#if reset_after_player_death:
-		#position = initial_position
+func _on_player_respawn():
+	if reset_at_player_respawn:
+		position = initial_position

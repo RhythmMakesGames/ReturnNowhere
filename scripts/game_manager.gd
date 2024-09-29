@@ -70,6 +70,7 @@ func _input(_event: InputEvent) -> void:
 
 
 # HUD gets name from the scene root if not provided
+# song/ambient volume is set to max if not non-zero
 var default_level_data:Dictionary = {
 	"res://scenes/levels/level_01.tscn":{
 		"name": "Getting Started",
@@ -112,6 +113,19 @@ var default_level_data:Dictionary = {
 	},
 	"res://scenes/levels/level_04.tscn":{
 		"name": "Falling Spikes",
+		"best_time": 0.0,
+		"unlocked": false,
+		"unlocks": "res://scenes/levels/level_05.tscn",
+		"completed": false,
+		"coins_collected": 0,
+		"coins_total": 1,
+		"level_song": "res://assets/sounds/caller.mp3",
+		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.25
+	},
+	"res://scenes/levels/level_05.tscn":{
+		"name": "Trampolines",
 		"best_time": 0.0,
 		"unlocked": false,
 		"unlocks": "",

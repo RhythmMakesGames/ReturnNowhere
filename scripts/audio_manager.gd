@@ -14,6 +14,7 @@ const TRAMPOLINE:AudioStream = preload("res://assets/sounds/trampoline.mp3")
 const LASER:AudioStream = preload("res://assets/sounds/laser2.mp3")
 const LAND_DEFAULT:AudioStream = preload("res://assets/sounds/land.mp3")
 const WOOD_BOX_DROP:AudioStream = preload("res://assets/sounds/wood_box_drop.mp3")
+const CHECK_POINT_SAVED:AudioStream = preload("res://assets/sounds/checkpoint.mp3")
 
 const SFX_BUS:String = "SFX"
 const MUSIC_BUS:String = "Music"
@@ -130,8 +131,8 @@ func on_scene_changed():
 			var song_vol:float = GameManager.level_data[scene.scene_file_path]["song_volume"]
 			if song_vol != 0.0:
 				music_player.volume_db = linear_to_db(song_vol)
-			else:
-				music_player.stop()
+			#else:
+				#music_player.stop()
 			
 		var ambient_path = GameManager.level_data[scene.scene_file_path]["level_ambient"]
 		if ambient_path != "":
@@ -141,8 +142,8 @@ func on_scene_changed():
 			var ambient_vol:float = GameManager.level_data[scene.scene_file_path]["ambient_volume"]
 			if ambient_vol != 0.0:
 				ambient_player.volume_db = linear_to_db(ambient_vol)
-			else:
-				ambient_player.stop()
+			#else:
+				#ambient_player.stop()
 
 
 func on_paused():

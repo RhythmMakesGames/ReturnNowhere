@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://3nu6e6jshlqs"]
+[gd_scene load_steps=18 format=3 uid="uid://3nu6e6jshlqs"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_7dlpl"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_q0s7c"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dvkdvx0lb5hp0" path="res://scenes/tilemap.tscn" id="3_st2g3"]
 [ext_resource type="PackedScene" uid="uid://hlxf2vgaai2k" path="res://scenes/hud.tscn" id="4_6c0lb"]
 [ext_resource type="Texture2D" uid="uid://cbjhhkl0onqbv" path="res://assets/sprites/gradient_atmospheric_light.png" id="6_t1qco"]
+[ext_resource type="Texture2D" uid="uid://brg553uxoordm" path="res://assets/sprites/gradient_neutral_point_light.png" id="7_k8v4i"]
+[ext_resource type="Texture2D" uid="uid://brgn7wocfgsa6" path="res://assets/sprites/gradient_neutral.png" id="8_o1hkf"]
 
 [sub_resource type="Gradient" id="Gradient_7dh24"]
 colors = PackedColorArray(0.541176, 0.603922, 0.74902, 1, 0.958803, 0.94874, 0.997136, 1)
@@ -60,7 +62,7 @@ glow_blend_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_7dlpl")]
-position = Vector2(217, 214)
+position = Vector2(88, 350)
 metadata/_edit_lock_ = true
 
 [node name="DefaultCamera2D" type="Camera2D" parent="Player"]
@@ -153,9 +155,8 @@ metadata/_edit_lock_ = true
 visible = false
 z_index = 3
 energy = 0.2
-texture = ExtResource("6_t1qco")
+texture = ExtResource("7_k8v4i")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/AtmosphericLight"]
-modulate = Color(1, 1, 1, 0.0980392)
-texture = ExtResource("6_t1qco")
+texture = ExtResource("8_o1hkf")
