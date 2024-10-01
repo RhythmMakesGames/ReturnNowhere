@@ -3,12 +3,13 @@ extends Node
 signal scene_change_started(scene)
 
 var main_menu_scene = preload("res://scenes/menu/ui_main_menu.tscn")
-
 var current_level:String = ""
 var save_path = "user://player_data.save"
 
 # default_level_data is defined at the end of the script
 var level_data:Dictionary = {}
+
+var enable_debug_controls = false
 
 
 func _ready() -> void:
@@ -128,12 +129,25 @@ var default_level_data:Dictionary = {
 		"name": "Trampolines",
 		"best_time": 0.0,
 		"unlocked": false,
-		"unlocks": "",
+		"unlocks": "res://scenes/levels/level_06.tscn",
 		"completed": false,
 		"coins_collected": 0,
 		"coins_total": 1,
 		"level_song": "res://assets/sounds/caller.mp3",
 		"level_ambient": "res://assets/sounds/building-rooftops-ambient-76133.mp3",
+		"song_volume": 0.0,
+		"ambient_volume": 0.25
+	},
+		"res://scenes/levels/level_06.tscn":{
+		"name": "Movable blocks",
+		"best_time": 0.0,
+		"unlocked": false,
+		"unlocks": "",
+		"completed": false,
+		"coins_collected": 0,
+		"coins_total": 2,
+		"level_song": "res://assets/sounds/DOS-88 – Far Away.mp3",
+		"level_ambient": "res://assets/sounds/rooftop_rain.mp3",
 		"song_volume": 0.0,
 		"ambient_volume": 0.25
 	}

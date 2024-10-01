@@ -12,6 +12,10 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var move_sound_player: AudioStreamPlayer = $MoveSoundPlayer
 var was_on_floor = true
 
+## physics is disabled if blocks falls below this height.
+## (positive y is down)
+@export var min_height = 1000
+
 @export var reset_at_player_respawn = false
 @onready var initial_position = position
 
@@ -24,6 +28,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
+		if position.y > min_height:
+			visible = false
+			set_physics_process(false)
 	
 	if is_getting_pushed:
 		velocity.x = pushed_in_direction * delta * move_speed
@@ -72,4 +80,7 @@ func _on_right_push_zone_body_exited(body: Node2D) -> void:
 
 func _on_player_respawn():
 	if reset_at_player_respawn:
+		velocity = Vector2(0,0)
 		position = initial_position
+		visible = true
+		set_physics_process(true)

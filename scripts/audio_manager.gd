@@ -32,8 +32,7 @@ const MUSIC_BUS:String = "Music"
 # a value of 1 is 0 db
 var def_game_vol = 1.0
 var def_sfx_vol = 1.0
-#var def_music_vol = 0.4
-var def_music_vol = 0.0
+var def_music_vol = 0.5
 
 # these buses allow us to change vol separate from the ui sliders, or audioplayer's volume_db
 # this allows us to define different volume or effects for each level's music/ambient 
@@ -82,6 +81,8 @@ func play_ambient(sound):
 
 # fade out music when switched b/w level & menu
 func on_scene_change_started(scene):
+	if scene == null: return
+	
 	var scene_path
 	if scene is String:
 		scene_path = scene
@@ -110,40 +111,43 @@ func on_scene_changed():
 		await animation_player.animation_finished
 		# this line was causing problems with setting volume_db few lines down
 		#animation_player.play("RESET")
-	music_player.stop()
-	ambient_player.stop()
 	is_waiting_for_animation = false
-	
-	music_player.volume_db = linear_to_db(1)
-	ambient_player.volume_db = linear_to_db(1)
 	
 	var scene = get_tree().current_scene
 	if scene == null: return
 	
-	if scene.name == "MainMenu":
-		play_music(MENU_MUSIC)
-	elif scene.name.contains("Level"):
+	if scene.name.contains("Level"):
 		var song_path = GameManager.level_data[scene.scene_file_path]["level_song"]
 		if song_path != "":
 			var song = load(song_path) as AudioStream
-			play_music(song)
+			if song != music_player.stream:
+				play_music(song)
 			
 			var song_vol:float = GameManager.level_data[scene.scene_file_path]["song_volume"]
 			if song_vol != 0.0:
 				music_player.volume_db = linear_to_db(song_vol)
-			#else:
-				#music_player.stop()
+			else:
+				music_player.volume_db = linear_to_db(1)
+		else:
+			music_player.stop()
 			
 		var ambient_path = GameManager.level_data[scene.scene_file_path]["level_ambient"]
 		if ambient_path != "":
 			var ambient = load(ambient_path) as AudioStream
-			play_ambient(ambient)
+			if ambient != ambient_player.stream:
+				play_ambient(ambient)
 			
 			var ambient_vol:float = GameManager.level_data[scene.scene_file_path]["ambient_volume"]
 			if ambient_vol != 0.0:
 				ambient_player.volume_db = linear_to_db(ambient_vol)
-			#else:
-				#ambient_player.stop()
+			else:
+				ambient_player.volume_db = linear_to_db(1)
+		else:
+			ambient_player.stop()
+
+	elif scene.name == "MainMenu":
+		play_music(MENU_MUSIC)
+	#else eg. congrats screen
 
 
 func on_paused():

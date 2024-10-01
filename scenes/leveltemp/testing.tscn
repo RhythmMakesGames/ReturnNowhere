@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cwmehxebcatuo"]
+[gd_scene load_steps=35 format=3 uid="uid://cwmehxebcatuo"]
 
 [ext_resource type="PackedScene" uid="uid://dskkedg0egljf" path="res://scenes/player.tscn" id="1_ggng4"]
 [ext_resource type="Script" path="res://scripts/rain_particles.gd" id="2_5p4tg"]
@@ -14,12 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://dquvb7yosttty" path="res://scenes/gameobjs/spikes/spike_single_down.tscn" id="12_g3v40"]
 [ext_resource type="PackedScene" uid="uid://bvg2imwul6pvv" path="res://scenes/gameobjs/immovable_block.tscn" id="13_5s27i"]
 [ext_resource type="Shader" path="res://scripts/shaders/x_test2.gdshader" id="14_gnbie"]
-[ext_resource type="Texture2D" uid="uid://cmh27j6js1okm" path="res://assets/sprites/test.jpg" id="15_brmtg"]
+[ext_resource type="Texture2D" uid="uid://dd000k2fa4w40" path="res://assets/sprites/tilemap_city.png" id="15_enyrb"]
 [ext_resource type="Shader" path="res://scripts/shaders/x_test1.gdshader" id="16_4jl8f"]
-[ext_resource type="Texture2D" uid="uid://dunv8mejni5o2" path="res://assets/sprites/test_loop.png" id="17_qch2u"]
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="18_fcqbn"]
 [ext_resource type="PackedScene" uid="uid://c47g02voinilm" path="res://scenes/gameobjs/movable_block.tscn" id="19_7kfem"]
-[ext_resource type="Texture2D" uid="uid://ck6gpbilcbuy3" path="res://assets/sprites/coins.png" id="20_8xfmq"]
+[ext_resource type="Texture2D" uid="uid://b3eqjv34hoi8y" path="res://assets/sprites/coins/coin_01.png" id="19_liglt"]
 [ext_resource type="PackedScene" uid="uid://d2dbsdvtv8bol" path="res://scenes/gameobjs/send_to_level.tscn" id="21_jghp4"]
 [ext_resource type="PackedScene" uid="uid://qququp3171jh" path="res://scenes/gameobjs/spikes/spikes.tscn" id="22_ts8p7"]
 [ext_resource type="PackedScene" uid="uid://ccuow7qd3wj8q" path="res://scenes/gameobjs/stone.tscn" id="23_70jww"]
@@ -421,21 +420,19 @@ occluder = SubResource("OccluderPolygon2D_u6seo")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="Bin"]
-visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_cfys4")
 position = Vector2(-189, 242)
-texture = ExtResource("15_brmtg")
+texture = ExtResource("15_enyrb")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Bin"]
-visible = false
 z_index = 5
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ti27y")
 position = Vector2(-429, 180)
 scale = Vector2(2.36875, 2.60556)
-texture = ExtResource("17_qch2u")
+texture = ExtResource("15_enyrb")
 centered = false
 metadata/_edit_lock_ = true
 
@@ -586,7 +583,7 @@ position = Vector2(293, 310)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(489, 211)
-texture = ExtResource("20_8xfmq")
+texture = ExtResource("19_liglt")
 
 [node name="SendToLevel" parent="." instance=ExtResource("21_jghp4")]
 position = Vector2(850, 150)

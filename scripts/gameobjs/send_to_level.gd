@@ -3,7 +3,7 @@ extends Area2D
 signal level_complete
 
 @export_file("*.tscn") var target_level_path := ""
-@onready var level_complete_scene = "res://scenes/level_complete.tscn"
+var congrats_scene_path = "res://scenes/menu/congrats_screen.tscn"
 
 ## show "congratulations, you have beaten the game" screen
 @export var final_level:bool = false
@@ -59,7 +59,10 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			if final_level:
 				# congratulations, you have beaten the game screen
-				return
+				ScreenTransitions.fade_transition()
+				GameManager.scene_change_started.emit(congrats_scene_path)
+				await ScreenTransitions.transition_halfpoint
+				get_tree().change_scene_to_file.call_deferred(congrats_scene_path)
 			# if no next level, let the player roam around
 			body.enable_movement_controls()
 			queue_free.call_deferred()

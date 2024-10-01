@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://thgdqt845aqq"]
+[gd_scene load_steps=16 format=3 uid="uid://thgdqt845aqq"]
 
 [ext_resource type="Texture2D" uid="uid://cqgqnl6swxkts" path="res://assets/ui/ui_background.png" id="1_gnr8i"]
 [ext_resource type="Script" path="res://scripts/menu/ui_options_menu.gd" id="1_yvn4o"]
@@ -21,6 +21,10 @@ shader = ExtResource("2_o2y5x")
 shader_parameter/amount = 1.75
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2dr51"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dyixw"]
+font = ExtResource("3_kwiie")
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_reurc"]
 font = ExtResource("3_kwiie")
@@ -146,6 +150,7 @@ text = "Move: A/D
 Jump: Space
 Fullscreen: f11
 Restart: R"
+label_settings = SubResource("LabelSettings_dyixw")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1

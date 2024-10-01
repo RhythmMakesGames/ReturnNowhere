@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal player_died
 signal player_respawn
 
-@export var enable_debug_controls = false
+@onready var enable_debug_controls = GameManager.enable_debug_controls
 var enable_god_mode = false
 var enable_no_clip = false
 @onready var default_z_index = z_index

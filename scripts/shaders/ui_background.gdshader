@@ -44,4 +44,6 @@ void fragment() {
 	float green = texture(TEXTURE, vec2(uv.x - shift, uv.y)).g;
 	float blue = texture(TEXTURE, vec2(uv.x, uv.y)).b;
 	COLOR = vec4(red, green, blue, 1.0);
+	
+	//COLOR = COLOR * vec4(2.0, 1.0, 0.5, 1.0);
 }
