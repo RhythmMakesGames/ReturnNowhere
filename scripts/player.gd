@@ -182,15 +182,15 @@ func _physics_process(delta: float) -> void:
 	move_direction = Input.get_axis(move_left_action, move_right_action)
 	# Input.get_vector()
 	
-	# update flip state (0 move_direction represents no change) 
-	if move_direction:
-		is_horizontally_flipped = true if move_direction < 0 else false
-	
 	handle_inputs() # also no clip movement
 	if disable_physics == true: return
 	
 	if is_movement_disabled: 
 		move_direction = 0
+	
+	# update flip state (0 move_direction represents no change) 
+	if move_direction:
+		is_horizontally_flipped = true if move_direction < 0 else false
 	
 	raycast_step_top.rotation_degrees = 180 if is_horizontally_flipped else 0
 	raycast_step_bottom.rotation_degrees = 180 if is_horizontally_flipped else 0

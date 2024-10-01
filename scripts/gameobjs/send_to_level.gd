@@ -59,10 +59,13 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			if final_level:
 				# congratulations, you have beaten the game screen
+				await get_tree().create_timer(1).timeout # some extra wait
+				
 				ScreenTransitions.fade_transition()
 				GameManager.scene_change_started.emit(congrats_scene_path)
 				await ScreenTransitions.transition_halfpoint
 				get_tree().change_scene_to_file.call_deferred(congrats_scene_path)
+			
 			# if no next level, let the player roam around
 			body.enable_movement_controls()
 			queue_free.call_deferred()

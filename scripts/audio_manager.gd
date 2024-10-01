@@ -92,6 +92,7 @@ func on_scene_change_started(scene):
 	# we emit the signal before we actually change the scene
 	var cur_scene_path = get_tree().current_scene.scene_file_path
 	
+	# should be menu.tscn but no need for now
 	if cur_scene_path.contains("menu") && scene_path.contains("level")\
 	|| cur_scene_path.contains("level") && scene_path.contains("menu"):
 		animation_player.play("fade_out")
@@ -146,8 +147,13 @@ func on_scene_changed():
 			ambient_player.stop()
 
 	elif scene.name == "MainMenu":
+		music_player.volume_db = linear_to_db(1)
 		play_music(MENU_MUSIC)
-	#else eg. congrats screen
+	elif scene.name == "CongratsScreen":
+		music_player.volume_db = linear_to_db(1)
+		var end_screen_music = \
+			load("res://assets/sounds/Forgotten Lullaby Music Box Loop.mp3") as AudioStream
+		play_music(end_screen_music)
 
 
 func on_paused():

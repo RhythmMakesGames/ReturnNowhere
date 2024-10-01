@@ -128,7 +128,6 @@ offset_top = 34.0
 offset_right = 425.0
 offset_bottom = 234.0
 color = Color(0, 0, 0, 0.705882)
-metadata/_edit_lock_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
