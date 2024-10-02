@@ -14,16 +14,17 @@ var collected_coins = 0
 
 func _ready() -> void:
 	# fetching data
-	total_coins = GameManager.level_data[current_scene.scene_file_path]["coins_total"]
-	collected_label.text = "%d/%d" % [collected_coins, total_coins]
-	#if total_coins == 0:
-		#$Coins.visible = false
-	
-	if GameManager.level_data[current_scene.scene_file_path]["name"] != "":
-		level_name.text = GameManager.level_data[current_scene.scene_file_path]["name"]
-	else:
-		# gets name from the scene root (make sure it's always capitalized)
-		level_name.text = current_scene.name.replace('_', ' ')
+	if GameManager.level_data.has(current_scene.scene_file_path):
+		total_coins = GameManager.level_data[current_scene.scene_file_path]["coins_total"]
+		collected_label.text = "%d/%d" % [collected_coins, total_coins]
+		#if total_coins == 0:
+			#$Coins.visible = false
+		
+		if GameManager.level_data[current_scene.scene_file_path]["name"] != "":
+			level_name.text = GameManager.level_data[current_scene.scene_file_path]["name"]
+		else:
+			# gets name from the scene root (make sure it's always capitalized)
+			level_name.text = current_scene.name.replace('_', ' ')
 
 
 func _input(_event: InputEvent) -> void:
@@ -34,7 +35,8 @@ func _input(_event: InputEvent) -> void:
 		if player.is_dead:
 			return
 		
-		if get_tree().get_current_scene().scene_file_path.contains('levels/level'):
+		# levels instead of levels/level to allow pause for other scenes in levels folder
+		if get_tree().get_current_scene().scene_file_path.contains("res://scenes/levels/"):
 			if !get_tree().paused:
 				get_tree().paused = true
 				#get_tree().set_deferred("paused", true)

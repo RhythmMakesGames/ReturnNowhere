@@ -6,6 +6,7 @@ extends Button
 @onready var texture = $TextureRect
 @onready var best_time = $VBoxContainer/BestTime
 @onready var coins = $VBoxContainer/Coins
+@onready var lock: TextureRect = $Lock
 
 # button grow on hover effect
 var original_size := scale
@@ -24,9 +25,21 @@ func _ready() -> void:
 	
 	best_time.visible = false
 	coins.visible = false
+	lock.visible = false
 	
-	if !GameManager.level_data[level_path]["unlocked"]:
-		disabled = true
+	if GameManager.level_data.has(level_path):
+		if !GameManager.level_data[level_path]["unlocked"]:
+			disabled = true
+			lock.visible = true
+			#text = ""
+	else:
+		# add placeholders that say empty/coming soon..
+		if level_path.contains("placeholder"):
+			disabled = true
+			text = "Empty"
+		#else
+			# if it's not a placeholder, and not a level(no data), for eg. a test scene
+			# it'd still work, if we add null reference checks whenever accessing level data
 
 
 func _on_pressed() -> void:
@@ -40,35 +53,37 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
-	if GameManager.level_data[level_path]["completed"]:
-		var time = GameManager.level_data[level_path]["best_time"]
-		var milliseconds = int(fmod(time, 1) * 1000)
-		var seconds = int(fmod(time, 60))
-		var minutes = int(fmod(time, 3600) / 60)
-		best_time.text = "%02d:%02d:%03d" % [minutes, seconds, milliseconds]
-		
-		$VBoxContainer/Coins/Collected.text = "%d/%d" % \
-			[GameManager.level_data[level_path]["coins_collected"]\
-			,GameManager.level_data[level_path]["coins_total"]]
-		
-		text = ""
-		best_time.visible = true
-		#coins.visible = true
-		if GameManager.level_data[level_path]["coins_total"] != 0:
-			coins.visible = true
-
+	if disabled: return
 	
-	if !disabled:
-		animate_size(new_size, anim_duration)
+	if GameManager.level_data.has(level_path):
+		if GameManager.level_data[level_path]["completed"]:
+			var time = GameManager.level_data[level_path]["best_time"]
+			var milliseconds = int(fmod(time, 1) * 1000)
+			var seconds = int(fmod(time, 60))
+			var minutes = int(fmod(time, 3600) / 60)
+			best_time.text = "%02d:%02d:%03d" % [minutes, seconds, milliseconds]
+			
+			$VBoxContainer/Coins/Collected.text = "%d/%d" % \
+				[GameManager.level_data[level_path]["coins_collected"]\
+				,GameManager.level_data[level_path]["coins_total"]]
+			
+			text = ""
+			best_time.visible = true
+			#coins.visible = true
+			if GameManager.level_data[level_path]["coins_total"] != 0:
+				coins.visible = true
+
+	animate_size(new_size, anim_duration)
 
 
 func _on_mouse_exited() -> void:
+	if disabled: return
+	
 	text = button_text
 	best_time.visible = false
 	coins.visible = false
 	
-	if !disabled:
-		animate_size(original_size, anim_duration)
+	animate_size(original_size, anim_duration)
 
 
 func animate_size(final_size: Vector2, duration: float) -> void:

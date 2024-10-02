@@ -1,9 +1,7 @@
 # License
-
 This project is licensed under the MIT License.
 
 # Game Engine
-
 This game uses Godot Engine, available under the following license:
 
 Copyright (c) 2014-present Godot Engine contributors.
@@ -28,14 +26,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 # Third-Party Assets
-
 For details about third-party assets and their usage, refer to CREDITS.txt file.
 
-
 # Optional
-
 Any credits or feedback regarding the project are appreciated but not required. 
 
 # Disclaimer
-
 The creator of this game takes no responsibility for any damage caused by the use or misuse of this software.

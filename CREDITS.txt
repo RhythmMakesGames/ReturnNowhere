@@ -10,7 +10,7 @@ Note: Assets have been selected, edited or modified to reflect the project's vis
 4. red_laser by StarNinjas (CC0) - https://opengameart.org/content/3-lasers
 5. Landing Platform by juanmotor (CC-BY 3.0) - https://opengameart.org/content/landing-platform
 6. Rotating Coin by Puddin (CC0) - https://opengameart.org/content/rotating-coin
-7. Button_Dark by CTatz (CC0) - https://opengameart.org/content/pixui-asset-pack-1-ctatz
+7. Button, Lock by CTatz (CC0) - https://opengameart.org/content/pixui-asset-pack-1-ctatz
 
 # Music/Ambient
 1. Synthwave House Loop (CC0) by Fupi - https://opengameart.org/content/synthwave-house-loop
