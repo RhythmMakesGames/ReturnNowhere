@@ -29,8 +29,8 @@ SOFTWARE.
 
 # Third-Party Assets
 
-1. "Character Sprite" by John Doe, licensed under CC BY 4.0. Available at: [URL]
-2. "Background Music" by Jane Smith, licensed under CC BY-SA 3.0. Available at: [URL]
+For details about third-party assets and their usage, refer to CREDITS.txt file.
+
 
 # Optional
 
