@@ -10,12 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Indoor Cat Game"
+config/name="Return Nowhere"
 run/main_scene="res://scenes/menu/ui_main_menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ReturnNowhere"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

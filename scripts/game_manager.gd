@@ -24,6 +24,7 @@ func _ready() -> void:
 		json.parse(json_string)
 		level_data = json.get_data()
 		save.close()
+		print("Loaded level data from save file.")
 		
 		# update loaded level data with new default level data
 		for key in default_level_data:
@@ -40,12 +41,13 @@ func _ready() -> void:
 		# load default level data
 		level_data = default_level_data
 		#save_level_data_to_file()
-		print("Loaded default level data.")
+		print("No save file found, loaded default level data.")
 	
 	# set current level to the last unlocked level
 	for key in level_data:
 		if level_data[key]["unlocked"] == true:
 			current_level = key
+	#print("Current level set to ", current_level)
 	
 	#var root = get_tree().get_root()
 	#current_scene = root.get_child(root.get_child_count() - 1)

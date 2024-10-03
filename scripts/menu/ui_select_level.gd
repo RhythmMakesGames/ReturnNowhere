@@ -34,8 +34,10 @@ func get_levels(path) -> void:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			#print(file_name)
-			if file_name.contains(".tscn"):
+			if file_name.ends_with(".remap"):
+				file_name = file_name.trim_suffix(".remap")
+			
+			if file_name.ends_with(".tscn"):
 				create_level_button('%s/%s' % [dir.get_current_dir(), file_name], file_name)
 			file_name = dir.get_next()
 		dir.list_dir_end()
@@ -50,6 +52,10 @@ func get_levels(path) -> void:
 
 func create_level_button(lvl_path: String, lvl_name: String):
 	var button = LEVEL_BUTTON.instantiate()
+	
+	if lvl_name.ends_with(".remap"):
+		lvl_name = lvl_name.trim_suffix(".remap")
+	
 	button.text = lvl_name.trim_suffix(".tscn").replace('_', ' ').capitalize()
 	button.level_path = lvl_path
 	button.thumb_path = '%s/%s' %[thumbs_dir, lvl_name.trim_suffix(".tscn") + ".png"]
