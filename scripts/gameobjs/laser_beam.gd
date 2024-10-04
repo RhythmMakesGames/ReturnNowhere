@@ -36,6 +36,7 @@ var fade_duration:float = 0.07
 # fix chopped laser at collision point
 var line_overlap = 1.4
 var player_was_hit = false
+@onready var default_laser_width = width
 
 
 func _ready() -> void:
@@ -60,7 +61,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# pulsate effect
 	#if randi_range(0, 4) == 3:
-	width = 2 + randf_range(0, 2)
+	width = default_laser_width + randf_range(0, 2)
 
 
 func _physics_process(delta: float) -> void:
