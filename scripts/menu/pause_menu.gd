@@ -17,7 +17,7 @@ func _ready() -> void:
 # adding a small delay fixed it
 func _input(_event: InputEvent) -> void:
 	# toggle pause while in a level
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("backspace"):
 		var options = get_node_or_null("OptionsMenu")
 		if options != null:
 			# options.queue_free.call_deferred()

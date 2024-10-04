@@ -10,6 +10,9 @@ func _ready() -> void:
 		$BackgroundGlitch.visible = true
 		#$ColorRect.visible = true
 	
+	# since blur shader isn't working on web
+	$BackgroundGlitch.visible = true
+	
 	var game_bus := AudioServer.get_bus_index("Master")
 	var music_bus := AudioServer.get_bus_index("Music")
 	var sfx_bus := AudioServer.get_bus_index("SFX")
@@ -20,7 +23,7 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	# toggle pause while in a level
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("backspace"):
 		queue_free.call_deferred()
 
 

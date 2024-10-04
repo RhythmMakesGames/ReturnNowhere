@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	# toggle pause while in a level
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("backspace"):
 		queue_free.call_deferred()
 
 
